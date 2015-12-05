@@ -28,8 +28,7 @@ import org.optaplannerdelirium.sss.domain.location.Location;
 @XStreamAlias("GiftAssignment")
 public class GiftAssignment extends AbstractPersistable implements Standstill {
 
-    protected Location location;
-    protected int demand;
+    protected Gift gift;
 
     // Planning variables: changes during planning, between score calculations.
     protected Standstill previousStandstill;
@@ -38,23 +37,15 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
     protected GiftAssignment nextGiftAssignment;
     protected Reindeer reindeer;
 
-    public Location getLocation() {
-        return location;
+    public Gift getGift() {
+        return gift;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setGift(Gift gift) {
+        this.gift = gift;
     }
 
-    public int getDemand() {
-        return demand;
-    }
-
-    public void setDemand(int demand) {
-        this.demand = demand;
-    }
-
-    @PlanningVariable(valueRangeProviderRefs = {"vehicleRange", "customerRange"},
+    @PlanningVariable(valueRangeProviderRefs = {"reindeerRange", "giftAssignmentRange"},
             graphType = PlanningVariableGraphType.CHAINED)
     public Standstill getPreviousStandstill() {
         return previousStandstill;
@@ -85,6 +76,14 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
     // Complex methods
     // ************************************************************************
 
+    public Location getLocation() {
+        return gift.getLocation();
+    }
+
+    public long getGiftWeight() {
+        return gift.getWeight();
+    }
+
     /**
      * @return a positive number, the distance multiplied by 1000 to avoid floating point arithmetic rounding errors
      */
@@ -100,7 +99,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
      * @return a positive number, the distance multiplied by 1000 to avoid floating point arithmetic rounding errors
      */
     public long getDistanceFrom(Standstill standstill) {
-        return standstill.getLocation().getDistanceTo(location);
+        return standstill.getLocation().getDistanceTo(getLocation());
     }
 
     /**
@@ -108,7 +107,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
      * @return a positive number, the distance multiplied by 1000 to avoid floating point arithmetic rounding errors
      */
     public long getDistanceTo(Standstill standstill) {
-        return location.getDistanceTo(standstill.getLocation());
+        return getLocation().getDistanceTo(standstill.getLocation());
     }
 
 }

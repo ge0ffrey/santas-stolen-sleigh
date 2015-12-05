@@ -23,19 +23,10 @@ import org.optaplannerdelirium.sss.domain.location.Location;
 @XStreamAlias("Reindeer")
 public class Reindeer extends AbstractPersistable implements Standstill {
 
-    protected int capacity;
     protected Location startingLocation;
 
     // Shadow variables
     protected GiftAssignment nextGiftAssignment;
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
 
     public Location getStartingLocation() {
         return startingLocation;

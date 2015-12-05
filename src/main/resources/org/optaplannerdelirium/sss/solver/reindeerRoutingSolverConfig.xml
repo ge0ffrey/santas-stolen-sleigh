@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <!--<environmentMode>FAST_ASSERT</environmentMode>-->
+  <solutionClass>org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution</solutionClass>
+  <entityClass>org.optaplannerdelirium.sss.domain.Standstill</entityClass>
+  <entityClass>org.optaplannerdelirium.sss.domain.GiftAssignment</entityClass>
+
+  <scoreDirectorFactory>
+    <scoreDefinitionType>HARD_SOFT_LONG</scoreDefinitionType>
+    <easyScoreCalculatorClass>org.optaplannerdelirium.sss.solver.score.ReindeerRoutingEasyScoreCalculator</easyScoreCalculatorClass>
+    <!--<assertionScoreDirectorFactory>-->
+      <!--<easyScoreCalculatorClass>org.optaplannerdelirium.sss.solver.score.ReindeerRoutingEasyScoreCalculator</easyScoreCalculatorClass>-->
+    <!--</assertionScoreDirectorFactory>-->
+    <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+  </scoreDirectorFactory>
+
+  <termination>
+    <minutesSpentLimit>5</minutesSpentLimit>
+  </termination>
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+    <!--<constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>-->
+  </constructionHeuristic>
+  <localSearch>
+    <unionMoveSelector>
+      <changeMoveSelector/>
+      <swapMoveSelector/>
+      <tailChainSwapMoveSelector/>
+      <!--<subChainChangeMoveSelector>-->
+        <!--<selectReversingMoveToo>true</selectReversingMoveToo>-->
+      <!--</subChainChangeMoveSelector>-->
+      <!--<subChainSwapMoveSelector>-->
+        <!--<selectReversingMoveToo>true</selectReversingMoveToo>-->
+      <!--</subChainSwapMoveSelector>-->
+    </unionMoveSelector>
+    <acceptor>
+      <lateAcceptanceSize>200</lateAcceptanceSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>1</acceptedCountLimit>
+    </forager>
+  </localSearch>
+</solver>
