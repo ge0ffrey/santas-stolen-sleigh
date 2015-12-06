@@ -26,6 +26,8 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 })
 public abstract class Location extends AbstractPersistable {
 
+    public static final Location NORTH_POLE = new SphereLocation(-1L, 90.0, 0.0);
+
     protected double latitude;
     protected double longitude;
 

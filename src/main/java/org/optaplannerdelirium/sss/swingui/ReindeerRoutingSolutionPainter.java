@@ -76,8 +76,8 @@ public class ReindeerRoutingSolutionPainter {
             int y = translator.translateLatitudeToY(location.getLatitude());
             g.setColor(TangoColorFactory.ALUMINIUM_4);
             g.fillRect(x - 1, y - 1, 3, 3);
-            String demandString = Long.toString(giftAssignment.getGiftWeight());
-            g.drawString(demandString, x - (g.getFontMetrics().stringWidth(demandString) / 2), y - TEXT_SIZE / 2);
+//            String demandString = Long.toString(giftAssignment.getGiftWeight());
+//            g.drawString(demandString, x - (g.getFontMetrics().stringWidth(demandString) / 2), y - TEXT_SIZE / 2);
         }
         int colorIndex = 0;
         // TODO Too many nested for loops
@@ -129,8 +129,8 @@ public class ReindeerRoutingSolutionPainter {
                 boolean ascending = (previousLocation.getLongitude() < location.getLongitude())
                         ^ (previousLocation.getLatitude() < location.getLatitude());
 
-                g.drawString(Long.toString(load),
-                        infoX + 1, (ascending ? infoY - 1 : infoY + TEXT_SIZE + 1));
+//                g.drawString(Long.toString(load),
+//                        infoX + 1, (ascending ? infoY - 1 : infoY + TEXT_SIZE + 1));
             }
             colorIndex = (colorIndex + 1) % TangoColorFactory.SEQUENCE_2.length;
         }

@@ -93,16 +93,12 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
         private void createReindeerList() {
             int reindeerListSize = 1000;
             List<Reindeer> reindeerList = new ArrayList<Reindeer>(reindeerListSize);
-            Location northPole = new SphereLocation();
-            northPole.setId(-1L);
-            northPole.setLatitude(90.0);
-            northPole.setLongitude(0.0);
             long id = 0;
             for (int i = 0; i < reindeerListSize; i++) {
                 Reindeer reindeer = new Reindeer();
                 reindeer.setId(id);
                 id++;
-                reindeer.setStartingLocation(northPole);
+                reindeer.setStartingLocation(Location.NORTH_POLE);
                 reindeerList.add(reindeer);
             }
             solution.setReindeerList(reindeerList);

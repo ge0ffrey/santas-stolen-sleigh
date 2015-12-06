@@ -23,8 +23,9 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
+import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
 
-@PlanningEntity() //difficultyWeightFactoryClass = DepotAngleCustomerDifficultyWeightFactory.class
+@PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
 @XStreamAlias("GiftAssignment")
 public class GiftAssignment extends AbstractPersistable implements Standstill {
 
