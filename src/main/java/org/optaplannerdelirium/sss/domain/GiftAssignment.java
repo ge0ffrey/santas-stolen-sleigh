@@ -19,24 +19,27 @@ package org.optaplannerdelirium.sss.domain;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.AnchorShadowVariable;
+import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
+import org.optaplannerdelirium.sss.domain.solver.TransportationWeightUpdatingVariableListener;
 
 @PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
 @XStreamAlias("GiftAssignment")
 public class GiftAssignment extends AbstractPersistable implements Standstill {
 
-    protected Gift gift;
+    private Gift gift;
 
     // Planning variables: changes during planning, between score calculations.
-    protected Standstill previousStandstill;
+    private Standstill previousStandstill;
 
     // Shadow variables
-    protected GiftAssignment nextGiftAssignment;
-    protected Reindeer reindeer;
+    private GiftAssignment nextGiftAssignment;
+    private Reindeer reindeer;
+    private Long transportationWeight;
 
     public Gift getGift() {
         return gift;
@@ -109,6 +112,16 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
      */
     public long getDistanceTo(Standstill standstill) {
         return getLocation().getDistanceTo(standstill.getLocation());
+    }
+
+    @CustomShadowVariable(variableListenerClass = TransportationWeightUpdatingVariableListener.class,
+            sources = {@CustomShadowVariable.Source(variableName = "previousStandstill")})
+    public Long getTransportationWeight() {
+        return transportationWeight;
+    }
+
+    public void setTransportationWeight(Long transportationWeight) {
+        this.transportationWeight = transportationWeight;
     }
 
 }

@@ -35,6 +35,8 @@ public interface Standstill {
      */
     @InverseRelationShadowVariable(sourceVariableName = "previousStandstill")
     GiftAssignment getNextGiftAssignment();
-    void setNextGiftAssignment(GiftAssignment nextCustomer);
+    void setNextGiftAssignment(GiftAssignment nextGiftAssignment);
+
+    Long getTransportationWeight();
 
 }

@@ -23,10 +23,12 @@ import org.optaplannerdelirium.sss.domain.location.Location;
 @XStreamAlias("Reindeer")
 public class Reindeer extends AbstractPersistable implements Standstill {
 
-    protected Location startingLocation;
+    private static final long SLEIGH_WEIGHT = 10L * Gift.WEIGHT_MULTIPLIER;
+
+    private Location startingLocation;
 
     // Shadow variables
-    protected GiftAssignment nextGiftAssignment;
+    private GiftAssignment nextGiftAssignment;
 
     public Location getStartingLocation() {
         return startingLocation;
@@ -40,8 +42,8 @@ public class Reindeer extends AbstractPersistable implements Standstill {
         return nextGiftAssignment;
     }
 
-    public void setNextGiftAssignment(GiftAssignment nextCustomer) {
-        this.nextGiftAssignment = nextCustomer;
+    public void setNextGiftAssignment(GiftAssignment nextGiftAssignment) {
+        this.nextGiftAssignment = nextGiftAssignment;
     }
 
     // ************************************************************************
@@ -58,6 +60,10 @@ public class Reindeer extends AbstractPersistable implements Standstill {
 
     public long getDistanceTo(Standstill standstill) {
         return startingLocation.getDistanceTo(standstill.getLocation());
+    }
+
+    public Long getTransportationWeight() {
+        return SLEIGH_WEIGHT;
     }
 
 }

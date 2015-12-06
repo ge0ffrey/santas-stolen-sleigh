@@ -51,7 +51,7 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
 
     public static class ReindeerRoutingInputBuilder extends TxtInputBuilder {
 
-        private static final BigDecimal WEIGHT_MULTIPLIER = new BigDecimal("1000000000000");
+        private static final BigDecimal WEIGHT_MULTIPLIER = new BigDecimal(Gift.WEIGHT_MULTIPLIER);
         private ReindeerRoutingSolution solution;
 
         private int giftListSize;

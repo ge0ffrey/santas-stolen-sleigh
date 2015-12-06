@@ -25,6 +25,8 @@ public class ReindeerRoutingEasyScoreCalculator implements EasyScoreCalculator<R
     public HardSoftLongScore calculateScore(ReindeerRoutingSolution solution) {
         long hardScore = 0L;
         long softScore = 0L;
+
+
         return HardSoftLongScore.valueOf(hardScore, softScore);
     }
 

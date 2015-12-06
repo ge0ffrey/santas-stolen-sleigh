@@ -35,13 +35,13 @@ import org.optaplanner.persistence.xstream.impl.score.XStreamScoreConverter;
 @XStreamAlias("ReindeerRoutingSolution")
 public class ReindeerRoutingSolution extends AbstractPersistable implements Solution<HardSoftLongScore> {
 
-    protected List<Gift> giftList;
-    protected List<Reindeer> reindeerList;
+    private List<Gift> giftList;
+    private List<Reindeer> reindeerList;
 
-    protected List<GiftAssignment> giftAssignmentList;
+    private List<GiftAssignment> giftAssignmentList;
 
     @XStreamConverter(value = XStreamScoreConverter.class, types = {HardSoftLongScoreDefinition.class})
-    protected HardSoftLongScore score;
+    private HardSoftLongScore score;
 
     public List<Gift> getGiftList() {
         return giftList;
