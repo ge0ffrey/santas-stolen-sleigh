@@ -23,7 +23,8 @@ import org.optaplannerdelirium.sss.domain.location.Location;
 @XStreamAlias("Reindeer")
 public class Reindeer extends AbstractPersistable implements Standstill {
 
-    private static final long SLEIGH_WEIGHT = 10L * Gift.WEIGHT_MULTIPLIER;
+    public static final long SLEIGH_WEIGHT = 10L * Gift.WEIGHT_MULTIPLIER;
+    public static final long WEIGHT_CAPACITY = 1010L * Gift.WEIGHT_MULTIPLIER;
 
     private Location startingLocation;
 

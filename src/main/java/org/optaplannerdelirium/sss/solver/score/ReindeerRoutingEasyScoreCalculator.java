@@ -18,15 +18,36 @@ package org.optaplannerdelirium.sss.solver.score;
 
 import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScore;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
+import org.optaplannerdelirium.sss.domain.GiftAssignment;
+import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
+import org.optaplannerdelirium.sss.domain.Standstill;
 
 public class ReindeerRoutingEasyScoreCalculator implements EasyScoreCalculator<ReindeerRoutingSolution> {
 
     public HardSoftLongScore calculateScore(ReindeerRoutingSolution solution) {
         long hardScore = 0L;
         long softScore = 0L;
-
-
+        for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
+            if (giftAssignment.getPreviousStandstill() != null) {
+                Standstill toStandstill = giftAssignment.getNextGiftAssignment();
+                if (toStandstill == null) {
+                    toStandstill = giftAssignment.getReindeer();
+                }
+                softScore -= giftAssignment.getTransportationWeight()
+                        * giftAssignment.getDistanceTo(toStandstill);
+                if (giftAssignment.getTransportationWeight() > Reindeer.WEIGHT_CAPACITY) {
+                    hardScore -= giftAssignment.getTransportationWeight() - Reindeer.WEIGHT_CAPACITY;
+                }
+            }
+        }
+        for (Reindeer reindeer : solution.getReindeerList()) {
+            GiftAssignment toStandstill = reindeer.getNextGiftAssignment();
+            if (toStandstill != null) {
+                softScore -= reindeer.getTransportationWeight()
+                        * reindeer.getDistanceTo(toStandstill);
+            }
+        }
         return HardSoftLongScore.valueOf(hardScore, softScore);
     }
 
