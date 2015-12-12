@@ -39,4 +39,6 @@ public interface Standstill {
 
     Long getTransportationWeight();
 
+    double getDistanceTo(Standstill standstill);
+
 }

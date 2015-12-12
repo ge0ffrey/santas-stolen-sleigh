@@ -44,8 +44,8 @@ public class ReindeerRoutingEasyScoreCalculator implements EasyScoreCalculator<R
         for (Reindeer reindeer : solution.getReindeerList()) {
             GiftAssignment toStandstill = reindeer.getNextGiftAssignment();
             if (toStandstill != null) {
-                softScore -= ReindeerRoutingCostCalculator.multiplyWeightAndDistance(reindeer.getTransportationWeight()
-                        , reindeer.getDistanceTo(toStandstill));
+                softScore -= ReindeerRoutingCostCalculator.multiplyWeightAndDistance(reindeer.getTransportationWeight(),
+                        reindeer.getDistanceTo(toStandstill));
             }
         }
         return HardSoftLongScore.valueOf(hardScore, softScore);
