@@ -97,35 +97,11 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
     }
 
     private void insertNextGiftAssignment(Standstill standstill) {
-        Standstill toStandstill = standstill.getNextGiftAssignment();
-        if (toStandstill == null) {
-            toStandstill = standstill.getReindeer();
-            if (toStandstill == null) {
-                return;
-            }
-        }
-        Long transportationWeight = standstill.getTransportationWeight();
-        if (transportationWeight == null) {
-            return;
-        }
-        softScore -= ReindeerRoutingCostCalculator.multiplyWeightAndDistance(transportationWeight,
-                standstill.getDistanceTo(toStandstill));
+        softScore -= standstill.getSoftNextDistanceWeightCost();
     }
 
     private void retractNextGiftAssignment(Standstill standstill) {
-        Standstill toStandstill = standstill.getNextGiftAssignment();
-        if (toStandstill == null) {
-            toStandstill = standstill.getReindeer();
-            if (toStandstill == null) {
-                return;
-            }
-        }
-        Long transportationWeight = standstill.getTransportationWeight();
-        if (transportationWeight == null) {
-            return;
-        }
-        softScore += ReindeerRoutingCostCalculator.multiplyWeightAndDistance(transportationWeight,
-                standstill.getDistanceTo(toStandstill));
+        softScore += standstill.getSoftNextDistanceWeightCost();
     }
 
     private void insertTransportationWeight(Standstill standstill) {
@@ -137,6 +113,7 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
         if (weightCapacity < 0L) {
             hardScore += weightCapacity;
         }
+        softScore -= standstill.getSoftNextDistanceWeightCost();
     }
 
     private void retractTransportationWeight(Standstill standstill) {
@@ -148,6 +125,7 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
         if (weightCapacity < 0L) {
             hardScore -= weightCapacity;
         }
+        softScore += standstill.getSoftNextDistanceWeightCost();
     }
 
     public HardSoftLongScore calculateScore() {

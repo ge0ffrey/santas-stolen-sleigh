@@ -68,4 +68,12 @@ public class Reindeer extends AbstractPersistable implements Standstill {
         return SLEIGH_WEIGHT;
     }
 
+    public long getSoftNextDistanceWeightCost() {
+        if (nextGiftAssignment == null) {
+            return 0L;
+        }
+        return ReindeerRoutingCostCalculator.multiplyWeightAndDistance(SLEIGH_WEIGHT,
+                getDistanceTo(nextGiftAssignment));
+    }
+
 }

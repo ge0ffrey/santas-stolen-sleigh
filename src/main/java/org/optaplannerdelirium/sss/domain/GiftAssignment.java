@@ -26,6 +26,7 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
 import org.optaplannerdelirium.sss.domain.solver.TransportationWeightUpdatingVariableListener;
+import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
 @PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
 @XStreamAlias("GiftAssignment")
@@ -105,12 +106,22 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
 
     @CustomShadowVariable(variableListenerClass = TransportationWeightUpdatingVariableListener.class,
             sources = {@CustomShadowVariable.Source(variableName = "previousStandstill")})
+                    // TODO @CustomShadowVariable.Source(variableName = "nextGiftAssignment")})
     public Long getTransportationWeight() {
         return transportationWeight;
     }
 
     public void setTransportationWeight(Long transportationWeight) {
         this.transportationWeight = transportationWeight;
+    }
+
+    public long getSoftNextDistanceWeightCost() {
+        if (transportationWeight == null || reindeer == null) {
+            return 0L;
+        }
+        Standstill toStandstill = nextGiftAssignment == null ? reindeer : nextGiftAssignment;
+        return ReindeerRoutingCostCalculator.multiplyWeightAndDistance(transportationWeight,
+                getDistanceTo(toStandstill));
     }
 
 }

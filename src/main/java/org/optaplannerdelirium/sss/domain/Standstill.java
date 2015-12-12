@@ -41,4 +41,6 @@ public interface Standstill {
 
     double getDistanceTo(Standstill standstill);
 
+    long getSoftNextDistanceWeightCost();
+
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
-  <environmentMode>FAST_ASSERT</environmentMode>
+  <environmentMode>FULL_ASSERT</environmentMode>
   <solutionClass>org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution</solutionClass>
   <entityClass>org.optaplannerdelirium.sss.domain.Standstill</entityClass>
   <entityClass>org.optaplannerdelirium.sss.domain.GiftAssignment</entityClass>

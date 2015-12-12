@@ -53,7 +53,8 @@ public class TransportationWeightUpdatingVariableListener implements VariableLis
         GiftAssignment shadowGiftAssignment = sourceGiftAssignment;
         Long transportationWeight = previousStandstill == null ? null
                 : previousStandstill.getTransportationWeight() + sourceGiftAssignment.getGiftWeight();
-        while (shadowGiftAssignment != null && shadowGiftAssignment.getTransportationWeight() != transportationWeight) {
+        while (shadowGiftAssignment != null
+                && !ObjectUtils.equals(shadowGiftAssignment.getTransportationWeight(), transportationWeight)) {
             scoreDirector.beforeVariableChanged(shadowGiftAssignment, "transportationWeight");
             shadowGiftAssignment.setTransportationWeight(transportationWeight);
             scoreDirector.afterVariableChanged(shadowGiftAssignment, "transportationWeight");
