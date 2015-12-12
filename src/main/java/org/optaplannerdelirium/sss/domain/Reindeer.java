@@ -19,12 +19,13 @@ package org.optaplannerdelirium.sss.domain;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
+import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
 @XStreamAlias("Reindeer")
 public class Reindeer extends AbstractPersistable implements Standstill {
 
-    public static final long SLEIGH_WEIGHT = 10L * Gift.WEIGHT_MULTIPLIER;
-    public static final long WEIGHT_CAPACITY = 1010L * Gift.WEIGHT_MULTIPLIER;
+    public static final long SLEIGH_WEIGHT = 10L * ReindeerRoutingCostCalculator.MICROS_PER_ONE_AS_LONG;
+    public static final long WEIGHT_CAPACITY = 1010L * ReindeerRoutingCostCalculator.MICROS_PER_ONE_AS_LONG;
 
     private Location startingLocation;
 
@@ -59,7 +60,7 @@ public class Reindeer extends AbstractPersistable implements Standstill {
         return startingLocation;
     }
 
-    public long getDistanceTo(Standstill standstill) {
+    public double getDistanceTo(Standstill standstill) {
         return startingLocation.getDistanceTo(standstill.getLocation());
     }
 

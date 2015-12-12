@@ -88,29 +88,18 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         return gift.getWeight();
     }
 
-    /**
-     * @return a positive number, the distance multiplied by 1000 to avoid floating point arithmetic rounding errors
-     */
-    public long getDistanceFromPreviousStandstill() {
+    public double getDistanceFromPreviousStandstill() {
         if (previousStandstill == null) {
             return 0;
         }
         return getDistanceFrom(previousStandstill);
     }
 
-    /**
-     * @param standstill never null
-     * @return a positive number, the distance multiplied by 1000 to avoid floating point arithmetic rounding errors
-     */
-    public long getDistanceFrom(Standstill standstill) {
+    public double getDistanceFrom(Standstill standstill) {
         return standstill.getLocation().getDistanceTo(getLocation());
     }
 
-    /**
-     * @param standstill never null
-     * @return a positive number, the distance multiplied by 1000 to avoid floating point arithmetic rounding errors
-     */
-    public long getDistanceTo(Standstill standstill) {
+    public double getDistanceTo(Standstill standstill) {
         return getLocation().getDistanceTo(standstill.getLocation());
     }
 

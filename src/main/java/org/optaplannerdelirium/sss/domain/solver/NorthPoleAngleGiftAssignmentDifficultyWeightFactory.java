@@ -40,10 +40,10 @@ public class NorthPoleAngleGiftAssignmentDifficultyWeightFactory
 
         private final GiftAssignment giftAssignment;
         private final double northPoleAngle;
-        private final long northPoleRoundTripDistance;
+        private final double northPoleRoundTripDistance;
 
         public NorthPoleAngleGiftAssignmentDifficultyWeight(GiftAssignment giftAssignment,
-                double northPoleAngle, long northPoleRoundTripDistance) {
+                double northPoleAngle, double northPoleRoundTripDistance) {
             this.giftAssignment = giftAssignment;
             this.northPoleAngle = northPoleAngle;
             this.northPoleRoundTripDistance = northPoleRoundTripDistance;

@@ -21,6 +21,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("SphereLocation")
 public class SphereLocation extends Location {
 
+    private static final double EARTH_R_IN_KM = 6372.8;
+
     public SphereLocation() {
     }
 
@@ -29,10 +31,14 @@ public class SphereLocation extends Location {
     }
 
     @Override
-    public long getDistanceTo(Location location) {
-        double distance = getAirDistanceDoubleTo(location); // TODO not correct
-        // Multiplied by 1000 to avoid floating point arithmetic rounding errors
-        return (long) (distance * 1000.0 + 0.5);
+    public double getDistanceTo(Location other) {
+        double latitudeDiff = Math.toRadians(other.getLatitude() - latitude);
+        double longitudeDiff = Math.toRadians(other.getLongitude() - longitude);
+        double a = Math.pow(Math.sin(latitudeDiff / 2), 2)
+                + Math.pow(Math.sin(longitudeDiff / 2), 2)
+                * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(other.getLatitude()));
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return EARTH_R_IN_KM * c;
     }
 
 }

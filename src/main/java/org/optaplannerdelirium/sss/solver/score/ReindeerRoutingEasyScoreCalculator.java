@@ -34,8 +34,8 @@ public class ReindeerRoutingEasyScoreCalculator implements EasyScoreCalculator<R
                 if (toStandstill == null) {
                     toStandstill = giftAssignment.getReindeer();
                 }
-                softScore -= giftAssignment.getTransportationWeight()
-                        * giftAssignment.getDistanceTo(toStandstill);
+                softScore -= ReindeerRoutingCostCalculator.multiplyWeightAndDistance(giftAssignment.getTransportationWeight(),
+                        giftAssignment.getDistanceTo(toStandstill));
                 if (giftAssignment.getTransportationWeight() > Reindeer.WEIGHT_CAPACITY) {
                     hardScore -= giftAssignment.getTransportationWeight() - Reindeer.WEIGHT_CAPACITY;
                 }
@@ -44,8 +44,8 @@ public class ReindeerRoutingEasyScoreCalculator implements EasyScoreCalculator<R
         for (Reindeer reindeer : solution.getReindeerList()) {
             GiftAssignment toStandstill = reindeer.getNextGiftAssignment();
             if (toStandstill != null) {
-                softScore -= reindeer.getTransportationWeight()
-                        * reindeer.getDistanceTo(toStandstill);
+                softScore -= ReindeerRoutingCostCalculator.multiplyWeightAndDistance(reindeer.getTransportationWeight()
+                        , reindeer.getDistanceTo(toStandstill));
             }
         }
         return HardSoftLongScore.valueOf(hardScore, softScore);

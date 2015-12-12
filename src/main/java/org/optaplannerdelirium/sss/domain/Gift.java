@@ -23,8 +23,6 @@ import org.optaplannerdelirium.sss.domain.location.Location;
 @XStreamAlias("Gift")
 public class Gift extends AbstractPersistable {
 
-    public static final long WEIGHT_MULTIPLIER = 1000000000000L;
-
     private Location location;
     private long weight;
 

@@ -88,7 +88,7 @@ public class ReindeerRoutingSolutionPainter {
             g.fillRect(x - 2, y - 2, 5, 5);
             g.setColor(TangoColorFactory.SEQUENCE_2[colorIndex]);
             GiftAssignment reindeerInfoGiftAssignment = null;
-            long longestNonDepotDistance = -1L;
+            double longestNonDepotDistance = -1.0;
             long load = 0L;
             for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
                 if (giftAssignment.getPreviousStandstill() != null && giftAssignment.getReindeer() == reindeer) {
@@ -99,7 +99,7 @@ public class ReindeerRoutingSolutionPainter {
                             location.getLongitude(), location.getLatitude(),
                             true, false);
                     // Determine where to draw the reindeer info
-                    long distance = giftAssignment.getDistanceFromPreviousStandstill();
+                    double distance = giftAssignment.getDistanceFromPreviousStandstill();
                     if (giftAssignment.getPreviousStandstill() instanceof GiftAssignment) {
                         if (longestNonDepotDistance < distance) {
                             longestNonDepotDistance = distance;

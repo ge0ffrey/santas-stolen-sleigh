@@ -29,6 +29,7 @@ import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.location.SphereLocation;
+import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
 public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
 
@@ -51,7 +52,6 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
 
     public static class ReindeerRoutingInputBuilder extends TxtInputBuilder {
 
-        private static final BigDecimal WEIGHT_MULTIPLIER = new BigDecimal(Gift.WEIGHT_MULTIPLIER);
         private ReindeerRoutingSolution solution;
 
         private int giftListSize;
@@ -84,7 +84,7 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 location.setLatitude(Double.parseDouble(lineTokens[1]));
                 location.setLongitude(Double.parseDouble(lineTokens[2]));
                 gift.setLocation(location);
-                gift.setWeight(new BigDecimal(lineTokens[3]).multiply(WEIGHT_MULTIPLIER).longValue());
+                gift.setWeight(ReindeerRoutingCostCalculator.parseMicroCost(lineTokens[3]));
                 giftList.add(gift);
             }
             solution.setGiftList(giftList);
