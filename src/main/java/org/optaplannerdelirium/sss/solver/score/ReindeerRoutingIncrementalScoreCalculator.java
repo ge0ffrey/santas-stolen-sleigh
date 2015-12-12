@@ -43,46 +43,47 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
     }
 
     public void afterEntityAdded(Object entity) {
-        if (entity instanceof Reindeer) {
-            return;
-        }
-        insertReindeer((Standstill) entity);
-        insertNextGiftAssignment((Standstill) entity);
-        insertTransportationWeight((Standstill) entity);
+        Standstill standstill = (Standstill) entity;
+        insertReindeer(standstill);
+        insertNextGiftAssignment(standstill);
+        insertTransportationWeight(standstill);
     }
 
     public void beforeVariableChanged(Object entity, String variableName) {
-        if (variableName.equals("previousStandstill"))   {
+        Standstill standstill = (Standstill) entity;
+        if (variableName.equals("previousStandstill")) {
             // Do nothing
-        } else if (variableName.equals("reindeer"))   {
-            retractReindeer((Standstill) entity);
-        } else if (variableName.equals("nextGiftAssignment"))   {
-            retractNextGiftAssignment((Standstill) entity);
-        } else if (variableName.equals("transportationWeight"))   {
-            retractTransportationWeight((Standstill) entity);
+        } else if (variableName.equals("reindeer")) {
+            retractReindeer(standstill);
+        } else if (variableName.equals("nextGiftAssignment")) {
+            retractNextGiftAssignment(standstill);
+        } else if (variableName.equals("transportationWeight")) {
+            retractTransportationWeight(standstill);
         } else {
             throw new IllegalArgumentException("Unsupported variableName (" + variableName + ").");
         }
     }
 
     public void afterVariableChanged(Object entity, String variableName) {
-        if (variableName.equals("previousStandstill"))   {
+        Standstill standstill = (Standstill) entity;
+        if (variableName.equals("previousStandstill")) {
             // Do nothing
-        } else if (variableName.equals("reindeer"))   {
-            insertReindeer((Standstill) entity);
-        } else if (variableName.equals("nextGiftAssignment"))   {
-            insertNextGiftAssignment((Standstill) entity);
-        } else if (variableName.equals("transportationWeight"))   {
-            insertTransportationWeight((Standstill) entity);
+        } else if (variableName.equals("reindeer")) {
+            insertReindeer(standstill);
+        } else if (variableName.equals("nextGiftAssignment")) {
+            insertNextGiftAssignment(standstill);
+        } else if (variableName.equals("transportationWeight")) {
+            insertTransportationWeight(standstill);
         } else {
             throw new IllegalArgumentException("Unsupported variableName (" + variableName + ").");
         }
     }
 
     public void beforeEntityRemoved(Object entity) {
-        retractReindeer((Standstill) entity);
-        retractNextGiftAssignment((Standstill) entity);
-        retractTransportationWeight((Standstill) entity);
+        Standstill standstill = (Standstill) entity;
+        retractReindeer(standstill);
+        retractNextGiftAssignment(standstill);
+        retractTransportationWeight(standstill);
     }
 
     public void afterEntityRemoved(Object entity) {
