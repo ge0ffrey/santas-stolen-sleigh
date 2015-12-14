@@ -32,9 +32,8 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
         hardScore = 0L;
         softScore = 0L;
         for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
-            insertReindeer(giftAssignment);
-            insertNextGiftAssignment(giftAssignment);
             insertTransportationWeight(giftAssignment);
+            insertTransportationToNextPenalty(giftAssignment);
         }
     }
 
@@ -44,64 +43,36 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
 
     public void afterEntityAdded(Object entity) {
         Standstill standstill = (Standstill) entity;
-        insertReindeer(standstill);
-        insertNextGiftAssignment(standstill);
         insertTransportationWeight(standstill);
+        insertTransportationToNextPenalty(standstill);
     }
 
     public void beforeVariableChanged(Object entity, String variableName) {
         Standstill standstill = (Standstill) entity;
-        if (variableName.equals("previousStandstill")) {
-            // Do nothing
-        } else if (variableName.equals("reindeer")) {
-            retractReindeer(standstill);
-        } else if (variableName.equals("nextGiftAssignment")) {
-            retractNextGiftAssignment(standstill);
-        } else if (variableName.equals("transportationWeight")) {
+        if (variableName.equals("transportationWeight")) {
             retractTransportationWeight(standstill);
-        } else {
-            throw new IllegalArgumentException("Unsupported variableName (" + variableName + ").");
+        } else if (variableName.equals("transportationToNextPenalty")) {
+            retractTransportationToNextPenalty(standstill);
         }
     }
 
     public void afterVariableChanged(Object entity, String variableName) {
         Standstill standstill = (Standstill) entity;
-        if (variableName.equals("previousStandstill")) {
-            // Do nothing
-        } else if (variableName.equals("reindeer")) {
-            insertReindeer(standstill);
-        } else if (variableName.equals("nextGiftAssignment")) {
-            insertNextGiftAssignment(standstill);
-        } else if (variableName.equals("transportationWeight")) {
+        if (variableName.equals("transportationWeight")) {
             insertTransportationWeight(standstill);
-        } else {
-            throw new IllegalArgumentException("Unsupported variableName (" + variableName + ").");
+        } else if (variableName.equals("transportationToNextPenalty")) {
+            insertTransportationToNextPenalty(standstill);
         }
     }
 
     public void beforeEntityRemoved(Object entity) {
         Standstill standstill = (Standstill) entity;
-        retractReindeer(standstill);
-        retractNextGiftAssignment(standstill);
         retractTransportationWeight(standstill);
+        retractTransportationToNextPenalty(standstill);
     }
 
     public void afterEntityRemoved(Object entity) {
         // Do nothing
-    }
-
-    private void insertReindeer(Standstill standstill) {
-    }
-
-    private void retractReindeer(Standstill standstill) {
-    }
-
-    private void insertNextGiftAssignment(Standstill standstill) {
-        softScore -= standstill.getSoftNextDistanceWeightCost();
-    }
-
-    private void retractNextGiftAssignment(Standstill standstill) {
-        softScore += standstill.getSoftNextDistanceWeightCost();
     }
 
     private void insertTransportationWeight(Standstill standstill) {
@@ -113,7 +84,6 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
         if (weightCapacity < 0L) {
             hardScore += weightCapacity;
         }
-        softScore -= standstill.getSoftNextDistanceWeightCost();
     }
 
     private void retractTransportationWeight(Standstill standstill) {
@@ -125,7 +95,22 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
         if (weightCapacity < 0L) {
             hardScore -= weightCapacity;
         }
-        softScore += standstill.getSoftNextDistanceWeightCost();
+    }
+
+    private void insertTransportationToNextPenalty(Standstill standstill) {
+        Long transportationToNextPenalty = standstill.getTransportationToNextPenalty();
+        if (transportationToNextPenalty == null) {
+            return;
+        }
+        softScore -= transportationToNextPenalty;
+    }
+
+    private void retractTransportationToNextPenalty(Standstill standstill) {
+        Long transportationToNextPenalty = standstill.getTransportationToNextPenalty();
+        if (transportationToNextPenalty == null) {
+            return;
+        }
+        softScore += transportationToNextPenalty;
     }
 
     public HardSoftLongScore calculateScore() {

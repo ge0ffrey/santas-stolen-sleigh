@@ -22,6 +22,7 @@ import org.optaplanner.core.api.domain.variable.AnchorShadowVariable;
 import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
+import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
@@ -41,6 +42,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
     private GiftAssignment nextGiftAssignment;
     private Reindeer reindeer;
     private Long transportationWeight;
+    private Long transportationToNextPenalty;
 
     public Gift getGift() {
         return gift;
@@ -96,6 +98,16 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         return getDistanceFrom(previousStandstill);
     }
 
+    public double getDistanceToNextGiftAssignment() {
+        if (nextGiftAssignment == null) {
+            if (reindeer == null) {
+                return 0.0;
+            }
+            return getDistanceTo(reindeer);
+        }
+        return getDistanceTo(nextGiftAssignment);
+    }
+
     public double getDistanceFrom(Standstill standstill) {
         return standstill.getLocation().getDistanceTo(getLocation());
     }
@@ -105,8 +117,8 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
     }
 
     @CustomShadowVariable(variableListenerClass = TransportationWeightUpdatingVariableListener.class,
-            sources = {@CustomShadowVariable.Source(variableName = "previousStandstill")})
-                    // TODO @CustomShadowVariable.Source(variableName = "nextGiftAssignment")})
+            sources = {@CustomShadowVariable.Source(variableName = "previousStandstill"),
+                     @CustomShadowVariable.Source(variableName = "nextGiftAssignment")})
     public Long getTransportationWeight() {
         return transportationWeight;
     }
@@ -115,13 +127,12 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         this.transportationWeight = transportationWeight;
     }
 
-    public long getSoftNextDistanceWeightCost() {
-        if (transportationWeight == null || reindeer == null) {
-            return 0L;
-        }
-        Standstill toStandstill = nextGiftAssignment == null ? reindeer : nextGiftAssignment;
-        return ReindeerRoutingCostCalculator.multiplyWeightAndDistance(transportationWeight,
-                getDistanceTo(toStandstill));
+    public Long getTransportationToNextPenalty() {
+        return transportationToNextPenalty;
+    }
+
+    public void setTransportationToNextPenalty(Long transportationToNextPenalty) {
+        this.transportationToNextPenalty = transportationToNextPenalty;
     }
 
 }

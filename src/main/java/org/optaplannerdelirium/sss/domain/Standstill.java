@@ -17,7 +17,9 @@
 package org.optaplannerdelirium.sss.domain;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
 import org.optaplanner.core.api.domain.variable.InverseRelationShadowVariable;
+import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
 import org.optaplannerdelirium.sss.domain.location.Location;
 
 @PlanningEntity
@@ -37,10 +39,14 @@ public interface Standstill {
     GiftAssignment getNextGiftAssignment();
     void setNextGiftAssignment(GiftAssignment nextGiftAssignment);
 
+    @CustomShadowVariable(variableListenerRef = @PlanningVariableReference(
+            entityClass = GiftAssignment.class, variableName = "transportationWeight"))
+    Long getTransportationToNextPenalty();
+    void setTransportationToNextPenalty(Long transportationToNextPenalty);
+
     Long getTransportationWeight();
 
+    double getDistanceToNextGiftAssignment();
     double getDistanceTo(Standstill standstill);
-
-    long getSoftNextDistanceWeightCost();
 
 }

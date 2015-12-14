@@ -17,6 +17,8 @@
 package org.optaplannerdelirium.sss.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
+import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
@@ -31,6 +33,7 @@ public class Reindeer extends AbstractPersistable implements Standstill {
 
     // Shadow variables
     private GiftAssignment nextGiftAssignment;
+    private Long transportationToNextPenalty;
 
     public Location getStartingLocation() {
         return startingLocation;
@@ -60,6 +63,13 @@ public class Reindeer extends AbstractPersistable implements Standstill {
         return startingLocation;
     }
 
+    public double getDistanceToNextGiftAssignment() {
+        if (nextGiftAssignment == null) {
+            return 0.0;
+        }
+        return getDistanceTo(nextGiftAssignment);
+    }
+
     public double getDistanceTo(Standstill standstill) {
         return startingLocation.getDistanceTo(standstill.getLocation());
     }
@@ -68,12 +78,12 @@ public class Reindeer extends AbstractPersistable implements Standstill {
         return SLEIGH_WEIGHT;
     }
 
-    public long getSoftNextDistanceWeightCost() {
-        if (nextGiftAssignment == null) {
-            return 0L;
-        }
-        return ReindeerRoutingCostCalculator.multiplyWeightAndDistance(SLEIGH_WEIGHT,
-                getDistanceTo(nextGiftAssignment));
+    public Long getTransportationToNextPenalty() {
+        return transportationToNextPenalty;
+    }
+
+    public void setTransportationToNextPenalty(Long transportationToNextPenalty) {
+        this.transportationToNextPenalty = transportationToNextPenalty;
     }
 
 }
