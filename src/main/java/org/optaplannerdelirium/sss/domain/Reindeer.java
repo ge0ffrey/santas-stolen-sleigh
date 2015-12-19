@@ -63,7 +63,7 @@ public class Reindeer extends AbstractPersistable implements Standstill {
         return startingLocation;
     }
 
-    public double getDistanceToNextGiftAssignment() {
+    public double getDistanceToNextGiftAssignmentOrReindeer() {
         if (nextGiftAssignment == null) {
             return 0.0;
         }

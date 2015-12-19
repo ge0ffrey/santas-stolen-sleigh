@@ -22,12 +22,10 @@ import org.optaplanner.core.api.domain.variable.AnchorShadowVariable;
 import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
-import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
-import org.optaplannerdelirium.sss.domain.solver.TransportationWeightUpdatingVariableListener;
-import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
+import org.optaplannerdelirium.sss.domain.solver.WeightAndCostUpdatingVariableListener;
 
 @PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
 @XStreamAlias("GiftAssignment")
@@ -98,7 +96,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         return getDistanceFrom(previousStandstill);
     }
 
-    public double getDistanceToNextGiftAssignment() {
+    public double getDistanceToNextGiftAssignmentOrReindeer() {
         if (nextGiftAssignment == null) {
             if (reindeer == null) {
                 return 0.0;
@@ -116,9 +114,10 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         return getLocation().getDistanceTo(standstill.getLocation());
     }
 
-    @CustomShadowVariable(variableListenerClass = TransportationWeightUpdatingVariableListener.class,
+    @CustomShadowVariable(variableListenerClass = WeightAndCostUpdatingVariableListener.class,
             sources = {@CustomShadowVariable.Source(variableName = "previousStandstill"),
-                     @CustomShadowVariable.Source(variableName = "nextGiftAssignment")})
+                     @CustomShadowVariable.Source(variableName = "nextGiftAssignment"),
+                    @CustomShadowVariable.Source(variableName = "reindeer")})
     public Long getTransportationWeight() {
         return transportationWeight;
     }

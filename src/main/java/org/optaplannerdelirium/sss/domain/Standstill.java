@@ -46,7 +46,7 @@ public interface Standstill {
 
     Long getTransportationWeight();
 
-    double getDistanceToNextGiftAssignment();
+    double getDistanceToNextGiftAssignmentOrReindeer();
     double getDistanceTo(Standstill standstill);
 
 }

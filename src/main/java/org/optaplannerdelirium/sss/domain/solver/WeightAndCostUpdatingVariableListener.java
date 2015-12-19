@@ -24,7 +24,7 @@ import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.Standstill;
 import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
-public class TransportationWeightUpdatingVariableListener implements VariableListener<Standstill> {
+public class WeightAndCostUpdatingVariableListener implements VariableListener<Standstill> {
 
     public void beforeEntityAdded(ScoreDirector scoreDirector, Standstill standstill) {
         // Do nothing
@@ -101,7 +101,7 @@ public class TransportationWeightUpdatingVariableListener implements VariableLis
             return null;
         }
         return ReindeerRoutingCostCalculator.multiplyWeightAndDistance(transportationWeight,
-                standstill.getDistanceToNextGiftAssignment());
+                standstill.getDistanceToNextGiftAssignmentOrReindeer());
     }
 
 }
