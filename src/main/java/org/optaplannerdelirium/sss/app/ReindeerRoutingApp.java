@@ -22,11 +22,12 @@ import org.optaplanner.examples.common.app.CommonApp;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
 import org.optaplanner.examples.common.persistence.SolutionDao;
 import org.optaplanner.examples.common.swingui.SolutionPanel;
+import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
 import org.optaplannerdelirium.sss.persistence.ReindeerRoutingDao;
 import org.optaplannerdelirium.sss.persistence.ReindeerRoutingImporter;
 import org.optaplannerdelirium.sss.swingui.ReindeerRoutingPanel;
 
-public class ReindeerRoutingApp extends CommonApp {
+public class ReindeerRoutingApp extends CommonApp<ReindeerRoutingSolution> {
 
     public static final String SOLVER_CONFIG
             = "org/optaplannerdelirium/sss/solver/reindeerRoutingSolverConfig.xml";
@@ -38,13 +39,7 @@ public class ReindeerRoutingApp extends CommonApp {
 
     public ReindeerRoutingApp() {
         super("Reindeer routing",
-                "Santa's stolen sleigh competition on kaggle.", null);
-    }
-
-    @Override
-    protected Solver createSolver() {
-        SolverFactory solverFactory = SolverFactory.createFromXmlResource(SOLVER_CONFIG);
-        return solverFactory.buildSolver();
+                "Santa's stolen sleigh competition on kaggle.", SOLVER_CONFIG, null);
     }
 
     @Override
