@@ -19,11 +19,13 @@ package org.optaplannerdelirium.sss.app;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.examples.common.app.CommonApp;
+import org.optaplanner.examples.common.persistence.AbstractSolutionExporter;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
 import org.optaplanner.examples.common.persistence.SolutionDao;
 import org.optaplanner.examples.common.swingui.SolutionPanel;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
 import org.optaplannerdelirium.sss.persistence.ReindeerRoutingDao;
+import org.optaplannerdelirium.sss.persistence.ReindeerRoutingExporter;
 import org.optaplannerdelirium.sss.persistence.ReindeerRoutingImporter;
 import org.optaplannerdelirium.sss.swingui.ReindeerRoutingPanel;
 
@@ -57,6 +59,11 @@ public class ReindeerRoutingApp extends CommonApp<ReindeerRoutingSolution> {
         return new AbstractSolutionImporter[]{
                 new ReindeerRoutingImporter()
         };
+    }
+
+    @Override
+    protected AbstractSolutionExporter createSolutionExporter() {
+        return new ReindeerRoutingExporter();
     }
 
 }
