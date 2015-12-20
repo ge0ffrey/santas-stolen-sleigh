@@ -35,13 +35,11 @@ import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
-import org.optaplanner.examples.vehiclerouting.domain.Customer;
-import org.optaplanner.examples.vehiclerouting.domain.Standstill;
-import org.optaplanner.examples.vehiclerouting.domain.Vehicle;
-import org.optaplanner.examples.vehiclerouting.domain.VehicleRoutingSolution;
 import org.optaplannerdelirium.sss.domain.Gift;
 import org.optaplannerdelirium.sss.domain.GiftAssignment;
+import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
+import org.optaplannerdelirium.sss.domain.Standstill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,10 +72,14 @@ public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseComman
             Future<ReindeerRoutingSolution> future = executorService.submit(runner);
             futureList.add(future);
         }
+        List<Reindeer> reindeerList = originalSolution.getReindeerList();
         List<GiftAssignment> giftAssignmentList = originalSolution.getGiftAssignmentList();
-        Map<Long, GiftAssignment> giftAssignmentMap = new HashMap<Long, GiftAssignment>(giftAssignmentList.size());
+        Map<Long, Standstill> standstillMap = new HashMap<Long, Standstill>(reindeerList.size() + giftAssignmentList.size());
+        for (Reindeer reindeer : reindeerList) {
+            standstillMap.put(-reindeer.getId(), reindeer);
+        }
         for (GiftAssignment giftAssignment : giftAssignmentList) {
-            giftAssignmentMap.put(giftAssignment.getId(), giftAssignment);
+            standstillMap.put(giftAssignment.getId(), giftAssignment);
         }
         for (Future<ReindeerRoutingSolution> future : futureList) {
             ReindeerRoutingSolution partitionSolution;
@@ -89,9 +91,12 @@ public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseComman
                 throw new IllegalStateException(e);
             }
             for (GiftAssignment partitionGiftAssignment : partitionSolution.getGiftAssignmentList()) {
-                GiftAssignment originalGiftAssignment = giftAssignmentMap.get(partitionGiftAssignment.getId());
+                GiftAssignment originalGiftAssignment = (GiftAssignment) standstillMap.get(partitionGiftAssignment.getId());
                 scoreDirector.beforeVariableChanged(originalGiftAssignment, "previousStandstill");
-                originalGiftAssignment.setPreviousStandstill(partitionGiftAssignment.getPreviousStandstill());
+                Standstill previousStandstill = partitionGiftAssignment.getPreviousStandstill();
+                Standstill originalPreviousStandstill = standstillMap.get(previousStandstill instanceof GiftAssignment
+                        ? ((GiftAssignment) previousStandstill).getId() : - ((Reindeer) previousStandstill).getId());
+                originalGiftAssignment.setPreviousStandstill(originalPreviousStandstill);
                 scoreDirector.afterVariableChanged(originalGiftAssignment, "previousStandstill");
             }
         }
