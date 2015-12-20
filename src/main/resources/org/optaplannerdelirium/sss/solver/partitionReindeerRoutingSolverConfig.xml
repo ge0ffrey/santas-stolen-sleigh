@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
-  <!--<environmentMode>FULL_ASSERT</environmentMode>-->
   <solutionClass>org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution</solutionClass>
   <entityClass>org.optaplannerdelirium.sss.domain.Standstill</entityClass>
   <entityClass>org.optaplannerdelirium.sss.domain.GiftAssignment</entityClass>
 
   <scoreDirectorFactory>
     <scoreDefinitionType>HARD_SOFT_LONG</scoreDefinitionType>
-    <!--<easyScoreCalculatorClass>org.optaplannerdelirium.sss.solver.score.ReindeerRoutingEasyScoreCalculator</easyScoreCalculatorClass>-->
     <incrementalScoreCalculatorClass>org.optaplannerdelirium.sss.solver.score.ReindeerRoutingIncrementalScoreCalculator</incrementalScoreCalculatorClass>
-    <!--<assertionScoreDirectorFactory>-->
-      <!--<easyScoreCalculatorClass>org.optaplannerdelirium.sss.solver.score.ReindeerRoutingEasyScoreCalculator</easyScoreCalculatorClass>-->
-    <!--</assertionScoreDirectorFactory>-->
     <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
   </scoreDirectorFactory>
 
-  <customPhase>
-    <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
-  </customPhase>
-  <!--<constructionHeuristic>-->
-    <!--<constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>-->
-  <!--</constructionHeuristic>-->
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
   <!--<localSearch>-->
     <!--<unionMoveSelector>-->
       <!--<changeMoveSelector/>-->
