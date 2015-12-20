@@ -51,47 +51,45 @@ public class WeightAndCostUpdatingVariableListener implements VariableListener<S
     }
 
     protected void updateVariable(ScoreDirector scoreDirector, Standstill sourceStandstill) {
+        Long transportationWeight;
         if (sourceStandstill instanceof GiftAssignment) {
             GiftAssignment sourceGiftAssignment = (GiftAssignment) sourceStandstill;
             Standstill previousStandstill = sourceGiftAssignment.getPreviousStandstill();
-            Long transportationWeight = previousStandstill == null ? null
+            transportationWeight = previousStandstill == null ? null
                     : previousStandstill.getTransportationWeight() + sourceGiftAssignment.getGiftWeight();
-            if (ObjectUtils.equals(sourceGiftAssignment.getTransportationWeight(), transportationWeight)) {
-                // Only nextGiftAssignment changed
-                Long transportationToNextPenalty =
-                        calculateTransportationToNextPenalty(transportationWeight, sourceGiftAssignment);
-                if (!ObjectUtils.equals(sourceStandstill.getTransportationToNextPenalty(), transportationToNextPenalty)) {
-                    scoreDirector.beforeVariableChanged(sourceGiftAssignment, "transportationToNextPenalty");
-                    sourceGiftAssignment.setTransportationToNextPenalty(transportationToNextPenalty);
-                    scoreDirector.afterVariableChanged(sourceGiftAssignment, "transportationToNextPenalty");
-                }
-            } else {
-                GiftAssignment shadowGiftAssignment = sourceGiftAssignment;
-                while (shadowGiftAssignment != null
-                        && !ObjectUtils.equals(shadowGiftAssignment.getTransportationWeight(), transportationWeight)) {
-                    scoreDirector.beforeVariableChanged(shadowGiftAssignment, "transportationWeight");
-                    shadowGiftAssignment.setTransportationWeight(transportationWeight);
-                    scoreDirector.afterVariableChanged(shadowGiftAssignment, "transportationWeight");
-                    Long transportationToNextPenalty =
-                            calculateTransportationToNextPenalty(transportationWeight, sourceGiftAssignment);
-                    scoreDirector.beforeVariableChanged(shadowGiftAssignment, "transportationToNextPenalty");
-                    shadowGiftAssignment.setTransportationToNextPenalty(transportationToNextPenalty);
-                    scoreDirector.afterVariableChanged(shadowGiftAssignment, "transportationToNextPenalty");
-                    shadowGiftAssignment = shadowGiftAssignment.getNextGiftAssignment();
-                    if (shadowGiftAssignment != null && transportationWeight != null) {
-                        transportationWeight += shadowGiftAssignment.getGiftWeight();
-                    }
-                }
+            if (!ObjectUtils.equals(sourceGiftAssignment.getTransportationWeight(), transportationWeight)) {
+                scoreDirector.beforeVariableChanged(sourceGiftAssignment, "transportationWeight");
+                sourceGiftAssignment.setTransportationWeight(transportationWeight);
+                scoreDirector.afterVariableChanged(sourceGiftAssignment, "transportationWeight");
             }
         } else {
             Reindeer reindeer = (Reindeer) sourceStandstill;
-            Long transportationWeight = reindeer.getTransportationWeight();
+            transportationWeight = reindeer.getTransportationWeight();
+        }
+        Long sourceTransportationToNextPenalty =
+                calculateTransportationToNextPenalty(transportationWeight, sourceStandstill);
+        if (!ObjectUtils.equals(sourceStandstill.getTransportationToNextPenalty(), sourceTransportationToNextPenalty)) {
+            scoreDirector.beforeVariableChanged(sourceStandstill, "transportationToNextPenalty");
+            sourceStandstill.setTransportationToNextPenalty(sourceTransportationToNextPenalty);
+            scoreDirector.afterVariableChanged(sourceStandstill, "transportationToNextPenalty");
+        }
+        GiftAssignment shadowGiftAssignment = sourceStandstill.getNextGiftAssignment();
+        if (shadowGiftAssignment != null && transportationWeight != null) {
+            transportationWeight += shadowGiftAssignment.getGiftWeight();
+        }
+        while (shadowGiftAssignment != null
+                && !ObjectUtils.equals(shadowGiftAssignment.getTransportationWeight(), transportationWeight)) {
+            scoreDirector.beforeVariableChanged(shadowGiftAssignment, "transportationWeight");
+            shadowGiftAssignment.setTransportationWeight(transportationWeight);
+            scoreDirector.afterVariableChanged(shadowGiftAssignment, "transportationWeight");
             Long transportationToNextPenalty =
-                    calculateTransportationToNextPenalty(transportationWeight, sourceStandstill);
-            if (!ObjectUtils.equals(sourceStandstill.getTransportationToNextPenalty(), transportationToNextPenalty)) {
-                scoreDirector.beforeVariableChanged(sourceStandstill, "transportationToNextPenalty");
-                sourceStandstill.setTransportationToNextPenalty(transportationToNextPenalty);
-                scoreDirector.afterVariableChanged(sourceStandstill, "transportationToNextPenalty");
+                    calculateTransportationToNextPenalty(transportationWeight, shadowGiftAssignment);
+            scoreDirector.beforeVariableChanged(shadowGiftAssignment, "transportationToNextPenalty");
+            shadowGiftAssignment.setTransportationToNextPenalty(transportationToNextPenalty);
+            scoreDirector.afterVariableChanged(shadowGiftAssignment, "transportationToNextPenalty");
+            shadowGiftAssignment = shadowGiftAssignment.getNextGiftAssignment();
+            if (shadowGiftAssignment != null && transportationWeight != null) {
+                transportationWeight += shadowGiftAssignment.getGiftWeight();
             }
         }
     }
