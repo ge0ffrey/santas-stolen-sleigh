@@ -92,10 +92,10 @@ public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseComman
             }
             for (GiftAssignment partitionGiftAssignment : partitionSolution.getGiftAssignmentList()) {
                 GiftAssignment originalGiftAssignment = (GiftAssignment) standstillMap.get(partitionGiftAssignment.getId());
-                scoreDirector.beforeVariableChanged(originalGiftAssignment, "previousStandstill");
                 Standstill previousStandstill = partitionGiftAssignment.getPreviousStandstill();
                 Standstill originalPreviousStandstill = standstillMap.get(previousStandstill instanceof GiftAssignment
                         ? ((GiftAssignment) previousStandstill).getId() : - ((Reindeer) previousStandstill).getId());
+                scoreDirector.beforeVariableChanged(originalGiftAssignment, "previousStandstill");
                 originalGiftAssignment.setPreviousStandstill(originalPreviousStandstill);
                 scoreDirector.afterVariableChanged(originalGiftAssignment, "previousStandstill");
             }

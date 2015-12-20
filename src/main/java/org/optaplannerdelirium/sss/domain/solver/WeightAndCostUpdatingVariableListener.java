@@ -55,7 +55,7 @@ public class WeightAndCostUpdatingVariableListener implements VariableListener<S
         if (sourceStandstill instanceof GiftAssignment) {
             GiftAssignment sourceGiftAssignment = (GiftAssignment) sourceStandstill;
             Standstill previousStandstill = sourceGiftAssignment.getPreviousStandstill();
-            transportationWeight = previousStandstill == null ? null
+            transportationWeight = previousStandstill == null || previousStandstill.getTransportationWeight() == null ? null
                     : previousStandstill.getTransportationWeight() + sourceGiftAssignment.getGiftWeight();
             if (!ObjectUtils.equals(sourceGiftAssignment.getTransportationWeight(), transportationWeight)) {
                 scoreDirector.beforeVariableChanged(sourceGiftAssignment, "transportationWeight");
