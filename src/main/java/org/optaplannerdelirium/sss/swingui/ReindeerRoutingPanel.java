@@ -43,7 +43,7 @@ public class ReindeerRoutingPanel extends SolutionPanel {
 
     @Override
     public boolean isRefreshScreenDuringSolving() {
-        return true;
+        return false;
     }
 
     public ReindeerRoutingSolution getReindeerRoutingSolution() {

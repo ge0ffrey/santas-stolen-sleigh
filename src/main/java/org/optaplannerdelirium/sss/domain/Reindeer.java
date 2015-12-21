@@ -26,8 +26,8 @@ import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 @XStreamAlias("Reindeer")
 public class Reindeer extends AbstractPersistable implements Standstill {
 
-    public static final long SLEIGH_WEIGHT = 10L * ReindeerRoutingCostCalculator.MICROS_PER_ONE_AS_LONG;
-    public static final long WEIGHT_CAPACITY = 1010L * ReindeerRoutingCostCalculator.MICROS_PER_ONE_AS_LONG;
+    public static final long SLEIGH_WEIGHT = 10L * ReindeerRoutingCostCalculator.WEIGHT_LONG_FACTOR;
+    public static final long WEIGHT_CAPACITY = 1010L * ReindeerRoutingCostCalculator.WEIGHT_LONG_FACTOR;
 
     private Location startingLocation;
 

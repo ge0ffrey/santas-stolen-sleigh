@@ -16,10 +16,15 @@
 
 package org.optaplannerdelirium.sss.persistence;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.examples.common.persistence.AbstractTxtSolutionImporter;
@@ -27,6 +32,7 @@ import org.optaplannerdelirium.sss.domain.Gift;
 import org.optaplannerdelirium.sss.domain.GiftAssignment;
 import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
+import org.optaplannerdelirium.sss.domain.Standstill;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.location.SphereLocation;
 import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
@@ -53,15 +59,29 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
     public static class ReindeerRoutingInputBuilder extends TxtInputBuilder {
 
         private ReindeerRoutingSolution solution;
+        private boolean initialized;
+        private BufferedReader initializedBufferedReader;
 
         private int giftListSize;
 
         public Solution readSolution() throws IOException {
             solution = new ReindeerRoutingSolution();
             solution.setId(0L);
+            initialized = inputFile.getName().endsWith("solution.csv");
+            if (initialized) {
+                initializedBufferedReader = bufferedReader;
+                File unsolvedInputFile = new File(inputFile.getParentFile(), "gifts.csv");
+                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(unsolvedInputFile), "UTF-8"));
+            } else {
+                initializedBufferedReader = null;
+            }
             readGiftList();
             createReindeerList();
             createGiftAssignmentList();
+            if (initialized) {
+                bufferedReader = initializedBufferedReader;
+                readGiftAssignmentList();
+            }
 
             logger.info("ReindeerRoutingSolution {} has {} reindeers and {} gift.",
                     getInputId(),
@@ -84,14 +104,14 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 location.setLatitude(Double.parseDouble(lineTokens[1]));
                 location.setLongitude(Double.parseDouble(lineTokens[2]));
                 gift.setLocation(location);
-                gift.setWeight(ReindeerRoutingCostCalculator.parseMicroCost(lineTokens[3]));
+                gift.setWeight(ReindeerRoutingCostCalculator.parseWeight(lineTokens[3]));
                 giftList.add(gift);
             }
             solution.setGiftList(giftList);
         }
 
         private void createReindeerList() {
-            int reindeerListSize = 1000;
+            int reindeerListSize = giftListSize / 10;
             List<Reindeer> reindeerList = new ArrayList<Reindeer>(reindeerListSize);
             long id = 0;
             for (int i = 0; i < reindeerListSize; i++) {
@@ -114,6 +134,48 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 giftAssignmentList.add(giftAssignment);
             }
             solution.setGiftAssignmentList(giftAssignmentList);
+        }
+
+        private void readGiftAssignmentList() throws IOException {
+            readConstantLine("GiftId,TripId");
+            Map<Long, Standstill> standstillMap = new HashMap<Long, Standstill>(giftListSize * 11 / 10);
+            for (Reindeer reindeer : solution.getReindeerList()) {
+                standstillMap.put(- reindeer.getId(), reindeer);
+            }
+            for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
+                standstillMap.put(giftAssignment.getId(), giftAssignment);
+            }
+            Reindeer previousReindeer = null;
+            GiftAssignment previousGiftAssignment = null;
+            for (int i = 0; i < giftListSize; i++) {
+                String line = bufferedReader.readLine();
+                String[] lineTokens = splitBy(line, "\\,", ",", 2, true, false);
+                GiftAssignment giftAssignment = (GiftAssignment) standstillMap.get(Long.parseLong(lineTokens[0]));
+                if (giftAssignment == null) {
+                    throw new IllegalStateException("No standstill with id (" + lineTokens[0] + ").");
+                }
+                Reindeer reindeer = (Reindeer) standstillMap.get(- Long.parseLong(lineTokens[1]));
+                if (reindeer == null) {
+                    throw new IllegalStateException("No standstill with id (" + lineTokens[1] + ").");
+                }
+                Standstill previousStandstill = (reindeer != previousReindeer) ? reindeer : previousGiftAssignment;
+                giftAssignment.setPreviousStandstill(previousStandstill);
+                previousStandstill.setNextGiftAssignment(giftAssignment);
+                giftAssignment.setReindeer(reindeer);
+                giftAssignment.setTransportationWeight(previousStandstill.getTransportationWeight() + giftAssignment.getGiftWeight());
+                previousGiftAssignment = giftAssignment;
+                previousReindeer = reindeer;
+            }
+            for (Reindeer reindeer : solution.getReindeerList()) {
+                reindeer.setTransportationToNextPenalty(
+                        ReindeerRoutingCostCalculator.multiplyWeightAndDistance(reindeer.getTransportationWeight(),
+                                reindeer.getDistanceToNextGiftAssignmentOrReindeer()));
+            }
+            for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
+                giftAssignment.setTransportationToNextPenalty(
+                        ReindeerRoutingCostCalculator.multiplyWeightAndDistance(giftAssignment.getTransportationWeight(),
+                                giftAssignment.getDistanceToNextGiftAssignmentOrReindeer()));
+            }
         }
         
     }

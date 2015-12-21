@@ -32,6 +32,8 @@ import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.config.heuristic.selector.common.decorator.SelectionSorterOrder;
+import org.optaplanner.core.impl.heuristic.selector.common.decorator.WeightFactorySelectionSorter;
 import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
@@ -40,20 +42,27 @@ import org.optaplannerdelirium.sss.domain.GiftAssignment;
 import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
 import org.optaplannerdelirium.sss.domain.Standstill;
+import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseCommand {
 
     private SolverFactory<ReindeerRoutingSolution> solverFactory;
-    private ExecutorService executorService;
+
+    public ReindeerRoutingPartitioningCustomPhase() {
+        solverFactory = SolverFactory.createFromXmlResource("org/optaplannerdelirium/sss/solver/partitionReindeerRoutingSolverConfig.xml");
+    }
 
     public void changeWorkingSolution(ScoreDirector scoreDirector) {
-        solverFactory = SolverFactory.createFromXmlResource("org/optaplannerdelirium/sss/solver/partitionReindeerRoutingSolverConfig.xml");
-        executorService = Executors.newFixedThreadPool(3);
+        int availableProcessorCount = Runtime.getRuntime().availableProcessors();
+        ExecutorService executorService = Executors.newFixedThreadPool(Math.max(availableProcessorCount - 2, 1));
         ReindeerRoutingSolution originalSolution = (ReindeerRoutingSolution) scoreDirector.getWorkingSolution();
 
         ReindeerRoutingSolution cloneSolution = (ReindeerRoutingSolution) ((InnerScoreDirector) scoreDirector).cloneSolution(originalSolution);
+        WeightFactorySelectionSorter<ReindeerRoutingSolution, GiftAssignment> sorter = new WeightFactorySelectionSorter<ReindeerRoutingSolution, GiftAssignment>(
+                new NorthPoleAngleGiftAssignmentDifficultyWeightFactory(), SelectionSorterOrder.ASCENDING);
+        sorter.sort(cloneSolution, cloneSolution.getGiftAssignmentList());
         int giftSize = cloneSolution.getGiftList().size();
         int partitionListSize = giftSize >= 1000 ? 20 : 4;
         if (giftSize % partitionListSize != 0) {
@@ -64,10 +73,15 @@ public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseComman
             ReindeerRoutingSolution partitionSolution = new ReindeerRoutingSolution();
             partitionSolution.setId(cloneSolution.getId());
             int giftSubSize = giftSize / partitionListSize;
-            partitionSolution.setGiftList(cloneSolution.getGiftList().subList(giftSubSize * i, giftSubSize * (i + 1)));
+            List<GiftAssignment> partitionGiftAssignmentList = cloneSolution.getGiftAssignmentList().subList(giftSubSize * i, giftSubSize * (i + 1));
+            List<Gift> partitionGiftList = new ArrayList<Gift>(giftSubSize);
+            for (GiftAssignment partitionGiftAssignment : partitionGiftAssignmentList) {
+                partitionGiftList.add(partitionGiftAssignment.getGift());
+            }
+            partitionSolution.setGiftList(partitionGiftList);
             int reindeerSubSize = cloneSolution.getReindeerList().size() / partitionListSize;
             partitionSolution.setReindeerList(cloneSolution.getReindeerList().subList(reindeerSubSize * i, reindeerSubSize * (i + 1)));
-            partitionSolution.setGiftAssignmentList(cloneSolution.getGiftAssignmentList().subList(giftSubSize * i, giftSubSize * (i + 1)));
+            partitionSolution.setGiftAssignmentList(partitionGiftAssignmentList);
             ReindeerRoutingPartitionRunner runner = new ReindeerRoutingPartitionRunner(partitionSolution);
             Future<ReindeerRoutingSolution> future = executorService.submit(runner);
             futureList.add(future);

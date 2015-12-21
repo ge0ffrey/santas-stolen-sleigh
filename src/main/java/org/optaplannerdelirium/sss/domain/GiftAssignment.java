@@ -25,9 +25,11 @@ import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
+import org.optaplannerdelirium.sss.domain.solver.NorthPoleDistanceGiftAssignmentDifficultyWeightFactory;
 import org.optaplannerdelirium.sss.domain.solver.WeightAndCostUpdatingVariableListener;
 
-@PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
+ @PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
+//@PlanningEntity(difficultyWeightFactoryClass = NorthPoleDistanceGiftAssignmentDifficultyWeightFactory.class) // Partitioning still happens on angle though
 @XStreamAlias("GiftAssignment")
 public class GiftAssignment extends AbstractPersistable implements Standstill {
 
