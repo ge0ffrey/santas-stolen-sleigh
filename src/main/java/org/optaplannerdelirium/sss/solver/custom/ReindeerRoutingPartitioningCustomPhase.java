@@ -34,6 +34,7 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.common.decorator.SelectionSorterOrder;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.WeightFactorySelectionSorter;
+import org.optaplanner.core.impl.phase.custom.AbstractCustomPhaseCommand;
 import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
@@ -46,12 +47,27 @@ import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDif
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseCommand {
+public class ReindeerRoutingPartitioningCustomPhase  extends AbstractCustomPhaseCommand {
+
+    private final String PARTITION_SOLVER_CONFIG_RESOURCE = "partitionSolverConfigResource";
 
     private SolverFactory<ReindeerRoutingSolution> solverFactory;
 
     public ReindeerRoutingPartitioningCustomPhase() {
-        solverFactory = SolverFactory.createFromXmlResource("org/optaplannerdelirium/sss/solver/partitionReindeerRoutingSolverConfig.xml");
+    }
+
+    @Override
+    public void applyCustomProperties(Map<String, String> customPropertyMap) {
+        String partitionSolverConfigResource = customPropertyMap.get(PARTITION_SOLVER_CONFIG_RESOURCE);
+        if (partitionSolverConfigResource == null) {
+            throw new IllegalArgumentException("A customProperty (" + PARTITION_SOLVER_CONFIG_RESOURCE
+                    + ") is missing from the solver configuration.");
+        }
+        if (customPropertyMap.size() != 1) {
+            throw new IllegalArgumentException("The customPropertyMap's size (" + customPropertyMap.size()
+                    + ") is not 1.");
+        }
+        solverFactory = SolverFactory.createFromXmlResource(partitionSolverConfigResource);
     }
 
     public void changeWorkingSolution(ScoreDirector scoreDirector) {
@@ -64,7 +80,7 @@ public class ReindeerRoutingPartitioningCustomPhase implements CustomPhaseComman
                 new NorthPoleAngleGiftAssignmentDifficultyWeightFactory(), SelectionSorterOrder.ASCENDING);
         sorter.sort(cloneSolution, cloneSolution.getGiftAssignmentList());
         int giftSize = cloneSolution.getGiftList().size();
-        int partitionListSize = giftSize >= 1000 ? 20 : 4;
+        int partitionListSize = giftSize >= 1000 ? 100 : 4;
         if (giftSize % partitionListSize != 0) {
             throw new IllegalStateException();
         }

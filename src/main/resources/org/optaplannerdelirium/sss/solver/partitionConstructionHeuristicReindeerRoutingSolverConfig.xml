@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <solutionClass>org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution</solutionClass>
+  <entityClass>org.optaplannerdelirium.sss.domain.Standstill</entityClass>
+  <entityClass>org.optaplannerdelirium.sss.domain.GiftAssignment</entityClass>
+
+  <scoreDirectorFactory>
+    <scoreDefinitionType>HARD_SOFT_LONG</scoreDefinitionType>
+    <incrementalScoreCalculatorClass>org.optaplannerdelirium.sss.solver.score.ReindeerRoutingIncrementalScoreCalculator</incrementalScoreCalculatorClass>
+    <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
+  </scoreDirectorFactory>
+
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
+</solver>

@@ -17,27 +17,14 @@
 
   <customPhase>
     <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
+    <customProperties>
+      <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionConstructionHeuristicReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
+    </customProperties>
   </customPhase>
-  <!--<constructionHeuristic>-->
-    <!--<constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>-->
-  <!--</constructionHeuristic>-->
-  <!--<localSearch>-->
-    <!--<unionMoveSelector>-->
-      <!--<changeMoveSelector/>-->
-      <!--<swapMoveSelector/>-->
-      <!--<tailChainSwapMoveSelector/>-->
-      <!--&lt;!&ndash;<subChainChangeMoveSelector>&ndash;&gt;-->
-        <!--&lt;!&ndash;<selectReversingMoveToo>true</selectReversingMoveToo>&ndash;&gt;-->
-      <!--&lt;!&ndash;</subChainChangeMoveSelector>&ndash;&gt;-->
-      <!--&lt;!&ndash;<subChainSwapMoveSelector>&ndash;&gt;-->
-        <!--&lt;!&ndash;<selectReversingMoveToo>true</selectReversingMoveToo>&ndash;&gt;-->
-      <!--&lt;!&ndash;</subChainSwapMoveSelector>&ndash;&gt;-->
-    <!--</unionMoveSelector>-->
-    <!--<acceptor>-->
-      <!--<lateAcceptanceSize>200</lateAcceptanceSize>-->
-    <!--</acceptor>-->
-    <!--<forager>-->
-      <!--<acceptedCountLimit>1</acceptedCountLimit>-->
-    <!--</forager>-->
-  <!--</localSearch>-->
+  <customPhase>
+    <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
+    <customProperties>
+      <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionLocalSearchReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
+    </customProperties>
+  </customPhase>
 </solver>
