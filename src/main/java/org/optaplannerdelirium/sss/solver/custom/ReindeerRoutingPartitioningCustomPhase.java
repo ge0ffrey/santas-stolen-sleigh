@@ -93,6 +93,9 @@ public class ReindeerRoutingPartitioningCustomPhase  extends AbstractCustomPhase
         if (giftSize < 1000) {
             logger.warn("Partition count automatically lowered from " + partitionCount + " to 4.");
             partitionCount = 4;
+        } else if (giftSize < 10000) {
+            logger.warn("Partition count automatically lowered from " + partitionCount + " to 4.");
+            partitionCount = 10;
         }
         if (giftSize % partitionCount != 0) {
             throw new IllegalStateException();
