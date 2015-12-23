@@ -7,6 +7,9 @@
         <id>1</id>
         <latitude>16.3457688674</latitude>
         <longitude>6.30354512503</longitude>
+        <cartesianX>0.052678975372392266</cartesianX>
+        <cartesianY>0.4768896580527136</cartesianY>
+        <cartesianZ>0.14071666424443396</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -16,6 +19,9 @@
         <id>2</id>
         <latitude>12.494749307</latitude>
         <longitude>28.6263955635</longitude>
+        <cartesianX>0.23387464530857283</cartesianX>
+        <cartesianY>0.4284866440643957</cartesianY>
+        <cartesianZ>0.10817507171350141</cartesianZ>
       </location>
       <weight>1552447957260</weight>
     </Gift>
@@ -25,6 +31,9 @@
         <id>3</id>
         <latitude>27.794615136</latitude>
         <longitude>60.0324947881</longitude>
+        <cartesianX>0.3831791416910203</cartesianX>
+        <cartesianY>0.22093891992801792</cartesianY>
+        <cartesianZ>0.23315175108494013</cartesianZ>
       </location>
       <weight>805849862195</weight>
     </Gift>
@@ -34,6 +43,9 @@
         <id>4</id>
         <latitude>44.4269923769</latitude>
         <longitude>110.114216113</longitude>
+        <cartesianX>0.33529332898469294</cartesianX>
+        <cartesianY>-0.12279427611690263</cartesianY>
+        <cartesianZ>0.3499999275589759</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -43,6 +55,9 @@
         <id>5</id>
         <latitude>-69.8540884125</latitude>
         <longitude>87.9468778773</longitude>
+        <cartesianX>0.17209549477011069</cartesianX>
+        <cartesianY>0.006169466259403449</cartesianY>
+        <cartesianZ>-0.46940928662086023</cartesianZ>
       </location>
       <weight>2508889191630</weight>
     </Gift>
@@ -52,6 +67,9 @@
         <id>6</id>
         <latitude>53.5679698071</latitude>
         <longitude>-71.3593080866</longitude>
+        <cartesianX>-0.28135768833494795</cartesianX>
+        <cartesianY>0.09490983039798608</cartesianY>
+        <cartesianZ>0.4022809656305401</cartesianZ>
       </location>
       <weight>3800015126260</weight>
     </Gift>
@@ -61,6 +79,9 @@
         <id>7</id>
         <latitude>12.9025840371</latitude>
         <longitude>79.9669489093</longitude>
+        <cartesianX>0.4799223326133574</cartesianX>
+        <cartesianY>0.08490873571447155</cartesianY>
+        <cartesianZ>0.11164703873513153</cartesianZ>
       </location>
       <weight>4420661624180</weight>
     </Gift>
@@ -70,6 +91,9 @@
         <id>8</id>
         <latitude>-6.29109889296</latitude>
         <longitude>-64.8917508931</longitude>
+        <cartesianX>-0.45002737018346506</cartesianX>
+        <cartesianY>0.21088723947980084</cartesianY>
+        <cartesianZ>-0.05478994716500102</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -79,6 +103,9 @@
         <id>9</id>
         <latitude>-2.68531605304</latitude>
         <longitude>111.089758191</longitude>
+        <cartesianX>0.4659966686861188</cartesianX>
+        <cartesianY>-0.17971745490238944</cartesianY>
+        <cartesianZ>-0.023425225225112253</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -88,6 +115,9 @@
         <id>10</id>
         <latitude>38.4288618657</latitude>
         <longitude>101.973670947</longitude>
+        <cartesianX>0.3831682429755491</cartesianX>
+        <cartesianY>-0.08126091023729705</cartesianY>
+        <cartesianZ>0.31077123747611607</cartesianZ>
       </location>
       <weight>3570131123690</weight>
     </Gift>
@@ -97,6 +127,9 @@
         <id>11</id>
         <latitude>39.0901430146</latitude>
         <longitude>72.6189278664</longitude>
+        <cartesianX>0.37035746867355424</cartesianX>
+        <cartesianY>0.11592864477527624</cartesianY>
+        <cartesianZ>0.3152711447600067</cartesianZ>
       </location>
       <weight>2757992143600</weight>
     </Gift>
@@ -106,6 +139,9 @@
         <id>12</id>
         <latitude>-15.5749342275</latitude>
         <longitude>39.5572954834</longitude>
+        <cartesianX>0.3067322428817451</cartesianX>
+        <cartesianY>0.37133876637161634</cartesianY>
+        <cartesianZ>-0.1342492151423623</cartesianZ>
       </location>
       <weight>1455197413690</weight>
     </Gift>
@@ -115,6 +151,9 @@
         <id>13</id>
         <latitude>73.1896497296</latitude>
         <longitude>-106.604219923</longitude>
+        <cartesianX>-0.1385726669469611</cartesianX>
+        <cartesianY>-0.041321419562153024</cartesianY>
+        <cartesianZ>0.47863363469419395</cartesianZ>
       </location>
       <weight>498356232888</weight>
     </Gift>
@@ -124,6 +163,9 @@
         <id>14</id>
         <latitude>57.0682897236</latitude>
         <longitude>134.171051275</longitude>
+        <cartesianX>0.19496602368223517</cartesianX>
+        <cartesianY>-0.18940460573581414</cartesianY>
+        <cartesianZ>0.4196595583751178</cartesianZ>
       </location>
       <weight>2365599779410</weight>
     </Gift>
@@ -133,6 +175,9 @@
         <id>15</id>
         <latitude>-68.884672727</latitude>
         <longitude>61.214391432</longitude>
+        <cartesianX>0.15786494163267636</cartesianX>
+        <cartesianY>0.08673535694325407</cartesianY>
+        <cartesianZ>-0.4664285991009106</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -142,6 +187,9 @@
         <id>16</id>
         <latitude>-40.7404097049</latitude>
         <longitude>-63.9527499451</longitude>
+        <cartesianX>-0.34035947575202014</cartesianX>
+        <cartesianY>0.16635200191183439</cartesianY>
+        <cartesianZ>-0.32631647020298415</cartesianZ>
       </location>
       <weight>2085176452040</weight>
     </Gift>
@@ -151,6 +199,9 @@
         <id>17</id>
         <latitude>-66.3243912609</latitude>
         <longitude>-65.0571157742</longitude>
+        <cartesianX>-0.1820520378077122</cartesianX>
+        <cartesianY>0.0846714203629345</cartesianY>
+        <cartesianZ>-0.45791681133562084</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -160,6 +211,9 @@
         <id>18</id>
         <latitude>48.7506310206</latitude>
         <longitude>-124.572001202</longitude>
+        <cartesianX>-0.27145379901565625</cartesianX>
+        <cartesianY>-0.1870677181795497</cartesianY>
+        <cartesianZ>0.3759235345320432</cartesianZ>
       </location>
       <weight>688447877979</weight>
     </Gift>
@@ -169,6 +223,9 @@
         <id>19</id>
         <latitude>34.2221051613</latitude>
         <longitude>-99.3908630501</longitude>
+        <cartesianX>-0.4078910953778858</cartesianX>
+        <cartesianY>-0.06745910569659061</cartesianY>
+        <cartesianZ>0.28120121509347124</cartesianZ>
       </location>
       <weight>4580868301230</weight>
     </Gift>
@@ -178,6 +235,9 @@
         <id>20</id>
         <latitude>-73.0838623546</latitude>
         <longitude>-74.4172652937</longitude>
+        <cartesianX>-0.14013829505062508</cartesianX>
+        <cartesianY>0.03908179814323303</cartesianY>
+        <cartesianZ>-0.4783658341836251</cartesianZ>
       </location>
       <weight>4321221951730</weight>
     </Gift>
@@ -187,6 +247,9 @@
         <id>21</id>
         <latitude>18.6716243133</latitude>
         <longitude>-95.7109355295</longitude>
+        <cartesianX>-0.471333384837587</cartesianX>
+        <cartesianY>-0.047136183277687135</cartesianY>
+        <cartesianZ>0.16007192309569904</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -196,6 +259,9 @@
         <id>22</id>
         <latitude>47.3626446387</latitude>
         <longitude>61.0683069193</longitude>
+        <cartesianX>0.296409879046736</cartesianX>
+        <cartesianY>0.1638410324185348</cartesianY>
+        <cartesianZ>0.3678278125693161</cartesianZ>
       </location>
       <weight>2711317318070</weight>
     </Gift>
@@ -205,6 +271,9 @@
         <id>23</id>
         <latitude>-21.2828406251</latitude>
         <longitude>-64.9940077309</longitude>
+        <cartesianX>-0.4222281918322307</cartesianX>
+        <cartesianY>0.19694200260868536</cartesianY>
+        <cartesianZ>-0.1814860921133229</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -214,6 +283,9 @@
         <id>24</id>
         <latitude>36.4035868261</latitude>
         <longitude>65.8513733791</longitude>
+        <cartesianX>0.36721073444064634</cartesianX>
+        <cartesianY>0.16463545156270956</cartesianY>
+        <cartesianZ>0.29673463667105643</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -223,6 +295,9 @@
         <id>25</id>
         <latitude>52.2185240181</latitude>
         <longitude>10.2652145163</longitude>
+        <cartesianX>0.0545887380988164</cartesianX>
+        <cartesianY>0.30142254943973995</cartesianY>
+        <cartesianZ>0.3951765635282871</cartesianZ>
       </location>
       <weight>2642884519510</weight>
     </Gift>
@@ -232,6 +307,9 @@
         <id>26</id>
         <latitude>18.366745749</latitude>
         <longitude>51.3729554921</longitude>
+        <cartesianX>0.37071475862434744</cartesianX>
+        <cartesianY>0.29622430589715476</cartesianY>
+        <cartesianZ>0.1575491299050576</cartesianZ>
       </location>
       <weight>3839440567600</weight>
     </Gift>
@@ -241,6 +319,9 @@
         <id>27</id>
         <latitude>29.4414267718</latitude>
         <longitude>86.2759975891</longitude>
+        <cartesianX>0.4345099113445319</cartesianX>
+        <cartesianY>0.02828128706034997</cartesianY>
+        <cartesianZ>0.24576677103623495</cartesianZ>
       </location>
       <weight>1439033000080</weight>
     </Gift>
@@ -250,6 +331,9 @@
         <id>28</id>
         <latitude>76.3334845992</latitude>
         <longitude>-38.2394206523</longitude>
+        <cartesianX>-0.07311963024920726</cartesianX>
+        <cartesianY>0.09278704254769321</cartesianY>
+        <cartesianZ>0.4858436830992781</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -259,6 +343,9 @@
         <id>29</id>
         <latitude>65.0717259305</latitude>
         <longitude>64.407895904</longitude>
+        <cartesianX>0.19006625139995736</cartesianX>
+        <cartesianY>0.09103228586666794</cartesianY>
+        <cartesianZ>0.45341806647801036</cartesianZ>
       </location>
       <weight>464246789893</weight>
     </Gift>
@@ -268,6 +355,9 @@
         <id>30</id>
         <latitude>38.3806598238</latitude>
         <longitude>42.6379985157</longitude>
+        <cartesianX>0.2654938631843192</cartesianX>
+        <cartesianY>0.2883383753404047</cartesianY>
+        <cartesianZ>0.31044160468197857</cartesianZ>
       </location>
       <weight>4572847367050</weight>
     </Gift>
@@ -277,6 +367,9 @@
         <id>31</id>
         <latitude>62.5199597365</latitude>
         <longitude>-43.2626103117</longitude>
+        <cartesianX>-0.15812225924360063</cartesianX>
+        <cartesianY>0.16801480114865924</cartesianY>
+        <cartesianZ>0.44358581776999595</cartesianZ>
       </location>
       <weight>2915974093350</weight>
     </Gift>
@@ -286,6 +379,9 @@
         <id>32</id>
         <latitude>58.9166758589</latitude>
         <longitude>-128.640284481</longitude>
+        <cartesianX>-0.2016300103041585</cartesianX>
+        <cartesianY>-0.16119136068509363</cartesianY>
+        <cartesianZ>0.42820869232797343</cartesianZ>
       </location>
       <weight>892293396867</weight>
     </Gift>
@@ -295,6 +391,9 @@
         <id>33</id>
         <latitude>-8.63406954274</latitude>
         <longitude>-63.9366853928</longitude>
+        <cartesianX>-0.44406439944059606</cartesianX>
+        <cartesianY>0.21719245171537718</cartesianY>
+        <cartesianZ>-0.07506162846172665</cartesianZ>
       </location>
       <weight>2484353586720</weight>
     </Gift>
@@ -304,6 +403,9 @@
         <id>34</id>
         <latitude>-76.194072717</latitude>
         <longitude>-141.018317751</longitude>
+        <cartesianX>-0.07505894712495795</cartesianX>
+        <cartesianY>-0.0927506953462921</cartesianY>
+        <cartesianZ>-0.4855547991414276</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -313,6 +415,9 @@
         <id>35</id>
         <latitude>52.5635732888</latitude>
         <longitude>71.6513211596</longitude>
+        <cartesianX>0.28848756308935336</cartesianX>
+        <cartesianY>0.09568012461175417</cartesianY>
+        <cartesianZ>0.39701415553736313</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -322,6 +427,9 @@
         <id>36</id>
         <latitude>31.0459810433</latitude>
         <longitude>12.0027990632</longitude>
+        <cartesianX>0.08908502479776333</cartesianX>
+        <cartesianY>0.41901143455013523</cartesianY>
+        <cartesianZ>0.2578629016997591</cartesianZ>
       </location>
       <weight>1428245276130</weight>
     </Gift>
@@ -331,6 +439,9 @@
         <id>37</id>
         <latitude>50.242050756</latitude>
         <longitude>-95.5377472093</longitude>
+        <cartesianX>-0.3182804010161617</cartesianX>
+        <cartesianY>-0.03085856175620542</cartesianY>
+        <cartesianZ>0.3843765542997254</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -340,6 +451,9 @@
         <id>38</id>
         <latitude>16.017500743</latitude>
         <longitude>-12.0883693736</longitude>
+        <cartesianX>-0.10064492810176587</cartesianX>
+        <cartesianY>0.4699320432937152</cartesianY>
+        <cartesianZ>0.13796547804861975</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -349,6 +463,9 @@
         <id>39</id>
         <latitude>8.05847093548</latitude>
         <longitude>48.1277893266</longitude>
+        <cartesianX>0.3686412423562489</cartesianX>
+        <cartesianY>0.33044027222455497</cartesianY>
+        <cartesianZ>0.07009180355935603</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -358,6 +475,9 @@
         <id>40</id>
         <latitude>75.2615103075</latitude>
         <longitude>143.474184781</longitude>
+        <cartesianX>0.07570980357277257</cartesianX>
+        <cartesianY>-0.10221957420228396</cartesianY>
+        <cartesianZ>0.4835485335443341</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -367,6 +487,9 @@
         <id>41</id>
         <latitude>18.708564599</latitude>
         <longitude>80.6150359492</longitude>
+        <cartesianX>0.4672422815933063</cartesianX>
+        <cartesianY>0.07722548619046411</cartesianY>
+        <cartesianZ>0.16037728821166647</cartesianZ>
       </location>
       <weight>3763891836860</weight>
     </Gift>
@@ -376,6 +499,9 @@
         <id>42</id>
         <latitude>68.485725996</latitude>
         <longitude>62.7979869733</longitude>
+        <cartesianX>0.16308622640481302</cartesianX>
+        <cartesianY>0.08382217895769994</cartesianY>
+        <cartesianZ>0.465163116628803</cartesianZ>
       </location>
       <weight>2970059220120</weight>
     </Gift>
@@ -385,6 +511,9 @@
         <id>43</id>
         <latitude>-77.051178651</latitude>
         <longitude>-29.7725439517</longitude>
+        <cartesianX>-0.055634520913371385</cartesianX>
+        <cartesianY>0.09725138255527119</cartesianY>
+        <cartesianZ>-0.48728530521023095</cartesianZ>
       </location>
       <weight>624581768299</weight>
     </Gift>
@@ -394,6 +523,9 @@
         <id>44</id>
         <latitude>42.3207833178</latitude>
         <longitude>-74.1174732856</longitude>
+        <cartesianX>-0.3555803428863108</cartesianX>
+        <cartesianY>0.10117249605960367</cartesianY>
+        <cartesianZ>0.3366403805159493</cartesianZ>
       </location>
       <weight>844463550471</weight>
     </Gift>
@@ -403,6 +535,9 @@
         <id>45</id>
         <latitude>55.7981397383</latitude>
         <longitude>114.306769974</longitude>
+        <cartesianX>0.25614088538991653</cartesianX>
+        <cartesianY>-0.11568848156643632</cartesianY>
+        <cartesianZ>0.4135311621444289</cartesianZ>
       </location>
       <weight>652314409133</weight>
     </Gift>
@@ -412,6 +547,9 @@
         <id>46</id>
         <latitude>67.7261456251</latitude>
         <longitude>38.3591767147</longitude>
+        <cartesianX>0.11761218677435344</cartesianX>
+        <cartesianY>0.1486070387289809</cartesianY>
+        <cartesianZ>0.4626913891162853</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -421,6 +559,9 @@
         <id>47</id>
         <latitude>29.9616935113</latitude>
         <longitude>14.7260593997</longitude>
+        <cartesianX>0.11011336220695672</cartesianX>
+        <cartesianY>0.4189507633837568</cartesianY>
+        <cartesianZ>0.24971044296073594</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -430,6 +571,9 @@
         <id>48</id>
         <latitude>39.4908953629</latitude>
         <longitude>87.4539689304</longitude>
+        <cartesianX>0.3854819227964954</cartesianX>
+        <cartesianY>0.017140799293816233</cartesianY>
+        <cartesianZ>0.3179777982763669</cartesianZ>
       </location>
       <weight>1476200542110</weight>
     </Gift>
@@ -439,6 +583,9 @@
         <id>49</id>
         <latitude>-1.95496237264</latitude>
         <longitude>-69.7200884637</longitude>
+        <cartesianX>-0.46873227405164986</cartesianX>
+        <cartesianY>0.173202527548463</cartesianY>
+        <cartesianZ>-0.017056954980094557</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -448,6 +595,9 @@
         <id>50</id>
         <latitude>56.8165711007</latitude>
         <longitude>-153.998137234</longitude>
+        <cartesianX>-0.11997290575431077</cartesianX>
+        <cartesianY>-0.24596061376275727</cartesianY>
+        <cartesianZ>0.41846132242097955</cartesianZ>
       </location>
       <weight>1404809733510</weight>
     </Gift>
@@ -457,6 +607,9 @@
         <id>51</id>
         <latitude>22.1574571208</latitude>
         <longitude>21.9442973001</longitude>
+        <cartesianX>0.17305361336843467</cartesianX>
+        <cartesianY>0.4295245169560264</cartesianY>
+        <cartesianZ>0.18857660574371493</cartesianZ>
       </location>
       <weight>3894530260330</weight>
     </Gift>
@@ -466,6 +619,9 @@
         <id>52</id>
         <latitude>64.8631213045</latitude>
         <longitude>46.8996050684</longitude>
+        <cartesianX>0.15507897187715738</cartesianX>
+        <cartesianY>0.14512234020758008</cartesianY>
+        <cartesianZ>0.45264778675499917</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -475,6 +631,9 @@
         <id>53</id>
         <latitude>33.5769942561</latitude>
         <longitude>-84.1039832023</longitude>
+        <cartesianX>-0.4143680067873411</cartesianX>
+        <cartesianY>0.04279165373528211</cartesianY>
+        <cartesianZ>0.27652853256343324</cartesianZ>
       </location>
       <weight>2847387080090</weight>
     </Gift>
@@ -484,6 +643,9 @@
         <id>54</id>
         <latitude>28.3156972635</latitude>
         <longitude>91.4168053757</longitude>
+        <cartesianX>0.44003914786765286</cartesianX>
+        <cartesianY>-0.01088347065385325</cartesianY>
+        <cartesianZ>0.23716470734583736</cartesianZ>
       </location>
       <weight>136699187497</weight>
     </Gift>
@@ -493,6 +655,9 @@
         <id>55</id>
         <latitude>-8.25094632739</latitude>
         <longitude>-41.5742883485</longitude>
+        <cartesianX>-0.3283608771427075</cartesianX>
+        <cartesianY>0.37017621265865197</cartesianY>
+        <cartesianZ>-0.0717544837885983</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -502,6 +667,9 @@
         <id>56</id>
         <latitude>1.84773190284</latitude>
         <longitude>-64.8486712213</longitude>
+        <cartesianX>-0.4523588787809361</cartesianX>
+        <cartesianY>0.21239476293285275</cartesianY>
+        <cartesianZ>0.016121707935315595</cartesianZ>
       </location>
       <weight>3025696957320</weight>
     </Gift>
@@ -511,6 +679,9 @@
         <id>57</id>
         <latitude>50.6645301945</latitude>
         <longitude>86.6545120863</longitude>
+        <cartesianX>0.3163897926764039</cartesianX>
+        <cartesianY>0.0184949535985964</cartesianY>
+        <cartesianZ>0.3867239788034457</cartesianZ>
       </location>
       <weight>2535367826500</weight>
     </Gift>
@@ -520,6 +691,9 @@
         <id>58</id>
         <latitude>31.6926827482</latitude>
         <longitude>101.117371138</longitude>
+        <cartesianX>0.4174554211253807</cartesianX>
+        <cartesianY>-0.08203294256982806</cartesianY>
+        <cartesianZ>0.26268149479239367</cartesianZ>
       </location>
       <weight>2120053353770</weight>
     </Gift>
@@ -529,6 +703,9 @@
         <id>59</id>
         <latitude>-84.8554851227</latitude>
         <longitude>-4.03151455516</longitude>
+        <cartesianX>-0.0031520657720264904</cartesianX>
+        <cartesianY>0.044723122159887344</cartesianY>
+        <cartesianZ>-0.4979858500255209</cartesianZ>
       </location>
       <weight>4280664664220</weight>
     </Gift>
@@ -538,6 +715,9 @@
         <id>60</id>
         <latitude>65.1571335885</latitude>
         <longitude>-136.82175182</longitude>
+        <cartesianX>-0.14374162859837264</cartesianX>
+        <cartesianY>-0.1531857870225999</cartesianY>
+        <cartesianZ>0.453731703611456</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -547,6 +727,9 @@
         <id>61</id>
         <latitude>37.7192599208</latitude>
         <longitude>80.2715347896</longitude>
+        <cartesianX>0.3898214007502951</cartesianX>
+        <cartesianY>0.06683273567448286</cartesianY>
+        <cartesianZ>0.30589648732756397</cartesianZ>
       </location>
       <weight>2496041596470</weight>
     </Gift>
@@ -556,6 +739,9 @@
         <id>62</id>
         <latitude>6.9630645164</latitude>
         <longitude>34.242819435</longitude>
+        <cartesianX>0.27927556606890025</cartesianX>
+        <cartesianY>0.41028162479942126</cartesianY>
+        <cartesianZ>0.06061473870967576</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -565,6 +751,9 @@
         <id>63</id>
         <latitude>-30.8958017228</latitude>
         <longitude>-70.4427228208</longitude>
+        <cartesianX>-0.40429814955494003</cartesianX>
+        <cartesianY>0.14362449423813</cartesianY>
+        <cartesianZ>-0.2567391885188015</cartesianZ>
       </location>
       <weight>1400143642420</weight>
     </Gift>
@@ -574,6 +763,9 @@
         <id>64</id>
         <latitude>54.2506583091</latitude>
         <longitude>28.5363373158</longitude>
+        <cartesianX>0.13955048377643742</cartesianX>
+        <cartesianY>0.2566317526304957</cartesianY>
+        <cartesianZ>0.4057903473711053</cartesianZ>
       </location>
       <weight>1616456954800</weight>
     </Gift>
@@ -583,6 +775,9 @@
         <id>65</id>
         <latitude>29.0189070569</latitude>
         <longitude>-110.281305729</longitude>
+        <cartesianX>-0.4101224986812584</cartesianX>
+        <cartesianY>-0.15155681361110473</cartesianY>
+        <cartesianZ>0.24254910497359095</cartesianZ>
       </location>
       <weight>883042544405</weight>
     </Gift>
@@ -592,6 +787,9 @@
         <id>66</id>
         <latitude>-8.03478827608</latitude>
         <longitude>22.5955467</longitude>
+        <cartesianX>0.19022589510360807</cartesianX>
+        <cartesianY>0.45708849532728324</cartesianY>
+        <cartesianZ>-0.06988716814602856</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -601,6 +799,9 @@
         <id>67</id>
         <latitude>5.40386801893</latitude>
         <longitude>34.3397861684</longitude>
+        <cartesianX>0.28079623822971267</cartesianX>
+        <cartesianY>0.41101850968715165</cartesianY>
+        <cartesianZ>0.047087761579791304</cartesianZ>
       </location>
       <weight>615145308359</weight>
     </Gift>
@@ -610,6 +811,9 @@
         <id>68</id>
         <latitude>32.4259621422</latitude>
         <longitude>7.92752316492</longitude>
+        <cartesianX>0.05820824845711276</cartesianX>
+        <cartesianY>0.41800919787411656</cartesianY>
+        <cartesianZ>0.2681046629661496</cartesianZ>
       </location>
       <weight>231987181403</weight>
     </Gift>
@@ -619,6 +823,9 @@
         <id>69</id>
         <latitude>51.7373645647</latitude>
         <longitude>-124.078637462</longitude>
+        <cartesianX>-0.2564599749786451</cartesianX>
+        <cartesianY>-0.17349703963075241</cartesianY>
+        <cartesianZ>0.3925901915144059</cartesianZ>
       </location>
       <weight>2237710159960</weight>
     </Gift>
@@ -628,6 +835,9 @@
         <id>70</id>
         <latitude>63.7719425387</latitude>
         <longitude>48.2711794087</longitude>
+        <cartesianX>0.16491261120571798</cartesianX>
+        <cartesianY>0.1470806473520569</cartesianY>
+        <cartesianZ>0.44852102942873434</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -637,6 +847,9 @@
         <id>71</id>
         <latitude>-22.5786969578</latitude>
         <longitude>-59.0080390403</longitude>
+        <cartesianX>-0.3957673739700868</cartesianX>
+        <cartesianY>0.2377254585591979</cartesianY>
+        <cartesianZ>-0.1919760194754555</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -646,6 +859,9 @@
         <id>72</id>
         <latitude>-0.536792463134</latitude>
         <longitude>-76.880521079</longitude>
+        <cartesianX>-0.4869280573514905</cartesianX>
+        <cartesianY>0.11348622833567198</cartesianY>
+        <cartesianZ>-0.004684329412770027</cartesianZ>
       </location>
       <weight>1318427387760</weight>
     </Gift>
@@ -655,6 +871,9 @@
         <id>73</id>
         <latitude>11.5538434842</latitude>
         <longitude>104.507355808</longitude>
+        <cartesianX>0.4742492415441222</cartesianX>
+        <cartesianY>-0.12271415317402039</cartesianY>
+        <cartesianZ>0.10014436332419278</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -664,6 +883,9 @@
         <id>74</id>
         <latitude>27.0940818716</latitude>
         <longitude>32.9667391748</longitude>
+        <cartesianX>0.24221837811061017</cartesianX>
+        <cartesianY>0.37345804179515124</cartesianY>
+        <cartesianZ>0.22772647699377552</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -673,6 +895,9 @@
         <id>75</id>
         <latitude>-17.6306035032</latitude>
         <longitude>177.802073311</longitude>
+        <cartesianX>0.01827511765495439</cartesianX>
+        <cartesianY>-0.4761639438028529</cartesianY>
+        <cartesianZ>-0.1514394885649418</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -682,6 +907,9 @@
         <id>76</id>
         <latitude>-85.145595536</latitude>
         <longitude>-174.798821238</longitude>
+        <cartesianX>-0.0038357132054005192</cartesianX>
+        <cartesianY>-0.04213778791053056</cartesianY>
+        <cartesianZ>-0.4982064774109356</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -691,6 +919,9 @@
         <id>77</id>
         <latitude>24.2013444606</latitude>
         <longitude>76.1242636332</longitude>
+        <cartesianX>0.44274670185658044</cartesianX>
+        <cartesianY>0.10936977491670873</cartesianY>
+        <cartesianZ>0.20497221843408125</cartesianZ>
       </location>
       <weight>5000000000000</weight>
     </Gift>
@@ -700,6 +931,9 @@
         <id>78</id>
         <latitude>28.7717125999</latitude>
         <longitude>10.5466679122</longitude>
+        <cartesianX>0.08021973880780742</cartesianX>
+        <cartesianY>0.43086810409792936</cartesianY>
+        <cartesianZ>0.24066048777616791</cartesianZ>
       </location>
       <weight>3044335470850</weight>
     </Gift>
@@ -709,6 +943,9 @@
         <id>79</id>
         <latitude>33.813455865</latitude>
         <longitude>-79.061933466</longitude>
+        <cartesianX>-0.4078797832198773</cartesianX>
+        <cartesianY>0.07882634090090815</cartesianY>
+        <cartesianZ>0.2782453780760423</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -718,6 +955,9 @@
         <id>80</id>
         <latitude>-83.0337459287</latitude>
         <longitude>111.511626773</longitude>
+        <cartesianX>0.05641821275063905</cartesianX>
+        <cartesianY>-0.022236951209358684</cartesianY>
+        <cartesianZ>-0.49630887889593134</cartesianZ>
       </location>
       <weight>1456020101090</weight>
     </Gift>
@@ -727,6 +967,9 @@
         <id>81</id>
         <latitude>-5.59307643706</latitude>
         <longitude>-43.7906087904</longitude>
+        <cartesianX>-0.3443651299843287</cartesianX>
+        <cartesianY>0.3592184792827024</cartesianY>
+        <cartesianZ>-0.04873131839689076</cartesianZ>
       </location>
       <weight>939312061940</weight>
     </Gift>
@@ -736,6 +979,9 @@
         <id>82</id>
         <latitude>36.3728480874</latitude>
         <longitude>118.536532222</longitude>
+        <cartesianX>0.3536781951168087</cartesianX>
+        <cartesianY>-0.1923236808521451</cartesianY>
+        <cartesianZ>0.29651869432195815</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -745,6 +991,9 @@
         <id>83</id>
         <latitude>39.3021550292</latitude>
         <longitude>105.919693188</longitude>
+        <cartesianX>0.3720691379895295</cartesianX>
+        <cartesianY>-0.10612495680264779</cartesianY>
+        <cartesianZ>0.31670498906610955</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -754,6 +1003,9 @@
         <id>84</id>
         <latitude>-15.6441099951</latitude>
         <longitude>14.7886582539</longitude>
+        <cartesianX>0.12289926751658092</cartesianX>
+        <cartesianY>0.46552816584104534</cartesianY>
+        <cartesianZ>-0.13483062282938574</cartesianZ>
       </location>
       <weight>408445553485</weight>
     </Gift>
@@ -763,6 +1015,9 @@
         <id>85</id>
         <latitude>66.0620537687</latitude>
         <longitude>168.107605098</longitude>
+        <cartesianX>0.04180701453872508</cartesianX>
+        <cartesianY>-0.198519091639691</cartesianY>
+        <cartesianZ>0.45699271743640596</cartesianZ>
       </location>
       <weight>1138657712940</weight>
     </Gift>
@@ -772,6 +1027,9 @@
         <id>86</id>
         <latitude>42.8661396693</latitude>
         <longitude>110.435058434</longitude>
+        <cartesianX>0.343409873936725</cartesianX>
+        <cartesianY>-0.12795223128267585</cartesianY>
+        <cartesianZ>0.34014391805902877</cartesianZ>
       </location>
       <weight>3210354724300</weight>
     </Gift>
@@ -781,6 +1039,9 @@
         <id>87</id>
         <latitude>53.3006694003</latitude>
         <longitude>113.379905548</longitude>
+        <cartesianX>0.27427392578323956</cartesianX>
+        <cartesianY>-0.11857473863179605</cartesianY>
+        <cartesianZ>0.40089131319330334</cartesianZ>
       </location>
       <weight>828641797617</weight>
     </Gift>
@@ -790,6 +1051,9 @@
         <id>88</id>
         <latitude>47.3742845841</latitude>
         <longitude>74.4564290807</longitude>
+        <cartesianX>0.32621938885141116</cartesianX>
+        <cartesianY>0.0907358543865764</cartesianY>
+        <cartesianZ>0.36789660920719264</cartesianZ>
       </location>
       <weight>4241229617640</weight>
     </Gift>
@@ -799,6 +1063,9 @@
         <id>89</id>
         <latitude>-23.2566830445</latitude>
         <longitude>32.6180129708</longitude>
+        <cartesianX>0.24761818054534515</cartesianX>
+        <cartesianY>0.3869217028836054</cartesianY>
+        <cartesianZ>-0.19742551127213487</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -808,6 +1075,9 @@
         <id>90</id>
         <latitude>-79.1711181313</latitude>
         <longitude>50.6549433098</longitude>
+        <cartesianX>0.0726463626010732</cartesianX>
+        <cartesianY>0.05955582018571473</cartesianY>
+        <cartesianZ>-0.49109633503299555</cartesianZ>
       </location>
       <weight>1554391954880</weight>
     </Gift>
@@ -817,6 +1087,9 @@
         <id>91</id>
         <latitude>20.2097532443</latitude>
         <longitude>-74.5694747732</longitude>
+        <cartesianX>-0.4523036156733988</cartesianX>
+        <cartesianY>0.12484446492926252</cartesianY>
+        <cartesianZ>0.17272897506005344</cartesianZ>
       </location>
       <weight>2238616530610</weight>
     </Gift>
@@ -826,6 +1099,9 @@
         <id>92</id>
         <latitude>71.6197557812</latitude>
         <longitude>98.1538159595</longitude>
+        <cartesianX>0.15606710765169923</cartesianX>
+        <cartesianY>-0.02236121635242867</cartesianY>
+        <cartesianZ>0.4744923960533749</cartesianZ>
       </location>
       <weight>765645488888</weight>
     </Gift>
@@ -835,6 +1111,9 @@
         <id>93</id>
         <latitude>42.073819773</latitude>
         <longitude>-84.829208348</longitude>
+        <cartesianX>-0.3696306822805517</cartesianX>
+        <cartesianY>0.03344904442851243</cartesianY>
+        <cartesianZ>0.33504375855048135</cartesianZ>
       </location>
       <weight>1021754984820</weight>
     </Gift>
@@ -844,6 +1123,9 @@
         <id>94</id>
         <latitude>68.0724364769</latitude>
         <longitude>99.438984934</longitude>
+        <cartesianX>0.184189049985678</cartesianX>
+        <cartesianY>-0.030621073810074423</cartesianY>
+        <cartesianZ>0.463828355864636</cartesianZ>
       </location>
       <weight>2516217737860</weight>
     </Gift>
@@ -853,6 +1135,9 @@
         <id>95</id>
         <latitude>-8.53460336558</latitude>
         <longitude>-63.5769279192</longitude>
+        <cartesianX>-0.44280794153447267</cartesianX>
+        <cartesianY>0.22003406618403953</cartesianY>
+        <cartesianZ>-0.07420334650486264</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -862,6 +1147,9 @@
         <id>96</id>
         <latitude>54.8107513024</latitude>
         <longitude>25.790835783</longitude>
+        <cartesianX>0.12536577102668817</cartesianX>
+        <cartesianY>0.2594374432304806</cartesianY>
+        <cartesianZ>0.40862652447548625</cartesianZ>
       </location>
       <weight>2352852973750</weight>
     </Gift>
@@ -871,6 +1159,9 @@
         <id>97</id>
         <latitude>18.3165562521</latitude>
         <longitude>32.7355847104</longitude>
+        <cartesianX>0.2566824724524351</cartesianX>
+        <cartesianY>0.39927835469496026</cartesianY>
+        <cartesianZ>0.15713339494770173</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -880,6 +1171,9 @@
         <id>98</id>
         <latitude>-0.0970903971052</latitude>
         <longitude>-53.3617695073</longitude>
+        <cartesianX>-0.4012091572986236</cartesianX>
+        <cartesianY>0.298379781868587</cartesianY>
+        <cartesianZ>-8.472731452877428E-4</cartesianZ>
       </location>
       <weight>715697779324</weight>
     </Gift>
@@ -889,6 +1183,9 @@
         <id>99</id>
         <latitude>66.4473155127</latitude>
         <longitude>160.304567119</longitude>
+        <cartesianX>0.06733531601267015</cartesianX>
+        <cartesianY>-0.18810748909948866</cartesianY>
+        <cartesianZ>0.45834651494492634</cartesianZ>
       </location>
       <weight>1200619993560</weight>
     </Gift>
@@ -898,6 +1195,9 @@
         <id>100</id>
         <latitude>75.2856193469</latitude>
         <longitude>-100.097826323</longitude>
+        <cartesianX>-0.1250330986340648</cartesianX>
+        <cartesianY>-0.022266893078467888</cartesianY>
+        <cartesianZ>0.4836020158338841</cartesianZ>
       </location>
       <weight>100000000000</weight>
     </Gift>
@@ -909,6 +1209,9 @@
         <id>-1</id>
         <latitude>90.0</latitude>
         <longitude>0.0</longitude>
+        <cartesianX>0.0</cartesianX>
+        <cartesianY>3.061616997868383E-17</cartesianY>
+        <cartesianZ>0.5</cartesianZ>
       </startingLocation>
     </Reindeer>
     <Reindeer id="206">

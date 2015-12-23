@@ -101,10 +101,11 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 String[] lineTokens = splitBy(line, "\\,", ",", 4, true, false);
                 Gift gift = new Gift();
                 gift.setId(Long.parseLong(lineTokens[0]));
-                Location location = new SphereLocation();
+                SphereLocation location = new SphereLocation();
                 location.setId(gift.getId());
                 location.setLatitude(Double.parseDouble(lineTokens[1]));
                 location.setLongitude(Double.parseDouble(lineTokens[2]));
+                location.updateCache();
                 gift.setLocation(location);
                 gift.setWeight(ReindeerRoutingCostCalculator.parseWeight(lineTokens[3]));
                 giftList.add(gift);
