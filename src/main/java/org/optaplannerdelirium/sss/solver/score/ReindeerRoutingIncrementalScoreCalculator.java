@@ -31,6 +31,9 @@ public class ReindeerRoutingIncrementalScoreCalculator extends AbstractIncrement
     public void resetWorkingSolution(ReindeerRoutingSolution solution) {
         hardScore = 0L;
         softScore = 0L;
+        for (Reindeer reindeer : solution.getReindeerList()) {
+            insertTransportationToNextPenalty(reindeer);
+        }
         for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
             insertTransportationWeight(giftAssignment);
             insertTransportationToNextPenalty(giftAssignment);
