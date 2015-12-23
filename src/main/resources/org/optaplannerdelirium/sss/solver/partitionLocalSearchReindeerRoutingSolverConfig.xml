@@ -11,7 +11,7 @@
   </scoreDirectorFactory>
 
   <termination>
-    <minutesSpentLimit>30</minutesSpentLimit>
+    <minutesSpentLimit>10</minutesSpentLimit>
     <!--<secondsSpentLimit>10</secondsSpentLimit>-->
   </termination>
   <localSearch>
