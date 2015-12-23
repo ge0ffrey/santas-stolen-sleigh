@@ -94,7 +94,7 @@ public class ReindeerRoutingPartitioningCustomPhase  extends AbstractCustomPhase
             logger.warn("Partition count automatically lowered from " + partitionCount + " to 4.");
             partitionCount = 4;
         } else if (giftSize < 10000) {
-            logger.warn("Partition count automatically lowered from " + partitionCount + " to 4.");
+            logger.warn("Partition count automatically lowered from " + partitionCount + " to 10.");
             partitionCount = 10;
         }
         if (giftSize % partitionCount != 0) {
