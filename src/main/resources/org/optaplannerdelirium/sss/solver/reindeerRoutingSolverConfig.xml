@@ -19,12 +19,14 @@
     <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
     <customProperties>
       <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionConstructionHeuristicReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
+      <partitionCount>100</partitionCount>
     </customProperties>
   </customPhase>
   <customPhase>
     <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
     <customProperties>
       <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionLocalSearchReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
+      <partitionCount>100</partitionCount>
     </customProperties>
   </customPhase>
 </solver>

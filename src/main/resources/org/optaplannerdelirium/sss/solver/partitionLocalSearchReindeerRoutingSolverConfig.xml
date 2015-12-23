@@ -11,6 +11,7 @@
   </scoreDirectorFactory>
 
   <termination>
+    <!-- This is per partition -->
     <minutesSpentLimit>10</minutesSpentLimit>
     <!--<secondsSpentLimit>10</secondsSpentLimit>-->
   </termination>

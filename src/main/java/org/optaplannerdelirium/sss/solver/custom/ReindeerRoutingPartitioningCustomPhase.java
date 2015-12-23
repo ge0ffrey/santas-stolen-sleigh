@@ -17,8 +17,6 @@
 package org.optaplannerdelirium.sss.solver.custom;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,14 +26,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.optaplanner.core.api.domain.solution.Solution;
-import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.common.decorator.SelectionSorterOrder;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.WeightFactorySelectionSorter;
 import org.optaplanner.core.impl.phase.custom.AbstractCustomPhaseCommand;
-import org.optaplanner.core.impl.phase.custom.CustomPhaseCommand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 import org.optaplannerdelirium.sss.domain.Gift;
@@ -49,21 +44,36 @@ import org.slf4j.LoggerFactory;
 
 public class ReindeerRoutingPartitioningCustomPhase  extends AbstractCustomPhaseCommand {
 
-    private final String PARTITION_SOLVER_CONFIG_RESOURCE = "partitionSolverConfigResource";
+    private final String PARTITION_SOLVER_CONFIG_RESOURCE_PROPERTY = "partitionSolverConfigResource";
+    private final String PARTITION_COUNT_PROPERTY = "partitionCount";
+
+    protected final transient Logger logger = LoggerFactory.getLogger(getClass());
 
     private SolverFactory<ReindeerRoutingSolution> solverFactory;
+    private int partitionCount;
 
     public ReindeerRoutingPartitioningCustomPhase() {
     }
 
     @Override
     public void applyCustomProperties(Map<String, String> customPropertyMap) {
-        String partitionSolverConfigResource = customPropertyMap.get(PARTITION_SOLVER_CONFIG_RESOURCE);
+        String partitionSolverConfigResource = customPropertyMap.get(PARTITION_SOLVER_CONFIG_RESOURCE_PROPERTY);
         if (partitionSolverConfigResource == null) {
-            throw new IllegalArgumentException("A customProperty (" + PARTITION_SOLVER_CONFIG_RESOURCE
+            throw new IllegalArgumentException("A customProperty (" + PARTITION_SOLVER_CONFIG_RESOURCE_PROPERTY
                     + ") is missing from the solver configuration.");
         }
-        if (customPropertyMap.size() != 1) {
+        String partitionCountString = customPropertyMap.get(PARTITION_COUNT_PROPERTY);
+        if (partitionCountString == null) {
+            throw new IllegalArgumentException("A customProperty (" + PARTITION_COUNT_PROPERTY
+                    + ") is missing from the solver configuration.");
+        }
+        try {
+            partitionCount = Integer.parseInt(partitionCountString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("The customProperty (" + PARTITION_COUNT_PROPERTY
+                    + ")'s value (" + partitionCount + ") is not a valid int.", e);
+        }
+        if (customPropertyMap.size() != 2) {
             throw new IllegalArgumentException("The customPropertyMap's size (" + customPropertyMap.size()
                     + ") is not 1.");
         }
@@ -80,22 +90,25 @@ public class ReindeerRoutingPartitioningCustomPhase  extends AbstractCustomPhase
                 new NorthPoleAngleGiftAssignmentDifficultyWeightFactory(), SelectionSorterOrder.ASCENDING);
         sorter.sort(cloneSolution, cloneSolution.getGiftAssignmentList());
         int giftSize = cloneSolution.getGiftList().size();
-        int partitionListSize = giftSize >= 1000 ? 100 : 4;
-        if (giftSize % partitionListSize != 0) {
+        if (giftSize < 1000) {
+            logger.warn("Partition count automatically lowered from " + partitionCount + " to 4.");
+            partitionCount = 4;
+        }
+        if (giftSize % partitionCount != 0) {
             throw new IllegalStateException();
         }
-        List<Future<ReindeerRoutingSolution>> futureList = new ArrayList<Future<ReindeerRoutingSolution>>(partitionListSize);
-        for (int i = 0; i < partitionListSize; i++) {
+        List<Future<ReindeerRoutingSolution>> futureList = new ArrayList<Future<ReindeerRoutingSolution>>(partitionCount);
+        for (int i = 0; i < partitionCount; i++) {
             ReindeerRoutingSolution partitionSolution = new ReindeerRoutingSolution();
             partitionSolution.setId(cloneSolution.getId());
-            int giftSubSize = giftSize / partitionListSize;
+            int giftSubSize = giftSize / partitionCount;
             List<GiftAssignment> partitionGiftAssignmentList = cloneSolution.getGiftAssignmentList().subList(giftSubSize * i, giftSubSize * (i + 1));
             List<Gift> partitionGiftList = new ArrayList<Gift>(giftSubSize);
             for (GiftAssignment partitionGiftAssignment : partitionGiftAssignmentList) {
                 partitionGiftList.add(partitionGiftAssignment.getGift());
             }
             partitionSolution.setGiftList(partitionGiftList);
-            int reindeerSubSize = cloneSolution.getReindeerList().size() / partitionListSize;
+            int reindeerSubSize = cloneSolution.getReindeerList().size() / partitionCount;
             partitionSolution.setReindeerList(cloneSolution.getReindeerList().subList(reindeerSubSize * i, reindeerSubSize * (i + 1)));
             partitionSolution.setGiftAssignmentList(partitionGiftAssignmentList);
             ReindeerRoutingPartitionRunner runner = new ReindeerRoutingPartitionRunner(partitionSolution);

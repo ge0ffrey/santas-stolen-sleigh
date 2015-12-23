@@ -74,10 +74,13 @@ public class ReindeerRoutingSolutionPainter {
             Location location = giftAssignment.getLocation();
             int x = translator.translateLongitudeToX(location.getLongitude());
             int y = translator.translateLatitudeToY(location.getLatitude());
-            g.setColor(TangoColorFactory.ALUMINIUM_4);
-            g.fillRect(x - 1, y - 1, 3, 3);
-//            String demandString = Long.toString(giftAssignment.getGiftWeight());
-//            g.drawString(demandString, x - (g.getFontMetrics().stringWidth(demandString) / 2), y - TEXT_SIZE / 2);
+            if (giftAssignment.getGift().isBigGift()) {
+                g.setColor(TangoColorFactory.ALUMINIUM_4);
+                g.fillRect(x - 1, y - 1, 3, 3);
+            } else {
+                g.setColor(TangoColorFactory.ALUMINIUM_2);
+                g.fillRect(x, y, 1, 1);
+            }
         }
         int colorIndex = 0;
         // TODO Too many nested for loops

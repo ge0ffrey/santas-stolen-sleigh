@@ -19,9 +19,12 @@ package org.optaplannerdelirium.sss.domain;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
+import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
 @XStreamAlias("Gift")
 public class Gift extends AbstractPersistable {
+
+    private static final long BIG_WEIGHT_THRESHOLD = 50L * ReindeerRoutingCostCalculator.WEIGHT_LONG_FACTOR;
 
     private Location location;
     private long weight;
@@ -40,6 +43,10 @@ public class Gift extends AbstractPersistable {
 
     public void setWeight(long weight) {
         this.weight = weight;
+    }
+
+    public boolean isBigGift() {
+        return weight >= BIG_WEIGHT_THRESHOLD;
     }
 
 }
