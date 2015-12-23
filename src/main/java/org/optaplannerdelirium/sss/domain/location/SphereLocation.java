@@ -21,7 +21,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("SphereLocation")
 public class SphereLocation extends Location {
 
-    private static final double EARTH_R_IN_KM = 6372.8;
+    private static final double EARTH_R_IN_KM = 6371;
 
     public SphereLocation() {
     }
