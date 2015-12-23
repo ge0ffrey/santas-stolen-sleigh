@@ -26,7 +26,7 @@
     <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
     <customProperties>
       <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionLocalSearchReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
-      <partitionCount>100</partitionCount>
+      <partitionCount>5</partitionCount>
     </customProperties>
   </customPhase>
 </solver>

@@ -16,8 +16,8 @@
 
   <termination>
     <!-- This is per partition -->
-    <!--<minutesSpentLimit>10</minutesSpentLimit>-->
-    <secondsSpentLimit>20</secondsSpentLimit>
+    <minutesSpentLimit>60</minutesSpentLimit>
+    <!--<secondsSpentLimit>20</secondsSpentLimit>-->
   </termination>
   <localSearch>
     <unionMoveSelector>
