@@ -27,4 +27,8 @@ public class ReindeerRoutingCostCalculator {
         return Math.round(result * SOFT_COST_DOUBLE_FACTOR);
     }
 
+    public static String formatWeight(long giftWeight) {
+        BigDecimal weightBigDecimal = new BigDecimal(giftWeight).divide(WEIGHT_BIG_DECIMAL_FACTOR, 11, BigDecimal.ROUND_HALF_UP);
+        return weightBigDecimal.toString();
+    }
 }
