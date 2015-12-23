@@ -27,11 +27,9 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 public abstract class Location extends AbstractPersistable {
 
     public static final Location NORTH_POLE = new SphereLocation(-1L, 90.0, 0.0);
-    private static double TEMP = Math.PI / 180;
 
     protected double latitude;
     protected double longitude;
-    protected double cartesianX, cartesianY, cartesianZ;
 
     public Location() {
     }
@@ -40,13 +38,6 @@ public abstract class Location extends AbstractPersistable {
         super(id);
         this.latitude = latitude;
         this.longitude = longitude;
-        final double latitudeInRads  = TEMP * latitude;
-        final double longitudeInRads = TEMP * longitude;
-
-        // Cartesian coordinates, normalized for a sphere of diameter 1.0
-        this.cartesianX = 0.5 * Math.cos(latitudeInRads) * Math.sin(longitudeInRads);
-        this.cartesianY = 0.5 * Math.cos(latitudeInRads) * Math.cos(longitudeInRads);
-        this.cartesianZ = 0.5 * Math.sin(latitudeInRads);
     }
 
     public double getLatitude() {
