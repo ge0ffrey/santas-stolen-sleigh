@@ -25,7 +25,6 @@ import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
-import org.optaplannerdelirium.sss.domain.solver.NorthPoleDistanceGiftAssignmentDifficultyWeightFactory;
 import org.optaplannerdelirium.sss.domain.solver.WeightAndCostUpdatingVariableListener;
 
  @PlanningEntity(difficultyWeightFactoryClass = NorthPoleAngleGiftAssignmentDifficultyWeightFactory.class)
@@ -37,6 +36,10 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
 
     // Planning variables: changes during planning, between score calculations.
     private Standstill previousStandstill; // Because the reindeer drop off gifts, the previousStandstill is actually where they go to...
+
+    // caches
+    private double distanceFromPreviousStandstill;
+    private double distanceToNextGiftAssignmentOrReindeer;
 
     // Shadow variables
     private GiftAssignment nextGiftAssignment; // Because the reindeer drop off gifts, the previousStandstill is actually where they come from...
@@ -58,8 +61,26 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         return previousStandstill;
     }
 
+    private double calculateDistanceFromPreviousStandstill() {
+        if (previousStandstill == null) {
+            return 0;
+        }
+        return getDistanceTo(previousStandstill);
+    }
+
+    private double calculateDistanceToNextGiftAssignmentOrReindeer() {
+        if (nextGiftAssignment == null) {
+            if (reindeer == null) {
+             return 0.0;
+            }
+            return getDistanceTo(reindeer);
+        }
+        return getDistanceTo(nextGiftAssignment);
+    }
+
     public void setPreviousStandstill(Standstill previousStandstill) {
         this.previousStandstill = previousStandstill;
+        this.distanceFromPreviousStandstill = calculateDistanceFromPreviousStandstill();
     }
 
     public GiftAssignment getNextGiftAssignment() {
@@ -68,6 +89,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
 
     public void setNextGiftAssignment(GiftAssignment nextGiftAssignment) {
         this.nextGiftAssignment = nextGiftAssignment;
+        this.distanceToNextGiftAssignmentOrReindeer = calculateDistanceToNextGiftAssignmentOrReindeer();
     }
 
     @AnchorShadowVariable(sourceVariableName = "previousStandstill")
@@ -77,6 +99,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
 
     public void setReindeer(Reindeer reindeer) {
         this.reindeer = reindeer;
+        this.distanceToNextGiftAssignmentOrReindeer = calculateDistanceToNextGiftAssignmentOrReindeer();
     }
 
     // ************************************************************************
@@ -92,24 +115,12 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
     }
 
     public double getDistanceFromPreviousStandstill() {
-        if (previousStandstill == null) {
-            return 0;
-        }
-        return getDistanceFrom(previousStandstill);
+        return this.distanceFromPreviousStandstill;
     }
 
+    @Override
     public double getDistanceToNextGiftAssignmentOrReindeer() {
-        if (nextGiftAssignment == null) {
-            if (reindeer == null) {
-                return 0.0;
-            }
-            return getDistanceTo(reindeer);
-        }
-        return getDistanceTo(nextGiftAssignment);
-    }
-
-    public double getDistanceFrom(Standstill standstill) {
-        return standstill.getLocation().getDistanceTo(getLocation());
+        return this.distanceToNextGiftAssignmentOrReindeer;
     }
 
     public double getDistanceTo(Standstill standstill) {
@@ -124,7 +135,7 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
         return transportationWeight;
     }
 
-    public void setTransportationWeight(Long transportationWeight) {
+     public void setTransportationWeight(Long transportationWeight) {
         this.transportationWeight = transportationWeight;
     }
 
