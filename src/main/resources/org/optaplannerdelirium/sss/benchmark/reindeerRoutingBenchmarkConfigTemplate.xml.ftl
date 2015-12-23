@@ -59,6 +59,13 @@
             <termination>
               <minutesSpentLimit>5</minutesSpentLimit>
             </termination>
+            <customPhase>
+                <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
+                <customProperties>
+                    <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionConstructionHeuristicReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
+                    <partitionCount>10</partitionCount>
+                </customProperties>
+            </customPhase>
         </solver>
     </inheritedSolverBenchmark>
 
@@ -66,13 +73,6 @@
   <solverBenchmark>
     <name>Tabu Search ${entityTabuSize} Nearby</name>
     <solver>
-      <customPhase>
-        <!-- First initialize the big gifts to give each their own reindeer -->
-        <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.BigGiftInitializer</customPhaseCommandClass>
-      </customPhase>
-      <constructionHeuristic>
-        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
-      </constructionHeuristic>
       <localSearch>
         <unionMoveSelector>
           <changeMoveSelector>
@@ -120,13 +120,6 @@
   <solverBenchmark>
     <name>Late Acceptance ${lateAcceptanceSize} Nearby</name>
     <solver>
-      <customPhase>
-        <!-- First initialize the big gifts to give each their own reindeer -->
-        <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.BigGiftInitializer</customPhaseCommandClass>
-      </customPhase>
-      <constructionHeuristic>
-        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
-      </constructionHeuristic>
       <localSearch>
         <unionMoveSelector>
           <changeMoveSelector>
