@@ -21,9 +21,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("SphereLocation")
 public class SphereLocation extends Location {
 
-    private static final double EARTH_R_IN_KM = 6371;
+    private static double RADIAN_CONVERSION = Math.PI / 180.0;
+    private static final int EARTH_R_IN_KM = 6371;
+    private static final int TWICE_EARTH_R_IN_KM = 2 * EARTH_R_IN_KM;
+
+    private double cartesianX, cartesianY, cartesianZ;
+    private boolean initialized = false;
 
     public SphereLocation() {
+        super();
     }
 
     public SphereLocation(long id, double latitude, double longitude) {
@@ -31,14 +37,24 @@ public class SphereLocation extends Location {
     }
 
     @Override
-    public double getDistanceTo(Location other) {
-        double latitudeDiff = Math.toRadians(other.getLatitude() - latitude);
-        double longitudeDiff = Math.toRadians(other.getLongitude() - longitude);
-        double a = Math.pow(Math.sin(latitudeDiff / 2), 2)
-                + Math.pow(Math.sin(longitudeDiff / 2), 2)
-                * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(other.getLatitude()));
-        double c = 2 * Math.asin(Math.sqrt(a));
-        return EARTH_R_IN_KM * c;
+    public double getDistanceTo(final Location other) {
+        if (other == this) {
+            return 0.0;
+        } else if (!initialized) { // XStream sucks, we cannot initialize X,Y,Z in constructor
+            final double latitudeInRads  = RADIAN_CONVERSION * latitude;
+            final double longitudeInRads = RADIAN_CONVERSION * longitude;
+            // Cartesian coordinates, normalized for a sphere of diameter 1.0
+            this.cartesianX = 0.5 * Math.cos(latitudeInRads) * Math.sin(longitudeInRads);
+            this.cartesianY = 0.5 * Math.cos(latitudeInRads) * Math.cos(longitudeInRads);
+            this.cartesianZ = 0.5 * Math.sin(latitudeInRads);
+            initialized = true;
+        }
+        final SphereLocation otherSphere = (SphereLocation) other;
+        final double dX = this.cartesianX - otherSphere.cartesianX;
+        final double dY = this.cartesianY - otherSphere.cartesianY;
+        final double dZ = this.cartesianZ - otherSphere.cartesianZ;
+        final double r = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
+        return TWICE_EARTH_R_IN_KM * Math.asin(r);
     }
 
 }
