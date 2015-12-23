@@ -22,6 +22,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,8 +147,7 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
             for (GiftAssignment giftAssignment : solution.getGiftAssignmentList()) {
                 standstillMap.put(giftAssignment.getId(), giftAssignment);
             }
-            Reindeer previousReindeer = null;
-            GiftAssignment previousGiftAssignment = null;
+            List<GiftAssignment> reversingGiftAssignmentList = new ArrayList<GiftAssignment>(giftListSize);
             for (int i = 0; i < giftListSize; i++) {
                 String line = bufferedReader.readLine();
                 String[] lineTokens = splitBy(line, "\\,", ",", 2, true, false);
@@ -154,14 +155,21 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 if (giftAssignment == null) {
                     throw new IllegalStateException("No standstill with id (" + lineTokens[0] + ").");
                 }
-                Reindeer reindeer = (Reindeer) standstillMap.get(- Long.parseLong(lineTokens[1]));
+                Reindeer reindeer = (Reindeer) standstillMap.get(-Long.parseLong(lineTokens[1]));
                 if (reindeer == null) {
                     throw new IllegalStateException("No standstill with id (" + lineTokens[1] + ").");
                 }
+                giftAssignment.setReindeer(reindeer);
+                reversingGiftAssignmentList.add(giftAssignment);
+            }
+            Collections.reverse(reversingGiftAssignmentList);
+            Reindeer previousReindeer = null;
+            GiftAssignment previousGiftAssignment = null;
+            for (GiftAssignment giftAssignment : reversingGiftAssignmentList) {
+                Reindeer reindeer = giftAssignment.getReindeer();
                 Standstill previousStandstill = (reindeer != previousReindeer) ? reindeer : previousGiftAssignment;
                 giftAssignment.setPreviousStandstill(previousStandstill);
                 previousStandstill.setNextGiftAssignment(giftAssignment);
-                giftAssignment.setReindeer(reindeer);
                 giftAssignment.setTransportationWeight(previousStandstill.getTransportationWeight() + giftAssignment.getGiftWeight());
                 previousGiftAssignment = giftAssignment;
                 previousReindeer = reindeer;

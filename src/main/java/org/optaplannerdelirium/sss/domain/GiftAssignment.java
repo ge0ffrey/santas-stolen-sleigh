@@ -36,13 +36,13 @@ public class GiftAssignment extends AbstractPersistable implements Standstill {
     private Gift gift;
 
     // Planning variables: changes during planning, between score calculations.
-    private Standstill previousStandstill;
+    private Standstill previousStandstill; // Because the reindeer drop off gifts, the previousStandstill is actually where they go to...
 
     // Shadow variables
-    private GiftAssignment nextGiftAssignment;
+    private GiftAssignment nextGiftAssignment; // Because the reindeer drop off gifts, the previousStandstill is actually where they come from...
     private Reindeer reindeer;
     private Long transportationWeight;
-    private Long transportationToNextPenalty;
+    private Long transportationToNextPenalty; // Because the reindeer drop off gifts, the penalty is actually they weariness of the distance from where they come from...
 
     public Gift getGift() {
         return gift;

@@ -17,6 +17,10 @@
 package org.optaplannerdelirium.sss.persistence;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.examples.common.persistence.AbstractTxtSolutionExporter;
@@ -56,13 +60,20 @@ public class ReindeerRoutingExporter extends AbstractTxtSolutionExporter {
         public void writeSolution() throws IOException {
             bufferedWriter.write("GiftId,TripId" + "\n");
             for (Reindeer reindeer : solution.getReindeerList()) {
+                List<GiftAssignment> reversingGiftAssignmentList = new ArrayList<GiftAssignment>(
+                        solution.getGiftAssignmentList().size() * 10 / solution.getReindeerList().size());
                 for (GiftAssignment giftAssignment = reindeer.getNextGiftAssignment();
                         giftAssignment != null;
                         giftAssignment = giftAssignment.getNextGiftAssignment()) {
+                    reversingGiftAssignmentList.add(giftAssignment);
+                }
+                Collections.reverse(reversingGiftAssignmentList);
+                for (GiftAssignment giftAssignment : reversingGiftAssignmentList) {
                     bufferedWriter.write(giftAssignment.getId() + "," + reindeer.getId() + "\n");
                 }
             }
         }
+
     }
 
 }
