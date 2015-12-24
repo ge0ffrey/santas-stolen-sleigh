@@ -45,7 +45,8 @@ TODO
 
 === Play with nearby selection parameters
 
-Triceo taking this.
+https://drive.google.com/file/d/0B2Qb5W2kA2huN01GN3AzNjU4VG8/view?usp=sharing
+There is a lot to say about this. I'll leave everyone to draw their own conclusions for now.
 
 === New nearby meter alternative that ignores latitude
 
