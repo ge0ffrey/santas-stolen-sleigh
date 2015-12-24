@@ -52,7 +52,9 @@ There is a lot to say about this. I'll leave everyone to draw their own conclusi
 
 All gifts need to return to the north pole anyway.
 
-TODO
+In itself, it's worse than the normal meter
+
+https://dl.dropboxusercontent.com/u/28857538/benchmarks/sss/2015-12-24_163751_aggregation_longitudeMeter/index.html
 
 === Use subchain moves
 
