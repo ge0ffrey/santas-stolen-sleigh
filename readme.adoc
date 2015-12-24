@@ -39,6 +39,11 @@ Some conclusions:
 * Very small (~ 1 %) tabu ratios are better than tabu size 7.
 * In the long run, LA still most likely better.
 
+=== Investigate combinations of TS and LA
+
+Done. Results here: https://drive.google.com/file/d/0B2Qb5W2kA2huWG1PUHU3enB4djA/view?usp=sharing
+To explain: this is two solvers run on the same slice, first TS, then LA. "REVERSE" results are LA first, TS second. All benchmarks have various settings to compare various nearby sizes, tabu ratios etc.
+
 === Play with less/more partitions
 
 TODO
