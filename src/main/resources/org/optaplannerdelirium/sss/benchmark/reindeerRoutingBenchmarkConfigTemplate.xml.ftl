@@ -66,12 +66,13 @@
               <minutesSpentLimit>60</minutesSpentLimit>
             </termination>
             <customPhase>
-                <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
-                <customProperties>
-                    <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionConstructionHeuristicReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
-                    <partitionCount>5</partitionCount>
-                </customProperties>
+                <!-- First initialize the big gifts to give each their own reindeer -->
+                <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.BigGiftInitializer</customPhaseCommandClass>
             </customPhase>
+            <constructionHeuristic>
+                <!-- Then initialize the rest -->
+                <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+            </constructionHeuristic>
         </solver>
     </inheritedSolverBenchmark>
 
