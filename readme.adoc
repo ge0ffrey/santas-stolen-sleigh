@@ -54,7 +54,10 @@ TODO
 
 === Play with LA parameters
 
-TODO
+Ondrej:
+https://drive.google.com/folderview?id=0B1PRlutaQSliT3N6RlpPS25LcEU&usp=sharing
+Played with some parameters, the results seem quite interesting to me.
+Please report any observations/conclusions you make so I can investigate further.
 
 === Play with nearby selection parameters
 
