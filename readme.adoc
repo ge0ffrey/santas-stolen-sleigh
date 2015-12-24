@@ -23,7 +23,8 @@ More importantly: TS flatlined and LA didn't flatline yet.
 
 === Play with Tabu Search ratio's
 
-Lukas: TODO
+Lukas: Working on it.
+More important finding so far: results on all slices look VERY similar. We could potentially simplify the benchmark by running on only one slice.
 
 === Play with less/more partitions
 
