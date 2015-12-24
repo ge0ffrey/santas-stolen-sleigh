@@ -7,27 +7,33 @@
     <inheritedSolverBenchmark>
         <problemBenchmarks>
             <solutionFileIOClass>org.optaplannerdelirium.sss.persistence.ReindeerRoutingFileIO</solutionFileIOClass>
-            <!-- Belgium datasets -->
-            <inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice1.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice2.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice3.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice4.csv</inputSolutionFile>
+            <!-- Slices datasets -->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice1.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice2.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice3.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice4.csv</inputSolutionFile>-->
             <inputSolutionFile>data/sss/import/slices/gifts_slice5.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice6.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice7.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice8.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice9.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice10.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice11.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice12.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice13.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice14.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice15.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice16.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice17.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>
-            <inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice6.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice7.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice8.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice9.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice10.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice11.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice12.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice13.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice14.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice15.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice16.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice17.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>-->
+            <!-- Chunks datasets -->
+            <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk0.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk1.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk2.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk3.csv</inputSolutionFile>-->
+            <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk4.csv</inputSolutionFile>-->
             <problemStatisticType>BEST_SCORE</problemStatisticType>
             <!--<problemStatisticType>STEP_SCORE</problemStatisticType>-->
             <!--<problemStatisticType>CALCULATE_COUNT_PER_SECOND</problemStatisticType>-->
@@ -57,13 +63,13 @@
             </scoreDirectorFactory>
 
             <termination>
-              <minutesSpentLimit>5</minutesSpentLimit>
+              <minutesSpentLimit>60</minutesSpentLimit>
             </termination>
             <customPhase>
                 <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
                 <customProperties>
                     <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionConstructionHeuristicReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
-                    <partitionCount>10</partitionCount>
+                    <partitionCount>5</partitionCount>
                 </customProperties>
             </customPhase>
         </solver>
