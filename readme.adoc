@@ -23,8 +23,11 @@ More importantly: TS flatlined and LA didn't flatline yet.
 
 === Play with Tabu Search ratio's
 
-Lukas: Working on it.
-More important finding so far: results on all slices look VERY similar. We could potentially simplify the benchmark by running on only one slice.
+Done. Results here: https://drive.google.com/file/d/0B2Qb5W2kA2huVnY1eEtYZ2JvVUk/view?usp=sharing
+Some conclusions:
+* Performance on all slices very similar. Future benchmarks will only be done on one of the slices to save time.
+* Very small (~ 1 %) tabu ratios are better than tabu size 7.
+* In the long run, LA still most likely better.
 
 === Play with less/more partitions
 
@@ -40,9 +43,7 @@ TODO
 
 === Play with nearby selection parameters
 
-Currently it's set on 40, that's way too litle.
-
-TODO
+Triceo taking this.
 
 === New nearby meter alternative that ignores latitude
 
