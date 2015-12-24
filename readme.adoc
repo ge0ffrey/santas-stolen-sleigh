@@ -4,11 +4,19 @@ We're solving the kaggle problem.
 
 == Collaboration standards
 
-Export your new best solutions as a csv file to data/sss/import.
-Slice files go into the slices subdirectory.
-All files in the root directory, must be the gifts.csv problem or an initialized version of it.
+Export your new best solutions as a csv file to `data/sss/import`.
 
-Add the first 4 score digits in the file name.
+We have 3 strategies to solve the problem:
+
+* Whole
+* 5 chunks of 20k each
+* 20 slices of 5k each. Most benchmarks use slice 5.
+
+Each of these types go in their own subdirectory of the import dir.
+
+Add the first 5 score digits in the file name.
+All initialized files must start with the uninitialized filename so the importer can find the problem file too,
+for example `gift_slice5.weakestFit_99999score.csv` has the problem file `gift_slice5.csv`.
 
 == Research investigations
 

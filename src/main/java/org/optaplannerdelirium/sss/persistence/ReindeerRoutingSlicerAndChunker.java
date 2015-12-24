@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.common.decorator.SelectionSorterOrder;
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.WeightFactorySelectionSorter;
@@ -23,21 +22,24 @@ import org.optaplannerdelirium.sss.domain.location.Location;
 import org.optaplannerdelirium.sss.domain.solver.NorthPoleAngleGiftAssignmentDifficultyWeightFactory;
 import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
-public class ReindeerRoutingSlicer {
+public class ReindeerRoutingSlicerAndChunker {
 
     public static void main(String[] args) {
-        new ReindeerRoutingSlicer().slice();
+        new ReindeerRoutingSlicerAndChunker().sliceAndChunk();
     }
 
     private ReindeerRoutingImporter importer;
-    private ReindeerRoutingExporter exporter;
 
-    public ReindeerRoutingSlicer() {
+    public ReindeerRoutingSlicerAndChunker() {
         importer = new ReindeerRoutingImporter();
-        exporter = new ReindeerRoutingExporter();
     }
 
-    public void slice() {
+    public void sliceAndChunk() {
+        sliceOrChunk(20, "slice");
+        sliceOrChunk(5, "chunk");
+    }
+
+    private void sliceOrChunk( int partitionCount, String sliceOrChunk) {
         File inputFile = new File(importer.getInputDir(), "gifts.csv");
         ReindeerRoutingSolution originalSolution = (ReindeerRoutingSolution) importer.readSolution(inputFile);
         ScoreDirector scoreDirector = SolverFactory.createFromXmlResource(ReindeerRoutingApp.SOLVER_CONFIG)
@@ -49,7 +51,6 @@ public class ReindeerRoutingSlicer {
         sorter.sort(cloneSolution, cloneSolution.getGiftAssignmentList());
 
         int giftSize = cloneSolution.getGiftList().size();
-        int partitionCount = 20;
         for (int i = 0; i < partitionCount; i++) {
             ReindeerRoutingSolution partitionSolution = new ReindeerRoutingSolution();
             partitionSolution.setId(cloneSolution.getId());
@@ -63,7 +64,7 @@ public class ReindeerRoutingSlicer {
             int reindeerSubSize = cloneSolution.getReindeerList().size() / partitionCount;
             partitionSolution.setReindeerList(cloneSolution.getReindeerList().subList(reindeerSubSize * i, reindeerSubSize * (i + 1)));
             partitionSolution.setGiftAssignmentList(partitionGiftAssignmentList);
-            File outputFile = new File (importer.getInputDir(), "slices/gifts_slice" + i + ".csv");
+            File outputFile = new File (importer.getInputDir(), sliceOrChunk + "s/gifts_" + sliceOrChunk + i + ".csv");
             writeSolution(partitionSolution, outputFile);
         }
     }
