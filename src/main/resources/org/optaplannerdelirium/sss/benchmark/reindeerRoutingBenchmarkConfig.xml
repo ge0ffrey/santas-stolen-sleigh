@@ -6,6 +6,8 @@
 
   <inheritedSolverBenchmark>
     <problemBenchmarks>
+      <!--<writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>-->
+
       <solutionFileIOClass>org.optaplannerdelirium.sss.persistence.ReindeerRoutingFileIO</solutionFileIOClass>
       <!-- Slices datasets -->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>-->
@@ -13,7 +15,7 @@
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice2.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice3.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice4.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice5.csv</inputSolutionFile>-->
+      <inputSolutionFile>data/sss/import/slices/gifts_slice5.csv</inputSolutionFile>
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice6.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice7.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice8.csv</inputSolutionFile>-->
@@ -29,11 +31,11 @@
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>-->
       <!-- Chunks datasets -->
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk0.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk1.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk2.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk3.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk4.csv</inputSolutionFile>
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk0.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk1.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk2.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk3.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk4.csv</inputSolutionFile>-->
       <problemStatisticType>BEST_SCORE</problemStatisticType>
       <!--<problemStatisticType>STEP_SCORE</problemStatisticType>-->
       <!--<problemStatisticType>CALCULATE_COUNT_PER_SECOND</problemStatisticType>-->

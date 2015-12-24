@@ -26,6 +26,7 @@ public class ReindeerRoutingFileIO implements SolutionFileIO {
     public static final String FILE_EXTENSION = "csv";
 
     private ReindeerRoutingImporter importer = new ReindeerRoutingImporter();
+    private ReindeerRoutingExporter exporter = new ReindeerRoutingExporter();
 
     public String getInputFileExtension() {
         return FILE_EXTENSION;
@@ -40,7 +41,7 @@ public class ReindeerRoutingFileIO implements SolutionFileIO {
     }
 
     public void write(Solution solution, File outputSolutionFile) {
-        throw new UnsupportedOperationException();
+        exporter.writeSolution(solution, outputSolutionFile);
     }
 
 }

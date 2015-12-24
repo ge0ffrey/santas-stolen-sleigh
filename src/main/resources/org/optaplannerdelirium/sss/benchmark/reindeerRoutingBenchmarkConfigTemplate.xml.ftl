@@ -6,6 +6,8 @@
 
     <inheritedSolverBenchmark>
         <problemBenchmarks>
+            <!--<writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>-->
+
             <solutionFileIOClass>org.optaplannerdelirium.sss.persistence.ReindeerRoutingFileIO</solutionFileIOClass>
             <!-- Slices datasets -->
             <!--<inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>-->

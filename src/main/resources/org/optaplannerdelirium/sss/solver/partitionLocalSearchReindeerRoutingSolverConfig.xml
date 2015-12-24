@@ -16,6 +16,7 @@
 
   <termination>
     <!-- This is per partition -->
+    <!--<hoursSpentLimit>8</hoursSpentLimit>-->
     <minutesSpentLimit>60</minutesSpentLimit>
     <!--<secondsSpentLimit>20</secondsSpentLimit>-->
   </termination>
