@@ -85,5 +85,25 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <!-- WARNING: This configuration must be run with "mvn exec:java" not "mvn exec:exec". -->
+          <configuration>
+            <mainClass>org.optaplannerdelirium.sss.app.ReindeerRoutingHelloWorld</mainClass>
+            <arguments>
+              <argument>-Xms1024m</argument>
+              <argument>-Xmx4096m</argument>
+              <argument>-server</argument>
+            </arguments>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
 </project>
 

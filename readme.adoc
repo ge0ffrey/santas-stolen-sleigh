@@ -1,0 +1,61 @@
+== Introduction
+
+We're solving the kaggle problem.
+
+== Collaboration standards
+
+Export your new best solutions as a csv file to data/sss/import.
+Slice files go into the slices subdirectory.
+All files in the root directory, must be the gifts.csv problem or an initialized version of it.
+
+Add the first 4 score digits in the file name.
+
+== Research investigations
+
+For team members only: Add your name to reserve a topic if you're doing it.
+Summarize your findings under the topic's title.
+Following the scientific method, others are encouraged to try to reproduce your findings and also report their findings below yours.
+
+=== TS vs LA
+
+Geoffrey: On a 1 hour run, TS 7 was worse than LA 400 on slice0.
+More importantly: TS flatlined and LA didn't flatline yet.
+
+=== Play with Tabu Search ratio's
+
+Lukas: Working on it.
+More important finding so far: results on all slices look VERY similar. We could potentially simplify the benchmark by running on only one slice.
+
+=== Play with less/more partitions
+
+TODO
+
+=== Play with TS parameters
+
+TODO
+
+=== Play with LA parameters
+
+TODO
+
+=== Play with nearby selection parameters
+
+Currently it's set on 40, that's way too litle.
+
+TODO
+
+=== New nearby meter alternative that ignores latitude
+
+All gifts need to return to the north pole anyway.
+
+TODO
+
+=== Use subchain moves
+
+Near the end, once we're getting stuck, we should definitely start using course-grained moves.
+
+TODO
+
+=== Use custom moves
+
+TODO
