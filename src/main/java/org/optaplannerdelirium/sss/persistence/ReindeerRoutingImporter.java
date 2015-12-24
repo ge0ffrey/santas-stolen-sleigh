@@ -69,10 +69,19 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
         public Solution readSolution() throws IOException {
             solution = new ReindeerRoutingSolution();
             solution.setId(0L);
-            initialized = inputFile.getName().endsWith("solution.csv");
+            bufferedReader.mark(1024);
+            initialized = bufferedReader.readLine().trim().equals("GiftId,TripId");
+            bufferedReader.reset();
             if (initialized) {
                 initializedBufferedReader = bufferedReader;
-                File unsolvedInputFile = new File(inputFile.getParentFile(), "gifts.csv");
+                String solutionFileName = inputFile.getName();
+                if (!solutionFileName.matches("gifts[^\\.]*\\..+\\.csv")) {
+                    throw new IllegalArgumentException("Cannot deduce problem file from solution file ("
+                            + solutionFileName + ") because the solution file does not follow"
+                            + " the pattern <problemFile>.<solutionInfo>.csv");
+                }
+                File unsolvedInputFile = new File(inputFile.getParentFile(),
+                        solutionFileName.replaceAll("(gifts[^\\.]*)\\..+\\.csv", "$1.csv"));
                 bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(unsolvedInputFile), "UTF-8"));
             } else {
                 initializedBufferedReader = null;
