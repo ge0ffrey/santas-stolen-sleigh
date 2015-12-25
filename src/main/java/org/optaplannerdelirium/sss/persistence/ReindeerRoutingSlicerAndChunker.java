@@ -66,13 +66,13 @@ public class ReindeerRoutingSlicerAndChunker {
                 split(20, "slice");
                 break;
             case UNSLICE:
-                unsplit(20, "slice");
+                unsplit(20, "slice", ".bestScore.csv");
                 break;
             case CHUNK:
                 split(5, "chunk");
                 break;
             case UNCHUNK:
-                unsplit(5, "chunk");
+                unsplit(5, "chunk", ".bestScore.csv");
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -109,7 +109,7 @@ public class ReindeerRoutingSlicerAndChunker {
         }
     }
 
-    private void unsplit(int partitionCount, String sliceOrChunk) {
+    private void unsplit(int partitionCount, String sliceOrChunk, String suffix) {
         File originalFile = new File(importer.getInputDir(), "gifts.csv");
         ReindeerRoutingSolution originalSolution = (ReindeerRoutingSolution) importer.readSolution(originalFile);
         Map<Long, GiftAssignment> giftAssignmentMap = new HashMap<Long, GiftAssignment>(
@@ -119,7 +119,7 @@ public class ReindeerRoutingSlicerAndChunker {
         }
         Iterator<Reindeer> originalReindeerIt = originalSolution.getReindeerList().iterator();
         for (int i = 0; i < partitionCount; i++) {
-            File inputFile = new File(importer.getInputDir(), sliceOrChunk + "s/gifts_" + sliceOrChunk + i + ".bestScore.csv");
+            File inputFile = new File(importer.getInputDir(), sliceOrChunk + "s/gifts_" + sliceOrChunk + i + suffix);
             if (!inputFile.exists()) {
                 throw new IllegalArgumentException("The inputFile (" + inputFile + ") does not exist.");
             }
