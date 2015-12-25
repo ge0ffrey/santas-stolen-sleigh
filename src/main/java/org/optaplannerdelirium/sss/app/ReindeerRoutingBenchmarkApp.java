@@ -24,10 +24,18 @@ public class ReindeerRoutingBenchmarkApp extends CommonBenchmarkApp {
         new ReindeerRoutingBenchmarkApp().buildAndBenchmark(args);
     }
 
+    /**
+     * To use another config that the default one, open the run configuration
+     * and add program argument such as "template" or "ge0ffreyLaptop" (without the quotes).
+     */
     public ReindeerRoutingBenchmarkApp() {
         super(
                 new ArgOption("default",
                         "org/optaplannerdelirium/sss/benchmark/reindeerRoutingBenchmarkConfig.xml"),
+                new ArgOption("ge0ffreyLaptop",
+                        "org/optaplannerdelirium/sss/benchmark/ge0ffrey/ge0ffreyLaptopBenchmarkConfig.xml"),
+                new ArgOption("ge0ffreyDesktop",
+                        "org/optaplannerdelirium/sss/benchmark/ge0ffrey/ge0ffreyDesktopBenchmarkConfig.xml"),
                 new ArgOption("template",
                         "org/optaplannerdelirium/sss/benchmark/reindeerRoutingBenchmarkConfigTemplate.xml.ftl", true)
         );
