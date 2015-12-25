@@ -154,10 +154,10 @@ public class ReindeerRoutingSlicerAndChunker {
         scoreDirector.setWorkingSolution(originalSolution);
         scoreDirector.calculateScore();
         HardSoftLongScore score = originalSolution.getScore();
-        logger.info("Unsplit solution with score ({}).", score);
         String scoreString = !score.isFeasible() ? "infeasible" : Long.toString(score.getSoftScore());
         File outputFile = new File (importer.getInputDir(), "whole/gifts.score" + scoreString + ".csv");
         exporter.writeSolution(originalSolution, outputFile);
+        logger.warn("The solution with score ({}) has been merged into file ({}).", score, outputFile.getName());
     }
 
     private void writeSolutionButGiftsOnly(ReindeerRoutingSolution solution, File outputFile) {
