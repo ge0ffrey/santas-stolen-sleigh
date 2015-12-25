@@ -2,34 +2,34 @@
 <plannerBenchmark>
   <benchmarkDirectory>local/data/sss</benchmarkDirectory>
   <parallelBenchmarkCount>3</parallelBenchmarkCount>
-  <warmUpSecondsSpentLimit>30</warmUpSecondsSpentLimit>
+  <!--<warmUpSecondsSpentLimit>30</warmUpSecondsSpentLimit>-->
 
   <inheritedSolverBenchmark>
     <problemBenchmarks>
-      <!--<writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>-->
+      <writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>
 
       <solutionFileIOClass>org.optaplannerdelirium.sss.persistence.ReindeerRoutingFileIO</solutionFileIOClass>
       <!-- Slices datasets -->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice1.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice2.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice3.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice4.csv</inputSolutionFile>-->
+      <inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice1.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice2.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice3.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice4.csv</inputSolutionFile>
       <inputSolutionFile>data/sss/import/slices/gifts_slice5.csv</inputSolutionFile>
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice6.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice7.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice8.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice9.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice10.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice11.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice12.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice13.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice14.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice15.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice16.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice17.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>-->
+      <inputSolutionFile>data/sss/import/slices/gifts_slice6.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice7.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice8.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice9.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice10.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice11.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice12.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice13.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice14.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice15.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice16.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice17.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>
       <!-- Chunks datasets -->
       <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk0.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk1.csv</inputSolutionFile>-->
@@ -64,9 +64,14 @@
         <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
       </scoreDirectorFactory>
 
-      <termination>
-        <minutesSpentLimit>60</minutesSpentLimit>
-      </termination>
+      <!--<termination>-->
+        <!--<minutesSpentLimit>60</minutesSpentLimit>-->
+      <!--</termination>-->
+    </solver>
+  </inheritedSolverBenchmark>
+  <solverBenchmark>
+    <name>BigGift_FFD</name>
+    <solver>
       <customPhase>
         <!-- First initialize the big gifts to give each their own reindeer -->
         <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.BigGiftInitializer</customPhaseCommandClass>
@@ -75,96 +80,6 @@
         <!-- Then initialize the rest -->
         <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
       </constructionHeuristic>
-    </solver>
-  </inheritedSolverBenchmark>
-  <solverBenchmark>
-    <name>Tabu Search 7 Nearby</name>
-    <solver>
-      <localSearch>
-        <unionMoveSelector>
-          <changeMoveSelector>
-            <entitySelector id="entitySelector1"/>
-            <valueSelector>
-              <nearbySelection>
-                <originEntitySelector mimicSelectorRef="entitySelector1"/>
-                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.GiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
-              </nearbySelection>
-            </valueSelector>
-          </changeMoveSelector>
-          <swapMoveSelector>
-            <entitySelector id="entitySelector2"/>
-            <secondaryEntitySelector>
-              <nearbySelection>
-                <originEntitySelector mimicSelectorRef="entitySelector2"/>
-                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.GiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
-              </nearbySelection>
-            </secondaryEntitySelector>
-          </swapMoveSelector>
-          <tailChainSwapMoveSelector>
-            <entitySelector id="entitySelector3"/>
-            <valueSelector>
-              <nearbySelection>
-                <originEntitySelector mimicSelectorRef="entitySelector3"/>
-                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.GiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
-              </nearbySelection>
-            </valueSelector>
-          </tailChainSwapMoveSelector>
-        </unionMoveSelector>
-        <acceptor>
-          <entityTabuSize>7</entityTabuSize>
-        </acceptor>
-        <forager>
-          <acceptedCountLimit>2000</acceptedCountLimit>
-        </forager>
-      </localSearch>
-    </solver>
-  </solverBenchmark>
-  <solverBenchmark>
-    <name>Late Acceptance 400 Nearby</name>
-    <solver>
-      <localSearch>
-        <unionMoveSelector>
-          <changeMoveSelector>
-            <entitySelector id="entitySelector1"/>
-            <valueSelector>
-              <nearbySelection>
-                <originEntitySelector mimicSelectorRef="entitySelector1"/>
-                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.GiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
-              </nearbySelection>
-            </valueSelector>
-          </changeMoveSelector>
-          <swapMoveSelector>
-            <entitySelector id="entitySelector2"/>
-            <secondaryEntitySelector>
-              <nearbySelection>
-                <originEntitySelector mimicSelectorRef="entitySelector2"/>
-                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.GiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
-              </nearbySelection>
-            </secondaryEntitySelector>
-          </swapMoveSelector>
-          <tailChainSwapMoveSelector>
-            <entitySelector id="entitySelector3"/>
-            <valueSelector>
-              <nearbySelection>
-                <originEntitySelector mimicSelectorRef="entitySelector3"/>
-                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.GiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>40</parabolicDistributionSizeMaximum>
-              </nearbySelection>
-            </valueSelector>
-          </tailChainSwapMoveSelector>
-        </unionMoveSelector>
-        <acceptor>
-          <lateAcceptanceSize>400</lateAcceptanceSize>
-        </acceptor>
-        <forager>
-          <acceptedCountLimit>1</acceptedCountLimit>
-        </forager>
-      </localSearch>
     </solver>
   </solverBenchmark>
 

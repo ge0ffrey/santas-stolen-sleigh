@@ -26,14 +26,16 @@ Following the scientific method, others are encouraged to try to reproduce your 
 
 === TS vs LA
 
-Geoffrey: On a 1 hour run, TS 7 was worse than LA 400 on slice0.
+Geoffrey:
+On a 1 hour run, TS 7 was worse than LA 400 on slice0.
 More importantly: TS flatlined and LA didn't flatline yet.
 
 https://dl.dropboxusercontent.com/u/28857538/2015-12-24_102218_aggregation/index.html[Slice 2 benchmark]
 
 === Play with Tabu Search ratio's
 
-Done. Results here: https://drive.google.com/file/d/0B2Qb5W2kA2huVnY1eEtYZ2JvVUk/view?usp=sharing
+Lukas:
+Results here: https://drive.google.com/file/d/0B2Qb5W2kA2huVnY1eEtYZ2JvVUk/view?usp=sharing
 Some conclusions:
 * Performance on all slices very similar. Future benchmarks will only be done on one of the slices to save time.
 * Very small (~ 1 %) tabu ratios are better than tabu size 7.
@@ -68,9 +70,10 @@ There is a lot to say about this. I'll leave everyone to draw their own conclusi
 
 All gifts need to return to the north pole anyway.
 
+Geoffrey:
 In itself, it's worse than the normal meter
 
-https://dl.dropboxusercontent.com/u/28857538/benchmarks/sss/2015-12-24_163751_aggregation_longitudeMeter/index.html
+https://dl.dropboxusercontent.com/u/28857538/benchmarks/sss/2015-12-24_163751_aggregation_longitudeMeter/index.html[benchmark result]
 
 === Use subchain moves
 
@@ -80,4 +83,14 @@ TODO
 
 === Use custom moves
 
+==== 3-opt
+
 TODO
+
+==== K-opt
+
+TODO probalby overkill
+
+==== Ruin & recreate
+
+TODO ge0ffrey
