@@ -2,17 +2,23 @@ package org.optaplannerdelirium.sss.persistence;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScore;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.common.decorator.SelectionSorterOrder;
@@ -20,6 +26,7 @@ import org.optaplanner.core.impl.heuristic.selector.common.decorator.WeightFacto
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirectorFactory;
+import org.optaplanner.examples.common.business.ProblemFileComparator;
 import org.optaplannerdelirium.sss.app.ReindeerRoutingApp;
 import org.optaplannerdelirium.sss.domain.Gift;
 import org.optaplannerdelirium.sss.domain.GiftAssignment;
@@ -49,7 +56,8 @@ public class ReindeerRoutingSlicerAndChunker {
         SLICE,
         UNSLICE,
         CHUNK,
-        UNCHUNK;
+        UNCHUNK,
+        COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNCHUNK;
     }
 
     private ReindeerRoutingImporter importer;
@@ -74,12 +82,83 @@ public class ReindeerRoutingSlicerAndChunker {
             case UNCHUNK:
                 unsplit(5, "chunk", ".bestScore.csv");
                 break;
+            case COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNCHUNK:
+                collectPiecesFromLatestBenchmark(5, "chunk");
+                unsplit(5, "chunk", ".latest.csv");
+                break;
             default:
                 throw new IllegalArgumentException();
         }
     }
 
-    private void split(int partitionCount, String sliceOrChunk) {
+    private void collectPiecesFromLatestBenchmark(int partitionCount, final String sliceOrChunk) {
+        File outputDir = new File("data/sss/import/" + sliceOrChunk + "s/");
+        if (!outputDir.exists()) {
+            throw new IllegalStateException("The outputDir (" + outputDir + ") does not exist.");
+        }
+        ScoreDirectorFactory scoreDirectorFactory = SolverFactory.createFromXmlResource(ReindeerRoutingApp.SOLVER_CONFIG).buildSolver().getScoreDirectorFactory();
+        ScoreDirector scoreDirector = scoreDirectorFactory.buildScoreDirector();
+        File benchmarkDir = new File("local/data/sss");
+        if (!benchmarkDir.exists()) {
+            throw new IllegalStateException("The benchmarkdir (" + benchmarkDir + ") does not exist.");
+        }
+        List<File> reportDirList = Arrays.asList(benchmarkDir.listFiles());
+        Collections.sort(reportDirList, new ProblemFileComparator()); // HACK, not really suited for this
+        File latestReportDir = reportDirList.get(reportDirList.size() - 1);
+        List<File> problemFileList = Arrays.asList(latestReportDir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.isDirectory() && file.getName().startsWith("gifts_" + sliceOrChunk);
+            }
+        }));
+        if (problemFileList.size() != partitionCount) {
+            throw new IllegalStateException(); // TODO
+        }
+        Collections.sort(problemFileList, new ProblemFileComparator()); // HACK, not really suited for this
+        for (int i = 0; i < partitionCount; i++) {
+            File problemFile = problemFileList.get(i);
+            File[] solverFiles = problemFile.listFiles((FileFilter) DirectoryFileFilter.INSTANCE);
+            if (solverFiles.length != 1) {
+                throw new IllegalStateException(); // TODO
+            }
+            File subSingleFile = new File(solverFiles[0], "sub0/");
+            File[] solutionFiles = subSingleFile.listFiles((FileFilter) FileFilterUtils.prefixFileFilter("gifts_" + sliceOrChunk + i));
+            if (solutionFiles.length != 1) {
+                throw new IllegalStateException(); // TODO
+            }
+            File solutionFile;
+            try {
+                solutionFile = solutionFiles[0].getCanonicalFile();
+            } catch (IOException e) {
+                throw new IllegalStateException(e);
+            }
+            if (!solutionFile.exists()) {
+                throw new IllegalStateException(); // TODO
+            }
+            File latestOutputFile = new File(outputDir, "gifts_" + sliceOrChunk + i + ".latest.csv");
+            if (latestOutputFile.exists()) {
+                throw new IllegalStateException(); // TODO
+            }
+            try {
+                FileUtils.copyFile(solutionFile, latestOutputFile);
+            } catch (IOException e) {
+                throw new IllegalStateException(e);
+            }
+            ReindeerRoutingSolution solution = (ReindeerRoutingSolution) importer.readSolution(latestOutputFile);
+            scoreDirector.setWorkingSolution(solution);
+            scoreDirector.calculateScore();
+            HardSoftLongScore score = solution.getScore();
+            String scoreString = !score.isFeasible() ? "infeasible" : Long.toString(score.getSoftScore());
+            File scoreOutputFile = new File(outputDir, "gifts_" + sliceOrChunk + i + ".score" + scoreString + ".csv");
+            try {
+                FileUtils.copyFile(latestOutputFile, scoreOutputFile);
+            } catch (IOException e) {
+                throw new IllegalStateException(e);
+            }
+        }
+    }
+
+    private void split(int partitionCount,String sliceOrChunk) {
         File inputFile = new File(importer.getInputDir(), "gifts.csv");
         ReindeerRoutingSolution originalSolution = (ReindeerRoutingSolution) importer.readSolution(inputFile);
         ScoreDirector scoreDirector = SolverFactory.createFromXmlResource(ReindeerRoutingApp.SOLVER_CONFIG)
