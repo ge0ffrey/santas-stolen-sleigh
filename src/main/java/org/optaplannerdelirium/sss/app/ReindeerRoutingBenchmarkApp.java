@@ -38,6 +38,10 @@ public class ReindeerRoutingBenchmarkApp extends CommonBenchmarkApp {
                         "org/optaplannerdelirium/sss/benchmark/ge0ffrey/ge0ffreyDesktopBenchmarkConfig.xml"),
                 new ArgOption("ge0ffreyServer",
                         "org/optaplannerdelirium/sss/benchmark/ge0ffrey/ge0ffreyServerBenchmarkConfig.xml"),
+                new ArgOption("oskopekDesktop",
+                        "org/optaplannerdelirium/sss/benchmark/oskopek/oskopekDesktopBenchmarkConfig.xml"),
+                new ArgOption("oskopekLaptop",
+                        "org/optaplannerdelirium/sss/benchmark/oskopek/oskopekLaptopBenchmarkConfig.xml"),
                 new ArgOption("template",
                         "org/optaplannerdelirium/sss/benchmark/reindeerRoutingBenchmarkConfigTemplate.xml.ftl", true)
         );
