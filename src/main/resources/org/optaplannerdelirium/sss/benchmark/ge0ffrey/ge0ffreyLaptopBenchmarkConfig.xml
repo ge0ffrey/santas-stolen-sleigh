@@ -31,11 +31,11 @@
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>-->
       <!-- Chunks datasets -->
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk0.LA400-1_Nb100_4h.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk1.LA400-1_Nb100_4h.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk2.LA400-1_Nb100_4h.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk3.LA400-1_Nb100_4h.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk4.LA400-1_Nb100_4h.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/chunks/gifts_chunk0.latest.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/chunks/gifts_chunk1.latest.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/chunks/gifts_chunk2.latest.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/chunks/gifts_chunk3.latest.csv</inputSolutionFile>
+      <inputSolutionFile>data/sss/import/chunks/gifts_chunk4.latest.csv</inputSolutionFile>
       <problemStatisticType>BEST_SCORE</problemStatisticType>
       <!--<problemStatisticType>STEP_SCORE</problemStatisticType>-->
       <!--<problemStatisticType>CALCULATE_COUNT_PER_SECOND</problemStatisticType>-->

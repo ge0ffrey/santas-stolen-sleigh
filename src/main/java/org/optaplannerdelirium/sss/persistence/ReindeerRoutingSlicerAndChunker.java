@@ -136,9 +136,6 @@ public class ReindeerRoutingSlicerAndChunker {
                 throw new IllegalStateException(); // TODO
             }
             File latestOutputFile = new File(outputDir, "gifts_" + sliceOrChunk + i + ".latest.csv");
-            if (latestOutputFile.exists()) {
-                throw new IllegalStateException(); // TODO
-            }
             try {
                 FileUtils.copyFile(solutionFile, latestOutputFile);
             } catch (IOException e) {
@@ -150,6 +147,9 @@ public class ReindeerRoutingSlicerAndChunker {
             HardSoftLongScore score = solution.getScore();
             String scoreString = !score.isFeasible() ? "infeasible" : Long.toString(score.getSoftScore());
             File scoreOutputFile = new File(outputDir, "gifts_" + sliceOrChunk + i + ".score" + scoreString + ".csv");
+            if (scoreOutputFile.exists()) {
+                throw new IllegalStateException(); // TODO
+            }
             try {
                 FileUtils.copyFile(latestOutputFile, scoreOutputFile);
             } catch (IOException e) {
