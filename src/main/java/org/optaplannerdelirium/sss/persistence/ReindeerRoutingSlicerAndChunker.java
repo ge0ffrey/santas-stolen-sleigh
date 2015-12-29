@@ -102,7 +102,13 @@ public class ReindeerRoutingSlicerAndChunker {
         if (!benchmarkDir.exists()) {
             throw new IllegalStateException("The benchmarkdir (" + benchmarkDir + ") does not exist.");
         }
-        List<File> reportDirList = Arrays.asList(benchmarkDir.listFiles());
+        File[] reportDirs = benchmarkDir.listFiles();
+        List<File> reportDirList = new ArrayList<File>(reportDirs.length);
+        for (File reportDir : reportDirs) {
+            if (reportDir.getName().matches("\\d{4}-\\d{2}-\\d{2}_\\d{6}")) {
+                reportDirList.add(reportDir);
+            }
+        }
         Collections.sort(reportDirList, new ProblemFileComparator()); // HACK, not really suited for this
         File latestReportDir = reportDirList.get(reportDirList.size() - 1);
         List<File> problemFileList = Arrays.asList(latestReportDir.listFiles(new FileFilter() {
