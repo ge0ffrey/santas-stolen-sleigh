@@ -60,4 +60,16 @@ public class SphereLocation extends Location {
         return TWICE_EARTH_R_IN_KM * Math.asin(r);
     }
 
+    @Override
+    public double getEuclideanDistanceSquaredTo(Location o) {
+        if (o == this) {
+            return 0.0;
+        }
+        SphereLocation other = (SphereLocation) o;
+        double dX = cartesianX - other.cartesianX;
+        double dY = cartesianY - other.cartesianY;
+        double dZ = cartesianZ - other.cartesianZ;
+        return dX * dX + dY * dY + dZ * dZ;
+    }
+
 }

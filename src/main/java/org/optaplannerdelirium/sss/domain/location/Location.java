@@ -62,6 +62,8 @@ public abstract class Location extends AbstractPersistable {
 
     public abstract double getDistanceTo(Location location);
 
+    public abstract double getEuclideanDistanceSquaredTo(Location location);
+
     /**
      * The angle relative to the direction EAST.
      * @param location never null
