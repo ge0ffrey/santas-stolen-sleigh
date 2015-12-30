@@ -61,6 +61,10 @@
     <!-- External dependencies -->
     <!-- Commons -->
     <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
@@ -95,8 +99,8 @@
           <configuration>
             <mainClass>org.optaplannerdelirium.sss.app.ReindeerRoutingHelloWorld</mainClass>
             <arguments>
-              <argument>-Xms1024m</argument>
-              <argument>-Xmx4096m</argument>
+              <argument>-Xms1G</argument>
+              <argument>-Xmx4G</argument>
               <argument>-server</argument>
             </arguments>
           </configuration>
