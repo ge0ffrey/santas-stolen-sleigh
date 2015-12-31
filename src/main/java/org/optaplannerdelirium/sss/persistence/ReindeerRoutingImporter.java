@@ -112,6 +112,10 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 gift.setId(Long.parseLong(lineTokens[0]));
                 SphereLocation location = new SphereLocation();
                 location.setId(gift.getId());
+                if (location.getId().equals(Location.NORTH_POLE.getId())) {
+                    throw new IllegalStateException("The location (" + location + ") uses an id (" + location.getId()
+                            + ") which is already reserved for the north pole location (" + Location.NORTH_POLE + ").");
+                }
                 location.setLatitude(Double.parseDouble(lineTokens[1]));
                 location.setLongitude(Double.parseDouble(lineTokens[2]));
                 location.updateCache();

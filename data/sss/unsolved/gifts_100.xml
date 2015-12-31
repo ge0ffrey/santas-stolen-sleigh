@@ -1206,7 +1206,7 @@
     <Reindeer id="204">
       <id>0</id>
       <startingLocation class="SphereLocation" id="205">
-        <id>-1</id>
+        <id>0</id>
         <latitude>90.0</latitude>
         <longitude>0.0</longitude>
         <cartesianX>0.0</cartesianX>
