@@ -84,7 +84,11 @@ public class ReindeerRoutingSolutionPainter {
         }
         int colorIndex = 0;
         // TODO Too many nested for loops
+        int tripCount = 0;
         for (Reindeer reindeer : solution.getReindeerList()) {
+            if (reindeer.getNextGiftAssignment() != null) {
+                tripCount++;
+            }
             g.setColor(TangoColorFactory.ALUMINIUM_3);
             int x = translator.translateLongitudeToX(reindeer.getLocation().getLongitude());
             int y = translator.translateLatitudeToY(reindeer.getLocation().getLatitude());
@@ -131,12 +135,15 @@ public class ReindeerRoutingSolutionPainter {
                 int infoY = translator.translateLatitudeToY(latitude);
                 boolean ascending = (previousLocation.getLongitude() < location.getLongitude())
                         ^ (previousLocation.getLatitude() < location.getLatitude());
-
 //                g.drawString(Long.toString(load),
 //                        infoX + 1, (ascending ? infoY - 1 : infoY + TEXT_SIZE + 1));
             }
             colorIndex = (colorIndex + 1) % TangoColorFactory.SEQUENCE_2.length;
         }
+        // Legend
+        String tripCountString = tripCount + " trips";
+        g.drawString(tripCountString,
+                ((int) width - g.getFontMetrics().stringWidth(tripCountString)) / 2, (int) height - 10 - TEXT_SIZE);
     }
 
     public Graphics2D createCanvas(double width, double height) {
