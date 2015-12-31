@@ -74,13 +74,13 @@ public class ReindeerRoutingSlicerAndChunker {
                 split(20, "slice");
                 break;
             case UNSLICE:
-                unsplit(20, "slice", ".bestScore.csv");
+                unsplit(20, "slice", ".latest.csv");
                 break;
             case CHUNK:
                 split(5, "chunk");
                 break;
             case UNCHUNK:
-                unsplit(5, "chunk", ".bestScore.csv");
+                unsplit(5, "chunk", ".latest.csv");
                 break;
             case COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNCHUNK:
                 collectPiecesFromLatestBenchmark(5, "chunk");
