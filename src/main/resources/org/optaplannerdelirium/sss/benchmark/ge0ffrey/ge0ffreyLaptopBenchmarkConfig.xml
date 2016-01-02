@@ -61,7 +61,7 @@
       </scoreDirectorFactory>
 
       <termination>
-        <hoursSpentLimit>4</hoursSpentLimit>
+        <hoursSpentLimit>8</hoursSpentLimit>
       </termination>
     </solver>
   </inheritedSolverBenchmark>
@@ -70,48 +70,48 @@
     <name>Late Acceptance 400 Nearby</name>
     <solver>
       <localSearch>
-        <!--<unionMoveSelector>-->
-          <!--<changeMoveSelector>-->
-            <!--<entitySelector id="entitySelector1"/>-->
-            <!--<valueSelector>-->
-              <!--<nearbySelection>-->
-                <!--<originEntitySelector mimicSelectorRef="entitySelector1"/>-->
-                <!--<nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>-->
-                <!--<parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>-->
-              <!--</nearbySelection>-->
-            <!--</valueSelector>-->
-          <!--</changeMoveSelector>-->
-          <!--<swapMoveSelector>-->
-            <!--<entitySelector id="entitySelector2"/>-->
-            <!--<secondaryEntitySelector>-->
-              <!--<nearbySelection>-->
-                <!--<originEntitySelector mimicSelectorRef="entitySelector2"/>-->
-                <!--<nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>-->
-                <!--<parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>-->
-              <!--</nearbySelection>-->
-            <!--</secondaryEntitySelector>-->
-          <!--</swapMoveSelector>-->
-          <!--<tailChainSwapMoveSelector>-->
-            <!--<entitySelector id="entitySelector3"/>-->
-            <!--<valueSelector>-->
-              <!--<nearbySelection>-->
-                <!--<originEntitySelector mimicSelectorRef="entitySelector3"/>-->
-                <!--<nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>-->
-                <!--<parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>-->
-              <!--</nearbySelection>-->
-            <!--</valueSelector>-->
-          <!--</tailChainSwapMoveSelector>-->
-        <!--</unionMoveSelector>-->
-        <kOptMoveSelector>
-          <entitySelector id="entitySelector4"/>
-          <valueSelector>
-            <nearbySelection>
-              <originEntitySelector mimicSelectorRef="entitySelector4"/>
-              <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-              <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
-            </nearbySelection>
-          </valueSelector>
-        </kOptMoveSelector>
+        <unionMoveSelector>
+          <changeMoveSelector>
+            <entitySelector id="entitySelector1"/>
+            <valueSelector>
+              <nearbySelection>
+                <originEntitySelector mimicSelectorRef="entitySelector1"/>
+                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+                <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+              </nearbySelection>
+            </valueSelector>
+          </changeMoveSelector>
+          <swapMoveSelector>
+            <entitySelector id="entitySelector2"/>
+            <secondaryEntitySelector>
+              <nearbySelection>
+                <originEntitySelector mimicSelectorRef="entitySelector2"/>
+                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+                <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+              </nearbySelection>
+            </secondaryEntitySelector>
+          </swapMoveSelector>
+          <tailChainSwapMoveSelector>
+            <entitySelector id="entitySelector3"/>
+            <valueSelector>
+              <nearbySelection>
+                <originEntitySelector mimicSelectorRef="entitySelector3"/>
+                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+                <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+              </nearbySelection>
+            </valueSelector>
+          </tailChainSwapMoveSelector>
+          <kOptMoveSelector>
+            <entitySelector id="entitySelector4"/>
+            <valueSelector>
+              <nearbySelection>
+                <originEntitySelector mimicSelectorRef="entitySelector4"/>
+                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+                <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+              </nearbySelection>
+            </valueSelector>
+          </kOptMoveSelector>
+        </unionMoveSelector>
         <acceptor>
           <lateAcceptanceSize>400</lateAcceptanceSize>
         </acceptor>
