@@ -30,10 +30,13 @@ import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScore;
 import org.optaplanner.core.impl.score.buildin.hardsoftlong.HardSoftLongScoreDefinition;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.persistence.xstream.impl.score.XStreamScoreConverter;
+import org.optaplannerdelirium.sss.domain.location.Location;
 
 @PlanningSolution
 @XStreamAlias("ReindeerRoutingSolution")
 public class ReindeerRoutingSolution extends AbstractPersistable implements Solution<HardSoftLongScore> {
+
+    private Location northPoleLocation;
 
     private List<Gift> giftList;
     private List<Reindeer> reindeerList;
@@ -42,6 +45,14 @@ public class ReindeerRoutingSolution extends AbstractPersistable implements Solu
 
     @XStreamConverter(value = XStreamScoreConverter.class, types = {HardSoftLongScoreDefinition.class})
     private HardSoftLongScore score;
+
+    public Location getNorthPoleLocation() {
+        return northPoleLocation;
+    }
+
+    public void setNorthPoleLocation(Location northPoleLocation) {
+        this.northPoleLocation = northPoleLocation;
+    }
 
     public List<Gift> getGiftList() {
         return giftList;

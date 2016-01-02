@@ -22,7 +22,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +34,7 @@ import org.optaplannerdelirium.sss.domain.GiftAssignment;
 import org.optaplannerdelirium.sss.domain.Reindeer;
 import org.optaplannerdelirium.sss.domain.ReindeerRoutingSolution;
 import org.optaplannerdelirium.sss.domain.Standstill;
-import org.optaplannerdelirium.sss.domain.location.Location;
+import org.optaplannerdelirium.sss.domain.location.CachingSphereLocation;
 import org.optaplannerdelirium.sss.domain.location.SphereLocation;
 import org.optaplannerdelirium.sss.solver.score.ReindeerRoutingCostCalculator;
 
@@ -60,15 +59,23 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
 
     public static class ReindeerRoutingInputBuilder extends TxtInputBuilder {
 
+        private boolean useCachingSphereLocation;
+
         private ReindeerRoutingSolution solution;
         private boolean initialized;
         private BufferedReader initializedBufferedReader;
 
         private int giftListSize;
+        private List<CachingSphereLocation> locationList;
 
         public Solution readSolution() throws IOException {
+            useCachingSphereLocation = System.getProperty("sss.useCachingSphereLocation") != null;
+            if (useCachingSphereLocation) {
+                locationList = new ArrayList<CachingSphereLocation>(100000 + 1); // north pole + 100k gifts
+            }
             solution = new ReindeerRoutingSolution();
             solution.setId(0L);
+            solution.setNorthPoleLocation(createLocation(0L, 90.0, 0.0));
             bufferedReader.mark(1024);
             initialized = bufferedReader.readLine().trim().equals("GiftId,TripId");
             bufferedReader.reset();
@@ -89,6 +96,17 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
             readGiftList();
             createReindeerList();
             createGiftAssignmentList();
+            if (useCachingSphereLocation) {
+                // To reduce memory usage (and for indexed based access), redistribute location id's (but NOT gift id's)
+                long locationId = 0L;
+                for (CachingSphereLocation location : locationList) {
+                    location.setId(locationId);
+                    locationId++;
+                }
+                for (CachingSphereLocation location : locationList) {
+                    location.createDistanceToMap(locationList);
+                }
+            }
             if (initialized) {
                 bufferedReader = initializedBufferedReader;
                 readGiftAssignmentList();
@@ -110,15 +128,13 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 String[] lineTokens = splitBy(line, "\\,", ",", 4, true, false);
                 Gift gift = new Gift();
                 gift.setId(Long.parseLong(lineTokens[0]));
-                SphereLocation location = new SphereLocation();
-                location.setId(gift.getId());
-                if (location.getId().equals(Location.NORTH_POLE.getId())) {
+                SphereLocation location = createLocation(gift.getId(),
+                        Double.parseDouble(lineTokens[1]), Double.parseDouble(lineTokens[2]));
+                if (location.getId().equals(solution.getNorthPoleLocation().getId())) {
                     throw new IllegalStateException("The location (" + location + ") uses an id (" + location.getId()
-                            + ") which is already reserved for the north pole location (" + Location.NORTH_POLE + ").");
+                            + ") which is already reserved for the north pole location (" + solution.getNorthPoleLocation() + ").");
                 }
-                location.setLatitude(Double.parseDouble(lineTokens[1]));
-                location.setLongitude(Double.parseDouble(lineTokens[2]));
-                location.updateCache();
+                location.updateCartesianCoordinates();
                 gift.setLocation(location);
                 gift.setWeight(ReindeerRoutingCostCalculator.parseWeight(lineTokens[3]));
                 giftList.add(gift);
@@ -134,10 +150,19 @@ public class ReindeerRoutingImporter extends AbstractTxtSolutionImporter {
                 Reindeer reindeer = new Reindeer();
                 reindeer.setId(id);
                 id++;
-                reindeer.setStartingLocation(Location.NORTH_POLE);
+                reindeer.setStartingLocation(solution.getNorthPoleLocation());
                 reindeerList.add(reindeer);
             }
             solution.setReindeerList(reindeerList);
+        }
+
+        private SphereLocation createLocation(long id, double latitude, double longitude) {
+            if (useCachingSphereLocation) {
+                CachingSphereLocation location = new CachingSphereLocation(id, latitude, longitude);
+                locationList.add(location);
+                return location;
+            }
+            return new SphereLocation(id, latitude, longitude);
         }
 
         private void createGiftAssignmentList() {

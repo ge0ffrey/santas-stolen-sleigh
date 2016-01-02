@@ -16,17 +16,62 @@
   </scoreDirectorFactory>
 
   <customPhase>
-    <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
-    <customProperties>
-      <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionConstructionHeuristicReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
-      <partitionCount>100</partitionCount>
-    </customProperties>
+    <!-- First initialize the big gifts to give each their own reindeer -->
+    <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.BigGiftInitializer</customPhaseCommandClass>
   </customPhase>
-  <customPhase>
-    <customPhaseCommandClass>org.optaplannerdelirium.sss.solver.custom.ReindeerRoutingPartitioningCustomPhase</customPhaseCommandClass>
-    <customProperties>
-      <partitionSolverConfigResource>org/optaplannerdelirium/sss/solver/partitionLocalSearchReindeerRoutingSolverConfig.xml</partitionSolverConfigResource>
-      <partitionCount>5</partitionCount>
-    </customProperties>
-  </customPhase>
+  <constructionHeuristic>
+    <!-- Then initialize the rest -->
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
+  <localSearch>
+    <unionMoveSelector>
+      <changeMoveSelector>
+        <entitySelector id="entitySelector1"/>
+        <valueSelector>
+          <nearbySelection>
+            <originEntitySelector mimicSelectorRef="entitySelector1"/>
+            <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+            <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+          </nearbySelection>
+        </valueSelector>
+      </changeMoveSelector>
+      <swapMoveSelector>
+        <entitySelector id="entitySelector2"/>
+        <secondaryEntitySelector>
+          <nearbySelection>
+            <originEntitySelector mimicSelectorRef="entitySelector2"/>
+            <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+            <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+          </nearbySelection>
+        </secondaryEntitySelector>
+      </swapMoveSelector>
+      <tailChainSwapMoveSelector>
+        <entitySelector id="entitySelector3"/>
+        <valueSelector>
+          <nearbySelection>
+            <originEntitySelector mimicSelectorRef="entitySelector3"/>
+            <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+            <parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>
+          </nearbySelection>
+        </valueSelector>
+      </tailChainSwapMoveSelector>
+      <!--<kOptMoveSelector>-->
+        <!--<entitySelector id="entitySelector4"/>-->
+        <!--<valueSelector>-->
+          <!--<nearbySelection>-->
+            <!--<originEntitySelector mimicSelectorRef="entitySelector4"/>-->
+            <!--<nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>-->
+            <!--<parabolicDistributionSizeMaximum>100</parabolicDistributionSizeMaximum>-->
+          <!--</nearbySelection>-->
+        <!--</valueSelector>-->
+      <!--</kOptMoveSelector>-->
+    </unionMoveSelector>
+    <acceptor>
+      <lateAcceptanceSize>400</lateAcceptanceSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>1</acceptedCountLimit>
+    </forager>
+  </localSearch>
+
 </solver>

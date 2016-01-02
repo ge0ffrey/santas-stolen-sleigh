@@ -35,10 +35,10 @@ public class SphereLocation extends Location {
 
     public SphereLocation(long id, double latitude, double longitude) {
         super(id, latitude, longitude);
-        updateCache();
+        updateCartesianCoordinates();
     }
 
-    public void updateCache() {
+    public void updateCartesianCoordinates() {
         final double latitudeInRads  = RADIAN_CONVERSION * latitude;
         final double longitudeInRads = RADIAN_CONVERSION * longitude;
         // Cartesian coordinates, normalized for a sphere of diameter 1.0
@@ -49,6 +49,10 @@ public class SphereLocation extends Location {
 
     @Override
     public double getDistanceTo(final Location o) {
+        return getHaversineDistanceTo(o);
+    }
+
+    public double getHaversineDistanceTo(Location o) {
         if (o == this) {
             return 0.0;
         }

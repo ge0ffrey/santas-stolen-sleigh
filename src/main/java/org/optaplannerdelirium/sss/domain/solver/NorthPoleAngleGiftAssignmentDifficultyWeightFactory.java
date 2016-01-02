@@ -29,10 +29,11 @@ public class NorthPoleAngleGiftAssignmentDifficultyWeightFactory
         implements SelectionSorterWeightFactory<ReindeerRoutingSolution, GiftAssignment> {
 
     public Comparable createSorterWeight(ReindeerRoutingSolution reindeerRoutingSolution, GiftAssignment giftAssignment) {
+        Location northPoleLocation = reindeerRoutingSolution.getNorthPoleLocation();
         return new NorthPoleAngleGiftAssignmentDifficultyWeight(giftAssignment,
-                giftAssignment.getLocation().getAngle(Location.NORTH_POLE),
-                giftAssignment.getLocation().getDistanceTo(Location.NORTH_POLE)
-                        + Location.NORTH_POLE.getDistanceTo(giftAssignment.getLocation()));
+                giftAssignment.getLocation().getAngle(northPoleLocation),
+                giftAssignment.getLocation().getDistanceTo(northPoleLocation)
+                        + northPoleLocation.getDistanceTo(giftAssignment.getLocation()));
     }
 
     public static class NorthPoleAngleGiftAssignmentDifficultyWeight
