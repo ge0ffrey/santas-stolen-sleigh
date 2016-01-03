@@ -55,6 +55,7 @@ public class ReindeerRoutingSlicerAndChunker {
     public enum SliceOrChunkType {
         SLICE,
         UNSLICE,
+        COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNSLICE,
         CHUNK,
         UNCHUNK,
         COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNCHUNK;
@@ -74,6 +75,10 @@ public class ReindeerRoutingSlicerAndChunker {
                 split(20, "slice");
                 break;
             case UNSLICE:
+                unsplit(20, "slice", ".latest.csv");
+                break;
+            case COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNSLICE:
+                collectPiecesFromLatestBenchmark(20, "slice");
                 unsplit(20, "slice", ".latest.csv");
                 break;
             case CHUNK:
@@ -118,7 +123,8 @@ public class ReindeerRoutingSlicerAndChunker {
             }
         }));
         if (problemFileList.size() != partitionCount) {
-            throw new IllegalStateException(); // TODO
+            throw new IllegalStateException("The problemFileList size (" + problemFileList.size()
+                    + ") does not equal the partitionCount (" + partitionCount + ").");
         }
         Collections.sort(problemFileList, new ProblemFileComparator()); // HACK, not really suited for this
         for (int i = 0; i < partitionCount; i++) {
