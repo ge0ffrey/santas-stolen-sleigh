@@ -10,26 +10,26 @@
 
       <solutionFileIOClass>org.optaplannerdelirium.sss.persistence.ReindeerRoutingFileIO</solutionFileIOClass>
       <!-- Slices datasets -->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice0.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice1.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice2.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice3.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice4.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice5.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice6.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice7.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice8.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice9.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice10.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice11.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice12.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice13.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice14.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice15.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice16.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice17.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>-->
-      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice0.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice1.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice2.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice3.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice4.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice5.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice6.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice7.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice8.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice9.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice10.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice11.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice12.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice13.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice14.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice15.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice16.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice17.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.latest.csv</inputSolutionFile>-->
       <!-- Chunks datasets -->
       <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk0.latest.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk1.latest.csv</inputSolutionFile>-->
@@ -68,7 +68,7 @@
   </inheritedSolverBenchmark>
 
   <solverBenchmark>
-    <name>Late Acceptance 400 Nearby</name>
+    <name>Late Acceptance 500 Nearby 200</name>
     <solver>
       <localSearch>
         <unionMoveSelector>
