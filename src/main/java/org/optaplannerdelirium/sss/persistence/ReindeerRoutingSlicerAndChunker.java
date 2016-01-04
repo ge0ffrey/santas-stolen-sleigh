@@ -18,7 +18,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.optaplanner.core.api.domain.solution.Solution;
 import org.optaplanner.core.api.score.buildin.hardsoftlong.HardSoftLongScore;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.heuristic.selector.common.decorator.SelectionSorterOrder;
@@ -55,10 +54,11 @@ public class ReindeerRoutingSlicerAndChunker {
     public enum SliceOrChunkType {
         SLICE,
         UNSLICE,
-        COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNSLICE,
+        COLLECT_SLICES_FROM_LATEST_BENCHMARK_AND_UNSLICE,
         CHUNK,
         UNCHUNK,
-        COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNCHUNK;
+        COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNCHUNK,
+        COLLECT_WHOLE_FROM_LATEST_BENCHMARK;
     }
 
     private ReindeerRoutingImporter importer;
@@ -77,7 +77,7 @@ public class ReindeerRoutingSlicerAndChunker {
             case UNSLICE:
                 unsplit(20, "slice", ".latest.csv");
                 break;
-            case COLLECT_CHUNKS_FROM_LATEST_BENCHMARK_AND_UNSLICE:
+            case COLLECT_SLICES_FROM_LATEST_BENCHMARK_AND_UNSLICE:
                 collectPiecesFromLatestBenchmark(20, "slice");
                 unsplit(20, "slice", ".latest.csv");
                 break;
@@ -91,13 +91,17 @@ public class ReindeerRoutingSlicerAndChunker {
                 collectPiecesFromLatestBenchmark(5, "chunk");
                 unsplit(5, "chunk", ".latest.csv");
                 break;
+            case COLLECT_WHOLE_FROM_LATEST_BENCHMARK:
+                collectPiecesFromLatestBenchmark(1, "whole");
+                break;
             default:
                 throw new IllegalArgumentException();
         }
     }
 
     private void collectPiecesFromLatestBenchmark(int partitionCount, final String sliceOrChunk) {
-        File outputDir = new File("data/sss/import/" + sliceOrChunk + "s/");
+        final boolean isWhole = sliceOrChunk.equals("whole");
+        File outputDir = new File("data/sss/import/" + sliceOrChunk + (isWhole ? "" : "s") + "/");
         if (!outputDir.exists()) {
             throw new IllegalStateException("The outputDir (" + outputDir + ") does not exist.");
         }
@@ -119,7 +123,7 @@ public class ReindeerRoutingSlicerAndChunker {
         List<File> problemFileList = Arrays.asList(latestReportDir.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                return file.isDirectory() && file.getName().startsWith("gifts_" + sliceOrChunk);
+                return file.isDirectory() && file.getName().startsWith(isWhole ? "gifts" : "gifts_" + sliceOrChunk);
             }
         }));
         if (problemFileList.size() != partitionCount) {
@@ -134,7 +138,7 @@ public class ReindeerRoutingSlicerAndChunker {
                 throw new IllegalStateException(); // TODO
             }
             File subSingleFile = new File(solverFiles[0], "sub0/");
-            File[] solutionFiles = subSingleFile.listFiles((FileFilter) FileFilterUtils.prefixFileFilter("gifts_" + sliceOrChunk + i));
+            File[] solutionFiles = subSingleFile.listFiles((FileFilter) FileFilterUtils.prefixFileFilter(isWhole ? "gifts" : "gifts_" + sliceOrChunk + i));
             if (solutionFiles.length != 1) {
                 throw new IllegalStateException(); // TODO
             }
@@ -147,7 +151,7 @@ public class ReindeerRoutingSlicerAndChunker {
             if (!solutionFile.exists()) {
                 throw new IllegalStateException(); // TODO
             }
-            File latestOutputFile = new File(outputDir, "gifts_" + sliceOrChunk + i + ".latest.csv");
+            File latestOutputFile = new File(outputDir, isWhole ? "gifts.latest.csv" : "gifts_" + sliceOrChunk + i + ".latest.csv");
             try {
                 FileUtils.copyFile(solutionFile, latestOutputFile);
             } catch (IOException e) {
@@ -158,7 +162,7 @@ public class ReindeerRoutingSlicerAndChunker {
             scoreDirector.calculateScore();
             HardSoftLongScore score = solution.getScore();
             String scoreString = !score.isFeasible() ? "infeasible" : Long.toString(score.getSoftScore());
-            File scoreOutputFile = new File(outputDir, "gifts_" + sliceOrChunk + i + ".score" + scoreString + ".csv");
+            File scoreOutputFile = new File(outputDir, (isWhole ? "gifts" : "gifts_" + sliceOrChunk + i) + ".score" + scoreString + ".csv");
             if (scoreOutputFile.exists()) {
                 throw new IllegalStateException(); // TODO
             }

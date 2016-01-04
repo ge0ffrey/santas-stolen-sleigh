@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plannerBenchmark>
   <benchmarkDirectory>local/data/sss</benchmarkDirectory>
-  <parallelBenchmarkCount>5</parallelBenchmarkCount>
+  <!--<parallelBenchmarkCount>5</parallelBenchmarkCount>-->
   <warmUpSecondsSpentLimit>30</warmUpSecondsSpentLimit>
 
   <inheritedSolverBenchmark>
@@ -31,11 +31,13 @@
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice18.csv</inputSolutionFile>-->
       <!--<inputSolutionFile>data/sss/import/slices/gifts_slice19.csv</inputSolutionFile>-->
       <!-- Chunks datasets -->
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk0.latest.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk1.latest.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk2.latest.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk3.latest.csv</inputSolutionFile>
-      <inputSolutionFile>data/sss/import/chunks/gifts_chunk4.latest.csv</inputSolutionFile>
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk0.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk1.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk2.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk3.latest.csv</inputSolutionFile>-->
+      <!--<inputSolutionFile>data/sss/import/chunks/gifts_chunk4.latest.csv</inputSolutionFile>-->
+      <!-- Whole dataset -->
+      <inputSolutionFile>data/sss/import/whole/gifts.latest.csv</inputSolutionFile>
       <problemStatisticType>BEST_SCORE</problemStatisticType>
       <!--<problemStatisticType>STEP_SCORE</problemStatisticType>-->
       <!--<problemStatisticType>CALCULATE_COUNT_PER_SECOND</problemStatisticType>-->
@@ -60,7 +62,7 @@
       </scoreDirectorFactory>
 
       <termination>
-        <hoursSpentLimit>30</hoursSpentLimit>
+        <hoursSpentLimit>14</hoursSpentLimit>
       </termination>
     </solver>
   </inheritedSolverBenchmark>
@@ -76,7 +78,7 @@
               <nearbySelection>
                 <originEntitySelector mimicSelectorRef="entitySelector1"/>
                 <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>120</parabolicDistributionSizeMaximum>
+                <parabolicDistributionSizeMaximum>200</parabolicDistributionSizeMaximum>
               </nearbySelection>
             </valueSelector>
           </changeMoveSelector>
@@ -86,7 +88,7 @@
               <nearbySelection>
                 <originEntitySelector mimicSelectorRef="entitySelector2"/>
                 <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>120</parabolicDistributionSizeMaximum>
+                <parabolicDistributionSizeMaximum>200</parabolicDistributionSizeMaximum>
               </nearbySelection>
             </secondaryEntitySelector>
           </swapMoveSelector>
@@ -96,10 +98,20 @@
               <nearbySelection>
                 <originEntitySelector mimicSelectorRef="entitySelector3"/>
                 <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
-                <parabolicDistributionSizeMaximum>120</parabolicDistributionSizeMaximum>
+                <parabolicDistributionSizeMaximum>200</parabolicDistributionSizeMaximum>
               </nearbySelection>
             </valueSelector>
           </tailChainSwapMoveSelector>
+          <kOptMoveSelector>
+            <entitySelector id="entitySelector4"/>
+            <valueSelector>
+              <nearbySelection>
+                <originEntitySelector mimicSelectorRef="entitySelector4"/>
+                <nearbyDistanceMeterClass>org.optaplannerdelirium.sss.solver.nearby.EuclideanGiftAssignmentNearbyDistanceMeter</nearbyDistanceMeterClass>
+                <parabolicDistributionSizeMaximum>200</parabolicDistributionSizeMaximum>
+              </nearbySelection>
+            </valueSelector>
+          </kOptMoveSelector>
         </unionMoveSelector>
         <acceptor>
           <lateAcceptanceSize>500</lateAcceptanceSize>
