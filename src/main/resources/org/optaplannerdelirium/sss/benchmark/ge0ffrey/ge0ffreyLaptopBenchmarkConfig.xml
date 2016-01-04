@@ -2,7 +2,7 @@
 <plannerBenchmark>
   <benchmarkDirectory>local/data/sss</benchmarkDirectory>
   <parallelBenchmarkCount>3</parallelBenchmarkCount>
-  <warmUpSecondsSpentLimit>30</warmUpSecondsSpentLimit>
+  <!--<warmUpSecondsSpentLimit>30</warmUpSecondsSpentLimit>-->
 
   <inheritedSolverBenchmark>
     <problemBenchmarks>
