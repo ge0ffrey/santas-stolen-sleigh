@@ -62,9 +62,9 @@
         <initializingScoreTrend>ONLY_DOWN</initializingScoreTrend>
       </scoreDirectorFactory>
 
-      <!--<termination>-->
-        <!--<hoursSpentLimit>8</hoursSpentLimit>-->
-      <!--</termination>-->
+      <termination>
+        <hoursSpentLimit>12</hoursSpentLimit>
+      </termination>
     </solver>
   </inheritedSolverBenchmark>
 
