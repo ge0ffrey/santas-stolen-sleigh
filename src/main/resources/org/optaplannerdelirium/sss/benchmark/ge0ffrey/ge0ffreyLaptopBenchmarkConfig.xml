@@ -63,7 +63,7 @@
       </scoreDirectorFactory>
 
       <termination>
-        <hoursSpentLimit>12</hoursSpentLimit>
+        <hoursSpentLimit>23</hoursSpentLimit>
       </termination>
     </solver>
   </inheritedSolverBenchmark>
