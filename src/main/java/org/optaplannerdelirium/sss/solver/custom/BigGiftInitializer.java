@@ -48,7 +48,7 @@ public class BigGiftInitializer extends AbstractCustomPhaseCommand {
         List<Reindeer> reindeerList = originalSolution.getReindeerList();
         Iterator<Reindeer> reindeerIterator = reindeerList.iterator();
         for (GiftAssignment giftAssignment : originalSolution.getGiftAssignmentList()) {
-            if (giftAssignment.getGift().isBigGift()) {
+            if (giftAssignment.getGift().isBigGift() && giftAssignment.getPreviousStandstill() != null) {
                 if (!reindeerIterator.hasNext()) {
                     throw new IllegalStateException("There are more big gifts than there are reindeer ("
                             + reindeerList.size() + ").");
