@@ -2,23 +2,58 @@
 
 We're solving the kaggle problem.
 
-== Collaboration standards
+== How to run our code
 
-Export your new best solutions as a csv file to `data/sss/import`.
+* Open the `pom.xml` with IntelliJ or Eclipse
 
-We have 3 strategies to solve the problem:
+* Run the UI:
 
-* Whole
+** Main class: `org.optaplannerdelirium.sss.app.ReindeerRoutingApp`
+
+** VM options: `-Xmx2G -server`
+
+** Working directory: `santas-stolen-sleigh` (the default)
+
+** Click import button and select a dataset. Highly recommended to select a slice the first time.
+
+* Run the Benchmarker:
+
+** Main class: `org.optaplannerdelirium.sss.app.ReindeerRoutingBenchmarkApp`
+
+** VM options: `-Xmx2G -server` (Add `-Dlogback.level.org.optaplanner=info` to reduce logging verbosity)
+
+** Program arguments (optional): `ge0ffreyLaptop` to run https://github.com/ge0ffrey/santas-stolen-sleigh/blob/master/src/main/resources/org/optaplannerdelirium/sss/benchmark/ge0ffrey/ge0ffreyLaptopBenchmarkConfig.xml[another config than the default]
+
+** Working directory: `santas-stolen-sleigh` (the default)
+
+* Note that starting a Local Search phase on a 100k problem can include up to 1.5 hours with no output due to the nearby selection bootstrap.
+
+== Algorithm description
+
+We didn't have much time to implement this case.
+In the first 3 weeks, we worked a few spare hours to build a simple domain.
+Only during the Christmas holidays, we had enough time to start optimizing.
+
+=== Partitioning
+
+Once we started, we quickly realized that even simple strategies (such as 2-opt hill climbing)
+would take days to flatline, so partitioning was vital. We introduced 3 strategies to partition and solve the problem:
+
+* Whole of 100k
 * 5 chunks of 20k each
 * 20 slices of 5k each. Most benchmarks use slice 5.
 
 Each of these types go in their own subdirectory of the import dir.
 
-Add the first 5 score digits in the file name.
-All initialized files must start with the uninitialized filename so the importer can find the problem file too,
-for example `gift_slice5.weakestFit_99999score.csv` has the problem file `gift_slice5.csv`.
+=== Construction Heuristics
 
-== Research investigations
+TODO
+
+=== Local Search
+
+TODO
+
+== Research investigations log
 
 For team members only: Add your name to reserve a topic if you're doing it.
 Summarize your findings under the topic's title.
