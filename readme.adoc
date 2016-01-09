@@ -40,18 +40,62 @@ Once we started, we quickly realized that even simple strategies (such as 2-opt 
 would take days to flatline, so partitioning was vital. We introduced 3 strategies to partition and solve the problem:
 
 * Whole of 100k
-* 5 chunks of 20k each
-* 20 slices of 5k each. Most benchmarks use slice 5.
+* 5 chunks of 20k each.
+* 20 slices of 5k each.
 
 Each of these types go in their own subdirectory of the import dir.
+Because we didn't have access to a cluster, each of us ran it mostly on his laptop/desktop.
+Therefore, we started by focusing on the 5 chunks, which ended up neglecting all research with the 20 slices.
+
+We configured our https://github.com/ge0ffrey/santas-stolen-sleigh/blob/master/src/main/resources/org/optaplannerdelirium/sss/benchmark/reindeerRoutingBenchmarkConfig.xml[benchmark config]
+to run the 5 chunks in parallel (with only 3 in parallel at the same time on 4 core machine).
+
+Some time before the competition deadline,
+we decided to merge the 5 chunks into a whole 100k solution and focus on optimizing that as a whole
+because http://www.optaplanner.org/blog/2014/03/03/CanMapReduceSolvePlanningProblems.html[partitioning lowers solution quality].
 
 === Construction Heuristics
 
-TODO
+First we started with http://docs.jboss.org/optaplanner/release/latest/optaplanner-docs/html_single/#firstFitDecreasing[First Fit Decreasing]
+and sorted the gifts (= the planning entities) by longitude (with more _difficult_ gifts at the right).
+The initial solution created by this Construction Heuristic weren't fantastic.
+
+To improve the initial solution, we added a https://github.com/ge0ffrey/santas-stolen-sleigh/blob/master/src/main/java/org/optaplannerdelirium/sss/solver/custom/BigGiftInitializer.java[BigGiftInitializer],
+we gives all big gifts (with a weight >= 50) it's own reindeer.
+The First Fit Decreasing algorithm then assigns the smaller gifts.
 
 === Local Search
 
-TODO
+Out of habit, we went with http://docs.jboss.org/optaplanner/release/latest/optaplanner-docs/html_single/#lateAcceptance[Late Acceptance]
+as it's very easy to configure, with late acceptance size of `400` (a later benchmark showed that `100` beats it a lot in the short run).
+We did quickly benchmark Tabu Search on the just initialized solutions (so again in the short run), but LA easily beat it.
+This is of course no surpise in hindsight, as it didn't even flatline after days of computation, the long run wasn't hours but weeks.
+We should really try Tabu Search once LA starts flatlining...
+We never benchmarked Simulated Annealing (even though it's just 1 line change in the config...).
+
+As for moves (= Local Search neigberhoods), we went with:
+
+* http://docs.jboss.org/optaplanner/release/latest/optaplanner-docs/html_single/images/Chapter-Move_and_neighborhood_selection/changeMove.png[change moves] (= relocate)
+
+* http://docs.jboss.org/optaplanner/release/latest/optaplanner-docs/html_single/images/Chapter-Move_and_neighborhood_selection/swapMove.png[swap moves] (= swaps)
+
+* tail chain swap moves (= 2-opts)
+
+* Later we also added a limited prototype for 3-opts (no reversing, and currently with a temporarily limitation that at least 2 of the gifts need to be in a different reindeer trip).
+
+Of course, to scale these moves to a 5k VRP, let alone a 100k VRP, we needed to apply http://docs.jboss.org/optaplanner/release/latest/optaplanner-docs/html_single/#nearbySelection[nearby selection].
+We originally went with a parabolic nearby distribution of `100`, but recently switched that to `200`.
+This means we try connecting a gift to its nearest 100 (or 200) gifts.
+
+Nearby is measured by the haversine distance, but we found we could use the squared direct distance too,
+to get the same nearby ordering, but improving nearby bootstrap performance (from days to only 1.5 hours for the 100k problem).
+Despite this, we still need to calculate the haversine distance during solving: we found that caching those wasn't really worth it
+(because it exploded memory usage - you can still enable that haversine caching by adding the VM option `-Dsss.useCachingSphereLocation`).
+
+=== Results
+
+After days of benchmarks, each starting on the best results of the previous,
+we are still not flatlining.
 
 == Research investigations log
 
