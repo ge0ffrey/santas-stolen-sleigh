@@ -127,8 +127,11 @@ It does _not_ - not even after days of optimizing - so I argue that
 *machine power and total CPU time was pretty important this year to make it to the top* (unlike in previous years).
 The fact that the winning solution can still be improved by simple moves, seems to agree with this.
 
-Nevertheless, it was a very interesting and well organized competition
-and I look forward to the details of other approaches to this problem.
+We 'll keep running our benchmarks for a few more days, to identify when our LA configuration starts flat-lining.
+
+It was a very interesting and well organized competition
+and I look forward to the details of other approaches to this problem,
+as well as next year's Santa competition.
 
 == Old stuff
 
