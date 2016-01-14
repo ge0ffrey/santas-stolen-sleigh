@@ -114,7 +114,7 @@ public class ReindeerRoutingSlicerAndChunker {
         File[] reportDirs = benchmarkDir.listFiles();
         List<File> reportDirList = new ArrayList<File>(reportDirs.length);
         for (File reportDir : reportDirs) {
-            if (reportDir.getName().matches("\\d{4}-\\d{2}-\\d{2}_\\d{6}")) {
+            if (reportDir.getName().matches("\\d{4}-\\d{2}-\\d{2}_\\d{6}.*")) {
                 reportDirList.add(reportDir);
             }
         }
